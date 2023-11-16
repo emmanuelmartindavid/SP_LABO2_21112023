@@ -1,6 +1,8 @@
-﻿using Entities.Models;
+﻿using Entities.Handlers.RoomExceptions;
+using Entities.Models;
 using Entities.SQLLogic;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace Entities.Handlers
 {
@@ -13,14 +15,22 @@ namespace Entities.Handlers
         ///<returns></returns>
         public async Task Add(Room room)
         {
-            string query = "INSERT INTO Habitaciones (Numero, Disponible, Tipo)" +
-                           "values(@number, @available, @type)";
-            using (var command = await this.CreateCommand(query))
+            try
             {
-                command.Parameters.AddWithValue("number", room.Number);
-                command.Parameters.AddWithValue("available", room.Available);
-                command.Parameters.AddWithValue("type", (int)room.Type);
-                await ExecuteNonQuery(command);
+                string query = "INSERT INTO Habitaciones (Numero, Disponible, Tipo)" +
+                           "values(@number, @available, @type)";
+                using (var command = await this.CreateCommand(query))
+                {
+                    command.Parameters.AddWithValue("number", room.Number);
+                    command.Parameters.AddWithValue("available", room.Available);
+                    command.Parameters.AddWithValue("type", (int)room.Type);
+                    await ExecuteNonQuery(command);
+                }
+
+            }
+            catch (SqlException ex)
+            {
+                throw new RoomNotAddedException(ex);
             }
         }
 
@@ -31,12 +41,20 @@ namespace Entities.Handlers
         ///<returns></returns>
         public async Task Delete(int number)
         {
-            string query = "DELETE Habitaciones WHERE Numero = @number";
-            using (var command = await this.CreateCommand(query))
+            try
             {
-                command.Parameters.AddWithValue("number", number);
-                await ExecuteNonQuery(command);
+                string query = "DELETE Habitaciones WHERE Numero = @number";
+                using (var command = await this.CreateCommand(query))
+                {
+                    command.Parameters.AddWithValue("number", number);
+                    await ExecuteNonQuery(command);
+                }
             }
+            catch (SqlException ex)
+            {
+                throw new RoomNotDeletedException(ex);
+            }
+
         }
 
         /// <summary>
@@ -45,19 +63,28 @@ namespace Entities.Handlers
         ///<returns></returns>
         public async Task<List<Room>> GetAll()
         {
-            var rooms = new List<Room>();
-            string query = "SELECT * FROM Habitaciones";
-            using (var command = await CreateCommand(query))
+            try
             {
-                using (var table = await ExecuteReader(command))
+                var rooms = new List<Room>();
+                string query = "SELECT * FROM Habitaciones";
+                using (var command = await CreateCommand(query))
                 {
-                    foreach (DataRow row in table.Rows)
+                    using (var table = await ExecuteReader(command))
                     {
-                        rooms.Add((Room)row);
+                        foreach (DataRow row in table.Rows)
+                        {
+                            rooms.Add((Room)row);
+                        }
                     }
+                    return rooms;
                 }
-                return rooms;
+
             }
+            catch (SqlException ex)
+            {
+                throw new RoomNotObtainedException(ex);
+            }
+
         }
         /// <summary>
         ///  Obtiene una habitacion por su numero
@@ -66,15 +93,23 @@ namespace Entities.Handlers
         /// <returns></returns>
         public async Task<Room> GetById(int number)
         {
-            string query = "SELECT * FROM Habitaciones WHERE Numero = @number";
-            using (var command = await CreateCommand(query))
+            try
             {
-                command.Parameters.AddWithValue("number", number);
-                using (var table = await ExecuteReader(command))
+                string query = "SELECT * FROM Habitaciones WHERE Numero = @number";
+                using (var command = await CreateCommand(query))
                 {
-                    return (Room)table.Rows[0];
+                    command.Parameters.AddWithValue("number", number);
+                    using (var table = await ExecuteReader(command))
+                    {
+                        return (Room)table.Rows[0];
+                    }
                 }
             }
+            catch (SqlException ex)
+            {
+                throw new RoomNotObtainedException(ex);
+            }
+
         }
 
         /// <summary>
@@ -84,14 +119,22 @@ namespace Entities.Handlers
         /// <returns></returns>
         public async Task Update(Room entity)
         {
-            string query = "UPDATE Habitaciones SET Numero = @number, Tipo = @type, Disponible = @available WHERE Numero = @number";
-            using (var command = await this.CreateCommand(query))
+            try
             {
-                command.Parameters.AddWithValue("number", entity.Number);
-                command.Parameters.AddWithValue("available", entity.Available);
-                command.Parameters.AddWithValue("type", (int)entity.Type);
-                await ExecuteNonQuery(command);
+                string query = "UPDATE Habitaciones SET Numero = @number, Tipo = @type, Disponible = @available WHERE Numero = @number";
+                using (var command = await this.CreateCommand(query))
+                {
+                    command.Parameters.AddWithValue("number", entity.Number);
+                    command.Parameters.AddWithValue("available", entity.Available);
+                    command.Parameters.AddWithValue("type", (int)entity.Type);
+                    await ExecuteNonQuery(command);
+                }
             }
+            catch (SqlException ex)
+            {
+                throw new RoomNotUpdatedException(ex);
+            }
+
         }
 
         /// <summary>
@@ -102,13 +145,22 @@ namespace Entities.Handlers
         /// <returns></returns>
         public async Task UpdateStatus(Room room, bool status)
         {
-            string query = "UPDATE Habitaciones SET Disponible = @available WHERE Numero = @number";
-            using (var command = await this.CreateCommand(query))
+            try
             {
-                command.Parameters.AddWithValue("number", room.Number);
-                command.Parameters.AddWithValue("available", status);
-                await ExecuteNonQuery(command);
+                string query = "UPDATE Habitaciones SET Disponible = @available WHERE Numero = @number";
+                using (var command = await this.CreateCommand(query))
+                {
+                    command.Parameters.AddWithValue("number", room.Number);
+                    command.Parameters.AddWithValue("available", status);
+                    await ExecuteNonQuery(command);
+                }
+
             }
+            catch (SqlException ex)
+            {
+                throw new RoomNotUpdatedException(ex);
+            }
+
         }
         /// <summary>
         /// 
@@ -118,14 +170,21 @@ namespace Entities.Handlers
         /// <returns></returns>
         public async Task UpdateStatus(int id, bool status)
         {
-            string query = "UPDATE Habitaciones SET Disponible = @available WHERE Numero = @number";
-            using (var command = await this.CreateCommand(query))
+            try
             {
-                command.Parameters.AddWithValue("number", id);
-                command.Parameters.AddWithValue("available", status);
-                await ExecuteNonQuery(command);
-            }
+                string query = "UPDATE Habitaciones SET Disponible = @available WHERE Numero = @number";
+                using (var command = await this.CreateCommand(query))
+                {
+                    command.Parameters.AddWithValue("number", id);
+                    command.Parameters.AddWithValue("available", status);
+                    await ExecuteNonQuery(command);
+                }
 
+            }
+            catch (SqlException ex)
+            {
+                throw new RoomNotUpdatedException(ex);
+            }
         }
 
         /// <summary>
@@ -134,19 +193,28 @@ namespace Entities.Handlers
         /// <returns></returns>
         public async Task<List<Room>> GetAvailable()
         {
-            var rooms = new List<Room>();
-            string query = "SELECT * FROM Habitaciones WHERE Disponible = 1";
-            using (var command = await CreateCommand(query))
+            try
             {
-                using (var table = await ExecuteReader(command))
+                var rooms = new List<Room>();
+                string query = "SELECT * FROM Habitaciones WHERE Disponible = 1";
+                using (var command = await CreateCommand(query))
                 {
-                    foreach (DataRow row in table.Rows)
+                    using (var table = await ExecuteReader(command))
                     {
-                        rooms.Add((Room)row);
+                        foreach (DataRow row in table.Rows)
+                        {
+                            rooms.Add((Room)row);
+                        }
                     }
+                    return rooms;
                 }
-                return rooms;
+
             }
-        }       
+            catch (SqlException ex)
+            {
+                throw new RoomNotObtainedException(ex);
+            }
+
+        }
     }
 }

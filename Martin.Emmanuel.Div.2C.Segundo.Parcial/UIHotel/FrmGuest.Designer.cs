@@ -187,7 +187,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(923, 425);
+            ClientSize = new Size(1152, 419);
             Controls.Add(lblGuestDgv);
             Controls.Add(btnModifyGuest);
             Controls.Add(dgvGuestsHandler);

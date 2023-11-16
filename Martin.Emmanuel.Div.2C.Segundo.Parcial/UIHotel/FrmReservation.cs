@@ -1,5 +1,8 @@
 ﻿using Entities.Controllers;
 using Entities.Exceptions;
+using Entities.Handlers.GuestExceptions;
+using Entities.Handlers.ReservationExceptions;
+using Entities.Handlers.RoomExceptions;
 using Entities.Models;
 using Entities.Validators;
 
@@ -10,21 +13,21 @@ namespace UIHotel
     /// </summary>
     public partial class FrmReservation : Form
     {
-        private GuestController _guestController;
-        private RoomController _roomController;
-        private ReservationController _reservationController;
-        private DataEntryValidator _dataEntryValidator;
+        private readonly GuestController _guestController;
+        private readonly RoomController _roomController;
+        private readonly ReservationController _reservationController;
+        private readonly DataEntryValidator _dataEntryValidator;
 
         /// <summary>
         /// 
         /// </summary>
         public FrmReservation()
         {
-            InitializeComponent();
-            _guestController = new();
-            _roomController = new();
-            _reservationController = new();
-            _dataEntryValidator = new();
+            this.InitializeComponent();
+            this._guestController = new();
+            this._roomController = new();
+            this._reservationController = new();
+            this._dataEntryValidator = new();
 
         }
         /// <summary>
@@ -35,7 +38,7 @@ namespace UIHotel
         /// <param name="e"></param>
         private async void FrmReservation_Load(object sender, EventArgs e)
         {
-            await UpdateDataComboBox();
+            await this.UpdateDataComboBox();
 
         }
         /// <summary>
@@ -43,16 +46,14 @@ namespace UIHotel
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-
         private async void btnGenerateReservation_Click(object sender, EventArgs e)
         {
             try
             {
-                var guest = (Guest)cmbGuests.SelectedItem;
-                var room = (Room)cmbRoomNumber.SelectedItem;
+                var guest = (Guest)this.cmbGuests.SelectedItem;
+                var room = (Room)this.cmbRoomNumber.SelectedItem;
                 var checkIn = DateTime.Parse(dtpCheckIn.Text);
                 var checkOut = DateTime.Parse(dtpCheckOut.Text);
-
                 if (guest == null || room == null)
                 {
                     return;
@@ -64,21 +65,28 @@ namespace UIHotel
                     CheckOut = checkOut,
                     RoomNumber = room.Number
                 };
-                await _dataEntryValidator.ValidateReservationExistence(reservation);
-                await _reservationController.Add(reservation);
-                await _roomController.UpdateRoomAvailability(room.Number, false);
-                await UpdateDataComboBox();
+                await this._dataEntryValidator.ValidateReservationExistence(reservation);
+                await this._reservationController.Add(reservation);
+                await this._roomController.UpdateRoomAvailability(room.Number, false);
+                await this.UpdateDataComboBox();
                 MessageBox.Show("Reserva generada correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (ReservationExistsException ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.ShowError(ex.Message);
+            }
+            catch (ReservationNotAddedException ex)
+            {
+                this.ShowError(ex.Message);
+            }
+            catch (RoomNotUpdatedException ex)
+            {
+                this.ShowError(ex.Message);
             }
             catch (Exception)
             {
-                MessageBox.Show("Ha ocurrido un error inesperado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al generar la reserva", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
         /// <summary>
@@ -97,16 +105,38 @@ namespace UIHotel
         /// <returns></returns>
         private async Task UpdateDataComboBox()
         {
-            var rooms = await _roomController.GetAvailableRooms();
-            cmbRoomNumber.DataSource = rooms;
-            cmbRoomNumber.DisplayMember = "DisplayProperty";
-            var guests = await _guestController.GetAllGuests();
-            cmbGuests.DataSource = guests;
-            cmbGuests.DisplayMember = "DisplayProperty";
-            this.dtpCheckIn.MinDate = new DateTime(2023, 11, 17, 0, 0, 0, 0);
-            this.dtpCheckIn.MaxDate = new DateTime(2024, 12, 31, 0, 0, 0, 0);
-            this.dtpCheckOut.MinDate = new DateTime(2023, 11, 18, 0, 0, 0, 0);
-            this.dtpCheckOut.MaxDate = new DateTime(2024, 12, 31, 0, 0, 0, 0);
+            try
+            {
+                var rooms = await this._roomController.GetAvailableRooms();
+                this.cmbRoomNumber.DataSource = rooms;
+                this.cmbRoomNumber.DisplayMember = "DisplayProperty";
+                var guests = await _guestController.GetAllGuests();
+                this.cmbGuests.DataSource = guests;
+                this.cmbGuests.DisplayMember = "DisplayProperty";
+                this.dtpCheckIn.MinDate = new DateTime(2023, 11, 17, 0, 0, 0, 0);
+                this.dtpCheckIn.MaxDate = new DateTime(2024, 12, 31, 0, 0, 0, 0);
+                this.dtpCheckOut.MinDate = new DateTime(2023, 11, 18, 0, 0, 0, 0);
+                this.dtpCheckOut.MaxDate = new DateTime(2024, 12, 31, 0, 0, 0, 0);
+            }
+            catch (RoomNotObtainedException ex)
+            {
+                this.ShowError(ex.Message);
+            }
+            catch (GuestNotObtainedException ex)
+            {
+                this.ShowError(ex.Message);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error al actualizar los datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void ShowError(string message)
+        {
+            MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
         }
     }
 }

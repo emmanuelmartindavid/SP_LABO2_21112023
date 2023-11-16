@@ -179,6 +179,7 @@
             FormBorderStyle = FormBorderStyle.Fixed3D;
             MaximizeBox = false;
             Name = "FrmRooms";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Habitaciones";
             FormClosing += FrmRooms_FormClosing;
             Load += FrmRooms_Load;

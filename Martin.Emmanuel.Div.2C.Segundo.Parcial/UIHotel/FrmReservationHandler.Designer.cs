@@ -155,13 +155,14 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(871, 449);
+            ClientSize = new Size(1007, 451);
             Controls.Add(lblReservationsDgv);
             Controls.Add(dgvReservationHandler);
             Controls.Add(grbReservationData);
             FormBorderStyle = FormBorderStyle.Fixed3D;
             MaximizeBox = false;
             Name = "FrmReservationHandler";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Menu Edicion Reservaciones";
             FormClosing += FrmReservationHandler_FormClosing;
             Load += FrmReservationHandler_Load;

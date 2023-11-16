@@ -1,5 +1,6 @@
 ﻿using Entities.Controllers;
 using Entities.Exceptions;
+using Entities.Handlers.RoomExceptions;
 using Entities.Models;
 using Entities.Validators;
 namespace UIHotel
@@ -16,11 +17,10 @@ namespace UIHotel
 
         public FrmRooms(EFrmType register)
         {
-            InitializeComponent();
-            _roomController = new();
-            _dataEntryValidator = new();
+            this.InitializeComponent();
+            this._roomController = new();
+            this._dataEntryValidator = new();
             this._eFrmRoomType = register;
-
             if (register == EFrmType.Edit)
             {
                 this.btnRegisterRoom.Visible = false;
@@ -78,6 +78,10 @@ namespace UIHotel
             {
                 this.ShowError(ex.Message);
             }
+            catch (RoomNotAddedException ex)
+            {
+                this.ShowError(ex.Message);
+            }
             catch (Exception ex)
             {
                 this.ShowError($"Error al agregar habitacion: {ex.Message}");
@@ -102,12 +106,19 @@ namespace UIHotel
         {
             if (this.dgvRoomHandler.CurrentRow != null)
             {
-                var room = (Room)this.dgvRoomHandler.CurrentRow.DataBoundItem;
-                if (room is not null)
+                try
                 {
-                    await this._roomController.DeleteRoom(room.Number);
-                    MessageBox.Show("Habitacion eliminada correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.UpdateRoomDataGrid();
+                    var room = (Room)this.dgvRoomHandler.CurrentRow.DataBoundItem;
+                    if (room is not null)
+                    {
+                        await this._roomController.DeleteRoom(room.Number);
+                        MessageBox.Show("Habitacion eliminada correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.UpdateRoomDataGrid();
+                    }
+                }
+                catch (RoomNotDeletedException ex)
+                {
+                    this.ShowError(ex.Message);
                 }
             }
             else
@@ -153,6 +164,10 @@ namespace UIHotel
             {
                 this.ShowError(ex.Message);
             }
+            catch (RoomNotUpdatedException ex)
+            {
+                this.ShowError(ex.Message);
+            }
             catch (Exception ex)
             {
                 this.ShowError($"Error al actualizar habitacion: {ex.Message}");
@@ -190,21 +205,28 @@ namespace UIHotel
         /// </summary>
         private async void UpdateRoomDataGrid()
         {
-            var room = await _roomController.GetAvailableRooms();
-            this.dgvRoomHandler.DataSource = room;
-            this.UpdateDatGrid();
-            if (room.Count > 0)
+            try
             {
-                this.lblRoomDgv.Text = "Habitaciones. Doble click sobre la habitacion que quiera seleccionar.";
-                this.UpdateTxtView();
-                if (_eFrmRoomType == EFrmType.Register)
+                var room = await _roomController.GetAvailableRooms();
+                this.dgvRoomHandler.DataSource = room;
+                this.UpdateDatGrid();
+                if (room.Count > 0)
+                {
+                    this.lblRoomDgv.Text = "Habitaciones. Doble click sobre la habitacion que quiera seleccionar.";
+                    this.UpdateTxtView();
+                    if (_eFrmRoomType == EFrmType.Register)
+                    {
+                        this.DeleteData();
+                    }
+                }
+                else
                 {
                     this.DeleteData();
                 }
             }
-            else
+            catch (RoomNotObtainedException ex)
             {
-                this.DeleteData();
+                this.ShowError($"Error al actualizar las habitaciones: {ex.Message}");
             }
         }
 
@@ -213,7 +235,6 @@ namespace UIHotel
         /// </summary>
         public void DeleteData()
         {
-
             this.txtRoomNumber.Text = string.Empty;
             this.cmbRoomType.SelectedItem = null;
             this.cmbAvaiableRoom.SelectedItem = null;
@@ -232,7 +253,6 @@ namespace UIHotel
         {
             FrmPrincipal frmPrincipal = new();
             frmPrincipal.Show();
-
         }
     }
 }

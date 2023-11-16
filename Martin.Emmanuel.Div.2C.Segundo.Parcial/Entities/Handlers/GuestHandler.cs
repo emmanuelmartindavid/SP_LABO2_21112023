@@ -1,11 +1,9 @@
-﻿using Entities.Models;
+﻿using Entities.Handlers.GuestExceptions;
+using Entities.Models;
 using Entities.SQLLogic;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
+
 
 namespace Entities.Handlers
 {
@@ -19,15 +17,22 @@ namespace Entities.Handlers
         /// <returns></returns>
         public async Task Add(Guest guest)
         {
-            string query = "INSERT INTO Huespedes (Dni, Nombre, Apellido, NumeroTelefono)" +
-                "values(@dni, @name, @lastName, @phoneNumber)";
-            using (var command = await this.CreateCommand(query))
+            try
             {
-                command.Parameters.AddWithValue("dni", guest.Dni);
-                command.Parameters.AddWithValue("name", guest.Name);
-                command.Parameters.AddWithValue("LastName", guest.LastName);
-                command.Parameters.AddWithValue("phoneNumber", guest.PhoneNumber);
-                await ExecuteNonQuery(command);
+                string query = "INSERT INTO Huespedes (Dni, Nombre, Apellido, NumeroTelefono)" +
+              "values(@dni, @name, @lastName, @phoneNumber)";
+                using (var command = await this.CreateCommand(query))
+                {
+                    command.Parameters.AddWithValue("dni", guest.Dni);
+                    command.Parameters.AddWithValue("name", guest.Name);
+                    command.Parameters.AddWithValue("LastName", guest.LastName);
+                    command.Parameters.AddWithValue("phoneNumber", guest.PhoneNumber);
+                    await ExecuteNonQuery(command);
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new GuestNotAddedException(ex);
             }
         }
 
@@ -38,11 +43,18 @@ namespace Entities.Handlers
         /// <returns></returns>
         public async Task Delete(int dni)
         {
-            string query = "DELETE Huespedes WHERE Dni = @dni";
-            using (var command = await this.CreateCommand(query))
+            try
             {
-                command.Parameters.AddWithValue("dni", dni);
-                await ExecuteNonQuery(command);
+                string query = "DELETE Huespedes WHERE Dni = @dni";
+                using (var command = await this.CreateCommand(query))
+                {
+                    command.Parameters.AddWithValue("dni", dni);
+                    await ExecuteNonQuery(command);
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new GuestNotDeletedException(ex);
             }
         }
         /// <summary>
@@ -52,21 +64,29 @@ namespace Entities.Handlers
         /// <returns></returns>
         public async Task<Guest> GetById(int dni)
         {
-            Guest guest;
-            guest = null;
-            string query = "SELECT * FROM Huespedes WHERE Dni = @dni";
-            using (var command = await CreateCommand(query))
+            try
             {
-                command.Parameters.AddWithValue("Dni", dni);
-                using (var table = await ExecuteReader(command))
+                Guest guest;
+                guest = null;
+                string query = "SELECT * FROM Huespedes WHERE Dni = @dni";
+                using (var command = await CreateCommand(query))
                 {
-                    foreach (DataRow row in table.Rows)
+                    command.Parameters.AddWithValue("Dni", dni);
+                    using (var table = await ExecuteReader(command))
                     {
-                        guest = (Guest)row;
+                        foreach (DataRow row in table.Rows)
+                        {
+                            guest = (Guest)row;
+                        }
                     }
                 }
+                return guest;
+
             }
-            return guest;
+            catch (SqlException ex)
+            {
+                throw new GuestNotObtainedException(ex);
+            }
         }
 
         /// <summary>
@@ -75,19 +95,26 @@ namespace Entities.Handlers
         /// <returns></returns>
         public async Task<List<Guest>> GetAll()
         {
-            var guests = new List<Guest>();
-            string query = "SELECT * FROM Huespedes";
-            using (var command = await this.CreateCommand(query))
+            try
             {
-                using (var table = await this.ExecuteReader(command))
+                var guests = new List<Guest>();
+                string query = "SELECT * FROM Huespedes";
+                using (var command = await this.CreateCommand(query))
                 {
-                    foreach (DataRow row in table.Rows)
+                    using (var table = await this.ExecuteReader(command))
                     {
-                        guests.Add((Guest)row);
+                        foreach (DataRow row in table.Rows)
+                        {
+                            guests.Add((Guest)row);
+                        }
                     }
                 }
+                return guests;
             }
-            return guests;
+            catch (SqlException ex)
+            {
+                throw new GuestNotObtainedException(ex);
+            }
         }
 
         /// <summary>
@@ -97,14 +124,22 @@ namespace Entities.Handlers
         /// <returns></returns>
         public async Task Update(Guest guest)
         {
-            string query = "UPDATE Huespedes SET Dni = @dni, Nombre = @name, Apellido = @lastName, NumeroTelefono = @phoneNumber WHERE Dni = @dni";
-            using (var command = await this.CreateCommand(query))
+            try
             {
-                command.Parameters.AddWithValue("dni", guest.Dni);
-                command.Parameters.AddWithValue("name", guest.Name);
-                command.Parameters.AddWithValue("LastName", guest.LastName);
-                command.Parameters.AddWithValue("phoneNumber", guest.PhoneNumber);
-                await this.ExecuteNonQuery(command);
+                string query = "UPDATE Huespedes SET Dni = @dni, Nombre = @name, Apellido = @lastName, NumeroTelefono = @phoneNumber WHERE Dni = @dni";
+                using (var command = await this.CreateCommand(query))
+                {
+                    command.Parameters.AddWithValue("dni", guest.Dni);
+                    command.Parameters.AddWithValue("name", guest.Name);
+                    command.Parameters.AddWithValue("LastName", guest.LastName);
+                    command.Parameters.AddWithValue("phoneNumber", guest.PhoneNumber);
+                    await this.ExecuteNonQuery(command);
+                }
+
+            }
+            catch (SqlException ex)
+            {
+                throw new GuestNotUpdatedException(ex);
             }
         }
 

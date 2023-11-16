@@ -3,6 +3,8 @@ using Entities.Models;
 using Entities.Utilities;
 using Entities.Validators;
 using Entities.Exceptions;
+using Entities.Handlers.RoomExceptions;
+using Entities.Handlers.ReservationExceptions;
 
 namespace UIHotel
 {
@@ -11,9 +13,9 @@ namespace UIHotel
     /// </summary>
     public partial class FrmReservationHandler : Form
     {
-        private ReservationController _reservationController;
-        private RoomController _roomController;
-        private DataEntryValidator _dataEntryValidator;
+        private readonly ReservationController _reservationController;
+        private readonly RoomController _roomController;
+        private readonly DataEntryValidator _dataEntryValidator;
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase FrmReservationHandler.
@@ -21,9 +23,9 @@ namespace UIHotel
         public FrmReservationHandler()
         {
             InitializeComponent();
-            this._reservationController = new ();
-            this._roomController = new ();
-            this._dataEntryValidator = new ();
+            this._reservationController = new();
+            this._roomController = new();
+            this._dataEntryValidator = new();
         }
 
         /// <summary>
@@ -35,8 +37,8 @@ namespace UIHotel
         private async void FrmReservationHandler_Load(object sender, EventArgs e)
         {
             this.UpdateReservationsGrid();
-          //  await this._roomController.UpdateRoomAvailability(103, true);
-          //  await this._roomController.UpdateRoomAvailability(104, true);
+            //  await this._roomController.UpdateRoomAvailability(103, true);
+            //  await this._roomController.UpdateRoomAvailability(104, true);
 
         }
 
@@ -49,17 +51,31 @@ namespace UIHotel
         /// <param name="e"></param>
         private async void btnDelete_Click(object sender, EventArgs e)
         {
-
             if (this.dgvReservationHandler.CurrentRow != null)
             {
-                var reservation = (Reservation)this.dgvReservationHandler.CurrentRow.DataBoundItem;
-                if (reservation is not null)
+                try
                 {
-                    UtilityClass.AddDeleteReservationsToList(reservation);
-                    await this._roomController.UpdateRoomAvailability(reservation.RoomNumber, true);
-                    await this._reservationController.Delete(reservation);
-                    MessageBox.Show("Reserva eliminada correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.UpdateReservationsGrid();
+                    var reservation = (Reservation)this.dgvReservationHandler.CurrentRow.DataBoundItem;
+                    if (reservation is not null)
+                    {
+                        UtilityClass.AddDeleteReservationsToList(reservation);
+                        await this._roomController.UpdateRoomAvailability(reservation.RoomNumber, true);
+                        await this._reservationController.Delete(reservation);
+                        MessageBox.Show("Reserva eliminada correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.UpdateReservationsGrid();
+                    }
+                }
+                catch (RoomNotUpdatedException ex)
+                {
+                    this.ShowError(ex.Message);
+                }
+                catch (ReservationNotDeletedException)
+                {
+                    this.ShowError("Error al eliminar la reserva");
+                }
+                catch (Exception ex)
+                {
+                    this.ShowError($"Error al eliminar la reserva: {ex.Message}");
                 }
             }
             else
@@ -114,7 +130,15 @@ namespace UIHotel
             {
                 this.ShowError(ex.Message);
             }
-             catch (WrongReservationDateException ex)
+            catch (WrongReservationDateException ex)
+            {
+                this.ShowError(ex.Message);
+            }
+            catch (RoomNotUpdatedException ex)
+            {
+                this.ShowError(ex.Message);
+            }
+            catch (ReservationNotUpdatedException ex)
             {
                 this.ShowError(ex.Message);
             }
@@ -166,18 +190,26 @@ namespace UIHotel
         /// </summary>
         private async void UpdateReservationsGrid()
         {
-            var reservations = await _reservationController.GetAllReservations();
-            this.dgvReservationHandler.DataSource = reservations;
-            this.UpdateDatGrid();
-            if (reservations.Count > 0)
+            try
             {
-                this.lblReservationsDgv.Text = "Reservas";
-                this.UpdateTxtView();
+                var reservations = await _reservationController.GetAllReservations();
+                this.dgvReservationHandler.DataSource = reservations;
+                this.UpdateDatGrid();
+                if (reservations.Count > 0)
+                {
+                    this.lblReservationsDgv.Text = "Reservas";
+                    this.UpdateTxtView();
+                }
+                else
+                {
+                    this.DeleteData();
+                }
             }
-            else
+            catch (ReservationNotObtainedException ex)
             {
-                this.DeleteData();
+                this.ShowError($"Error al actualizar las reservas: {ex.Message}");
             }
+
         }
 
         /// <summary>

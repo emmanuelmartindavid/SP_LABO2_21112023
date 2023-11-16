@@ -2,7 +2,11 @@
 using Entities.Validators;
 using Entities.Exceptions;
 using Entities.Models;
-using System.Windows.Forms;
+using Entities.Handlers.GuestExceptions;
+using Entities.Handlers.ReservationExceptions;
+using Entities.Handlers.RoomExceptions;
+
+
 
 namespace UIHotel
 {
@@ -16,7 +20,6 @@ namespace UIHotel
         private readonly DataEntryValidator _dataEntryValidator;
         private readonly RoomController _roomController;
         private readonly EFrmType _eFrmGuestType;
-        // private readonly EFrmType _eFrmGuestTypeChoice;
         public FrmGuest(EFrmType eFrmGuestType)
         {
             InitializeComponent();
@@ -88,10 +91,19 @@ namespace UIHotel
                 this.ShowError(ex.Message);
 
             }
+            catch (GuestNotObtainedException ex)
+            {
+                this.ShowError(ex.Message);
+
+            }
             catch (GuestExistsException ex)
             {
                 this.ShowError(ex.Message);
 
+            }
+            catch (GuestNotAddedException ex)
+            {
+                this.ShowError(ex.Message);
             }
             catch (Exception ex)
             {
@@ -118,19 +130,43 @@ namespace UIHotel
 
             if (this.dgvGuestsHandler.CurrentRow != null)
             {
-                var guest = (Guest)this.dgvGuestsHandler.CurrentRow.DataBoundItem;
-                if (guest is not null)
+                try
                 {
-                    await this._guestController.DeleteGuest(guest);
-
-                    if (await this._dataEntryValidator.ValidateReservationExistence(guest.Dni))
+                    var guest = (Guest)this.dgvGuestsHandler.CurrentRow.DataBoundItem;
+                    if (guest is not null)
                     {
-                        var reservation = await this._reservationController.GetReservationByDni(guest.Dni);
-                        await this._roomController.UpdateRoomAvailability(reservation.RoomNumber, true);
-                        await this._reservationController.Delete(reservation);
+                        await this._guestController.DeleteGuest(guest);
+
+                        if (await this._dataEntryValidator.ValidateReservationExistence(guest.Dni))
+                        {
+                            var reservation = await this._reservationController.GetReservationByDni(guest.Dni);
+                            await this._roomController.UpdateRoomAvailability(reservation.RoomNumber, true);
+                            await this._reservationController.Delete(reservation);
+                        }
+                        MessageBox.Show("Reserva eliminada correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.UpdateGuestDataGrid();
                     }
-                    MessageBox.Show("Reserva eliminada correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.UpdateGuestDataGrid();
+
+                }
+                catch (GuestNotDeletedException ex)
+                {
+                    this.ShowError(ex.Message);
+                }
+                catch (RoomNotUpdatedException ex)
+                {
+                    this.ShowError(ex.Message);
+                }
+                catch (ReservationNotObtainedException ex)
+                {
+                    this.ShowError(ex.Message);
+                }
+                catch (ReservationNotDeletedException ex)
+                {
+                    this.ShowError(ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    this.ShowError($"Error al eliminar huesped: {ex.Message}");
                 }
             }
             else
@@ -183,10 +219,19 @@ namespace UIHotel
                 this.ShowError(ex.Message);
 
             }
+            catch (GuestNotObtainedException ex)
+            {
+                this.ShowError(ex.Message);
+
+            }
             catch (GuestExistsException ex)
             {
                 this.ShowError(ex.Message);
 
+            }
+            catch (GuestNotUpdatedException ex)
+            {
+                this.ShowError(ex.Message);
             }
             catch (Exception ex)
             {
@@ -219,7 +264,6 @@ namespace UIHotel
             this.dgvGuestsHandler.Columns[2].HeaderText = "Apellido";
             this.dgvGuestsHandler.Columns[3].HeaderText = "Nro Telefono";
             this.dgvGuestsHandler.Columns[4].Visible = false;
-
         }
 
         /// <summary>
@@ -227,21 +271,29 @@ namespace UIHotel
         /// </summary>
         private async void UpdateGuestDataGrid()
         {
-            var guest = await this._guestController.GetAllGuests();
-            this.dgvGuestsHandler.DataSource = guest;
-            this.UpdateDatGrid();
-            if (guest.Count > 0)
+            try
             {
-                this.lblGuestDgv.Text = "Huespedes. Doble click sobre el huesped que quiera seleccionar.";
-                this.UpdateTxtView();
-                if (_eFrmGuestType == EFrmType.Register)
+                var guest = await this._guestController.GetAllGuests();
+                this.dgvGuestsHandler.DataSource = guest;
+                this.UpdateDatGrid();
+                if (guest.Count > 0)
+                {
+                    this.lblGuestDgv.Text = "Huespedes. Doble click sobre el huesped que quiera seleccionar.";
+                    this.UpdateTxtView();
+                    if (_eFrmGuestType == EFrmType.Register)
+                    {
+                        this.DeleteData();
+                    }
+                }
+                else
                 {
                     this.DeleteData();
                 }
             }
-            else
+            catch (GuestNotObtainedException ex)
             {
-                this.DeleteData();
+                this.ShowError(ex.Message);
+
             }
         }
 
