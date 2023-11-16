@@ -33,21 +33,6 @@ namespace UIHotel
             frmReservation.Show();
             this.Hide();
         }
-
-        /*    private async void btnRegisteredGuests_Click(object sender, EventArgs e)
-            {
-                var guests = await this._guestController.GetAllGuests();
-
-                this.dgvMainData.AutoGenerateColumns = false;
-                this.dgvMainData.Columns.Clear();
-
-                this.dgvMainData.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "DNI", HeaderText = "DNI" });
-                this.dgvMainData.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Name", HeaderText = "Nombre" });
-                this.dgvMainData.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "LastName", HeaderText = "Apellido" });
-                this.dgvMainData.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "PhoneNumber", HeaderText = "Nro Telefono" });
-
-                this.dgvMainData.DataSource = guests;
-            }*/
         private async void btnRegisteredGuests_Click(object sender, EventArgs e)
         {
             var guests = await _guestController.GetAllGuests();
@@ -74,7 +59,6 @@ namespace UIHotel
 
         private void btnReservationHandler_Click(object sender, EventArgs e)
         {
-
             FrmReservationHandler frmReservationHandler = new();
             frmReservationHandler.Show();
             this.Hide();
@@ -85,7 +69,6 @@ namespace UIHotel
             FrmGuest frmGuestRegister = new(EFrmType.Register);
             frmGuestRegister.Show();
             this.Hide();
-
         }
 
         private void btnHandlerGuest_Click(object sender, EventArgs e)
@@ -93,7 +76,6 @@ namespace UIHotel
             FrmGuest frmGuestRegister = new(EFrmType.Edit);
             frmGuestRegister.Show();
             this.Hide();
-
         }
 
         private void btnRegisterRoom_Click(object sender, EventArgs e)
@@ -101,7 +83,6 @@ namespace UIHotel
             FrmRooms frmRoom = new(EFrmType.Register);
             frmRoom.Show();
             this.Hide();
-
         }
 
         private void btnRoomHanlder_Click(object sender, EventArgs e)
@@ -109,7 +90,6 @@ namespace UIHotel
              FrmRooms frmRoom = new(EFrmType.Edit);
             frmRoom.Show();
             this.Hide();
-
         }
     }
 }

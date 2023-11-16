@@ -70,13 +70,17 @@ namespace UIHotel
                 this.UpdateRoomDataGrid();
                 MessageBox.Show("Huesped registrado correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            catch (ValidateDataGuestException ex)
+            catch (WrongRoomNumberException ex)
             {
                 this.ShowError(ex.Message);
             }
-            catch (Exception)
+            catch (RoomExistsException ex)
             {
-                this.ShowError("Ha ocurrido un error inesperado");
+                this.ShowError(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                this.ShowError($"Error al agregar habitacion: {ex.Message}");
             }
         }
 
@@ -141,17 +145,17 @@ namespace UIHotel
                     MessageBox.Show("Habitacion actualizada correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            catch (ValidateDataRoomException ex)
+            catch (WrongRoomNumberException ex)
             {
                 this.ShowError(ex.Message);
             }
-            catch (ValidateDataReservationException ex)
+            catch (RoomExistsException ex)
             {
                 this.ShowError(ex.Message);
             }
             catch (Exception ex)
             {
-                this.ShowError($"Error al actualizar Habitacion: {ex.Message}");
+                this.ShowError($"Error al actualizar habitacion: {ex.Message}");
             }
         }
 
@@ -222,6 +226,13 @@ namespace UIHotel
             {
                 this.lblRoomDgv.Text = "No hay huespedes";
             }
+        }
+
+        private void FrmRooms_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            FrmPrincipal frmPrincipal = new();
+            frmPrincipal.Show();
+
         }
     }
 }

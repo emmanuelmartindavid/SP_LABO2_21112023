@@ -48,7 +48,6 @@ namespace UIHotel
         {
             try
             {
-
                 var guest = (Guest)cmbGuests.SelectedItem;
                 var room = (Room)cmbRoomNumber.SelectedItem;
                 var checkIn = DateTime.Parse(dtpCheckIn.Text);
@@ -71,7 +70,7 @@ namespace UIHotel
                 await UpdateDataComboBox();
                 MessageBox.Show("Reserva generada correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            catch (ValidateDataReservationException ex)
+            catch (ReservationExistsException ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -81,18 +80,7 @@ namespace UIHotel
             }
 
         }
-        /// <summary>
-        /// Evento de clic en el botón de registrar nuevo huésped.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnRegisterNewGuest_Click(object sender, EventArgs e)
-        {
-            FrmGuest frmGuest = new(EFrmType.Register);
-            frmGuest.Show();
-            this.Hide();
 
-        }
         /// <summary>
         /// Evento de cierre del formulario de reservaciones.
         /// </summary>

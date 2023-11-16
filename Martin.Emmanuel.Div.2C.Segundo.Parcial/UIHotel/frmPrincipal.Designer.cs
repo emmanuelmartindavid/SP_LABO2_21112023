@@ -164,7 +164,7 @@
             Controls.Add(btnReservationsHistory);
             Controls.Add(btnFrmReservation);
             Controls.Add(lblWelcome);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
+            FormBorderStyle = FormBorderStyle.Fixed3D;
             MaximizeBox = false;
             Name = "FrmPrincipal";
             StartPosition = FormStartPosition.CenterScreen;

@@ -2,6 +2,7 @@
 using Entities.Validators;
 using Entities.Exceptions;
 using Entities.Models;
+using System.Windows.Forms;
 
 namespace UIHotel
 {
@@ -15,6 +16,7 @@ namespace UIHotel
         private readonly DataEntryValidator _dataEntryValidator;
         private readonly RoomController _roomController;
         private readonly EFrmType _eFrmGuestType;
+        // private readonly EFrmType _eFrmGuestTypeChoice;
         public FrmGuest(EFrmType eFrmGuestType)
         {
             InitializeComponent();
@@ -72,17 +74,28 @@ namespace UIHotel
                 await this._guestController.AddGuest(guest);
                 this.UpdateGuestDataGrid();
                 MessageBox.Show("Huesped registrado correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                /*  FrmReservation frmReservation = new();
-                  frmReservation.Show();
-                  this.Close();*/
             }
-            catch (ValidateDataGuestException ex)
+            catch (WrongGuestDniException ex)
             {
                 this.ShowError(ex.Message);
             }
-            catch (Exception)
+            catch (WrongGuestNameException ex)
             {
-                this.ShowError("Ha ocurrido un error inesperado");
+                this.ShowError(ex.Message);
+            }
+            catch (WrongPhoneNumberGuestException ex)
+            {
+                this.ShowError(ex.Message);
+
+            }
+            catch (GuestExistsException ex)
+            {
+                this.ShowError(ex.Message);
+
+            }
+            catch (Exception ex)
+            {
+                this.ShowError($"Error al actualizar huesped: {ex.Message}");
             }
         }
         /// <summary>
@@ -92,9 +105,8 @@ namespace UIHotel
         /// <param name="e"></param>
         private void FrmGuestRegister_FormClosing(object sender, FormClosingEventArgs e)
         {
-            FrmReservation frmReservation = new();
-            frmReservation.Show();
-
+            FrmPrincipal frmPrincipal = new();
+            frmPrincipal.Show();
         }
         /// <summary>
         /// 
@@ -116,7 +128,6 @@ namespace UIHotel
                         var reservation = await this._reservationController.GetReservationByDni(guest.Dni);
                         await this._roomController.UpdateRoomAvailability(reservation.RoomNumber, true);
                         await this._reservationController.Delete(reservation);
-
                     }
                     MessageBox.Show("Reserva eliminada correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.UpdateGuestDataGrid();
@@ -138,11 +149,6 @@ namespace UIHotel
         {
             try
             {
-                /*if (this.dgvReservationHandler.CurrentRow == null)
-                {
-                    this.ShowError("No hay reservas para actualizar");
-                    return;
-                }*/
                 var guest = (Guest)this.dgvGuestsHandler.CurrentRow.DataBoundItem;
                 if (guest is not null)
                 {
@@ -159,87 +165,34 @@ namespace UIHotel
                         LastName = this.txtLastName.Text,
                         PhoneNumber = long.Parse(this.txtPhoneNumber.Text),
                     };
-
                     await this._guestController.UpdateGuest(newGuest);
                     this.UpdateGuestDataGrid();
                     MessageBox.Show("Huesped actualizado correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            catch (ValidateDataRoomException ex)
+            catch (WrongGuestDniException ex)
             {
                 this.ShowError(ex.Message);
             }
-            catch (ValidateDataReservationException ex)
+            catch (WrongGuestNameException ex)
             {
                 this.ShowError(ex.Message);
+            }
+            catch (WrongPhoneNumberGuestException ex)
+            {
+                this.ShowError(ex.Message);
+
+            }
+            catch (GuestExistsException ex)
+            {
+                this.ShowError(ex.Message);
+
             }
             catch (Exception ex)
             {
                 this.ShowError($"Error al actualizar huesped: {ex.Message}");
             }
         }
-        /* private async void btnModifyGuest_Click(object sender, EventArgs e)
-         {
-             try
-             {
-                 *//*if (this.dgvReservationHandler.CurrentRow == null)
-                 {
-                     this.ShowError("No hay reservas para actualizar");
-                     return;
-                 }*//*
-                 var guest = (Guest)this.dgvGuestsHandler.CurrentRow.DataBoundItem;
-                 if (guest is not null)
-                 {
-                     this._dataEntryValidator.ValidateDniGuest(this.txtDni.Text);
-                     var guestDni = int.Parse(this.txtDni.Text);
-                     this._dataEntryValidator.ValidateNameGuest(this.txtName.Text, this.txtLastName.Text);
-                     this._dataEntryValidator.ValidatePhoneNumberGuest(this.txtPhoneNumber.Text);
-                     await this._dataEntryValidator.ValidateGuestExistence(guestDni, guest.Dni);
-
-                     if (await this._dataEntryValidator.ValidateReservationExistence(guestDni))
-                     {
-                         var reservation = await this._reservationController.GetReservationByDni(guestDni);
-
-                         var reservationMidify = new Reservation
-                         {
-                             DniGuest = guestDni,
-                             ChekIn = reservation.ChekIn,
-                             CheckOut = reservation.CheckOut,
-                             RoomNumber = reservation.RoomNumber,
-                         };
-                         await this._reservationController.UpdateReservation(reservationMidify);
-                     }
-
-                     var newGuest = new Guest
-                     {
-                         Dni = int.Parse(this.txtDni.Text),
-                         Name = this.txtName.Text,
-                         LastName = this.txtLastName.Text,
-                         PhoneNumber = long.Parse(this.txtPhoneNumber.Text),
-                     };
-
-                     await this._guestController.Update(newGuest);
-                     this.UpdateGuestDataGrid();
-                     MessageBox.Show("Huesped actualizado correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                 }
-             }
-             catch (ValidateDataRoomException ex)
-             {
-                 //this.ShowError(ex.Message);
-                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-             }
-             catch (ValidateDataReservationException ex)
-             {
-                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-             }
-             catch (Exception ex)
-             {
-                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                 //this.ShowError($"Error al actualizar la reserva: {ex.Message}");
-             }
-
-         }*/
-
         /// <summary>
         /// Actualiza los campos de texto con los detalles del huesped seleccionado.
         /// </summary>
@@ -265,6 +218,8 @@ namespace UIHotel
             this.dgvGuestsHandler.Columns[1].HeaderText = "Nombre";
             this.dgvGuestsHandler.Columns[2].HeaderText = "Apellido";
             this.dgvGuestsHandler.Columns[3].HeaderText = "Nro Telefono";
+            this.dgvGuestsHandler.Columns[4].Visible = false;
+
         }
 
         /// <summary>

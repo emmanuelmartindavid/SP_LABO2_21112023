@@ -29,3 +29,4 @@ C:\Users\cuerpos\Desktop\SegundoParcial\Martin.Emmanuel.Div.2C.Segundo.Parcial\U
 C:\Users\cuerpos\Desktop\SegundoParcial\Martin.Emmanuel.Div.2C.Segundo.Parcial\UIHotel\obj\Debug\net6.0-windows\UIHotel.FrmReservationHandler.resources
 C:\Users\cuerpos\Desktop\SegundoParcial\Martin.Emmanuel.Div.2C.Segundo.Parcial\UIHotel\obj\Debug\net6.0-windows\UIHotel.FrmGuest.resources
 C:\Users\cuerpos\Desktop\SegundoParcial\Martin.Emmanuel.Div.2C.Segundo.Parcial\UIHotel\obj\Debug\net6.0-windows\UIHotel.FrmRooms.resources
+C:\Users\cuerpos\Desktop\SegundoParcial\Martin.Emmanuel.Div.2C.Segundo.Parcial\UIHotel\obj\Debug\net6.0-windows\UIHotel.sourcelink.json

@@ -159,6 +159,8 @@
             Controls.Add(lblReservationsDgv);
             Controls.Add(dgvReservationHandler);
             Controls.Add(grbReservationData);
+            FormBorderStyle = FormBorderStyle.Fixed3D;
+            MaximizeBox = false;
             Name = "FrmReservationHandler";
             Text = "Menu Edicion Reservaciones";
             FormClosing += FrmReservationHandler_FormClosing;

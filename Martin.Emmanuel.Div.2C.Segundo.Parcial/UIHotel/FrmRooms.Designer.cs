@@ -176,8 +176,11 @@
             Controls.Add(btnDeleteRoom);
             Controls.Add(btnRegisterRoom);
             Controls.Add(grbRoomData);
+            FormBorderStyle = FormBorderStyle.Fixed3D;
+            MaximizeBox = false;
             Name = "FrmRooms";
             Text = "Habitaciones";
+            FormClosing += FrmRooms_FormClosing;
             Load += FrmRooms_Load;
             ((System.ComponentModel.ISupportInitialize)dgvRoomHandler).EndInit();
             grbRoomData.ResumeLayout(false);

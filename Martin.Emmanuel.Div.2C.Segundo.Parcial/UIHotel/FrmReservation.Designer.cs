@@ -38,7 +38,6 @@
             lblCheckIn = new Label();
             btnGenerateReservation = new Button();
             grbGuests = new GroupBox();
-            btnRegisterNewGuest = new Button();
             cmbGuests = new ComboBox();
             grbRoomData.SuspendLayout();
             grbReservationData.SuspendLayout();
@@ -87,7 +86,7 @@
             grbReservationData.Size = new Size(319, 153);
             grbReservationData.TabIndex = 9;
             grbReservationData.TabStop = false;
-            grbReservationData.Text = "Datos Reserva";
+            grbReservationData.Text = "Datos Reservacion";
             // 
             // lblCheckOut
             // 
@@ -134,25 +133,14 @@
             // 
             // grbGuests
             // 
-            grbGuests.Controls.Add(btnRegisterNewGuest);
             grbGuests.Controls.Add(cmbGuests);
             grbGuests.Font = new Font("Arial", 14F, FontStyle.Regular, GraphicsUnit.Point);
             grbGuests.Location = new Point(37, 41);
             grbGuests.Name = "grbGuests";
-            grbGuests.Size = new Size(359, 153);
+            grbGuests.Size = new Size(359, 131);
             grbGuests.TabIndex = 11;
             grbGuests.TabStop = false;
             grbGuests.Text = "Huespedes en Sistema";
-            // 
-            // btnRegisterNewGuest
-            // 
-            btnRegisterNewGuest.Location = new Point(45, 104);
-            btnRegisterNewGuest.Name = "btnRegisterNewGuest";
-            btnRegisterNewGuest.Size = new Size(275, 31);
-            btnRegisterNewGuest.TabIndex = 1;
-            btnRegisterNewGuest.Text = "Registrar Nuevo Huesped";
-            btnRegisterNewGuest.UseVisualStyleBackColor = true;
-            btnRegisterNewGuest.Click += btnRegisterNewGuest_Click;
             // 
             // cmbGuests
             // 
@@ -172,6 +160,7 @@
             Controls.Add(btnGenerateReservation);
             Controls.Add(grbReservationData);
             Controls.Add(grbRoomData);
+            FormBorderStyle = FormBorderStyle.Fixed3D;
             MaximizeBox = false;
             Name = "FrmReservation";
             StartPosition = FormStartPosition.CenterScreen;
@@ -204,7 +193,6 @@
         private Button btnGenerateReservation;
         private Label lblCheckOut;
         private GroupBox grbGuests;
-        private Button btnRegisterNewGuest;
         private ComboBox cmbGuests;
     }
 }

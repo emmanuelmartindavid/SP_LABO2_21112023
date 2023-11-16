@@ -106,11 +106,15 @@ namespace UIHotel
                     MessageBox.Show("Reserva actualizada correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            catch (ValidateDataRoomException ex)
+            catch (WrongRoomNumberException ex)
             {
                 this.ShowError(ex.Message);
             }
-            catch (ValidateDataReservationException ex)
+            catch (RoomExistsException ex)
+            {
+                this.ShowError(ex.Message);
+            }
+             catch (WrongReservationDateException ex)
             {
                 this.ShowError(ex.Message);
             }

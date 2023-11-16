@@ -194,6 +194,8 @@
             Controls.Add(btnDeleteGuest);
             Controls.Add(btnRegisterGuest);
             Controls.Add(grbGuestData);
+            FormBorderStyle = FormBorderStyle.Fixed3D;
+            MaximizeBox = false;
             MinimizeBox = false;
             Name = "FrmGuest";
             StartPosition = FormStartPosition.CenterScreen;
