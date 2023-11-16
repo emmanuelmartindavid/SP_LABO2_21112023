@@ -1,0 +1,135 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\cuerpos\\Desktop\\SegundoParcial\\Martin.Emmanuel.Div.2C.Segundo.Parcial\\UIHotel\\UIHotel.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\cuerpos\\Desktop\\SegundoParcial\\Martin.Emmanuel.Div.2C.Segundo.Parcial\\Entities\\Entities.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\cuerpos\\Desktop\\SegundoParcial\\Martin.Emmanuel.Div.2C.Segundo.Parcial\\Entities\\Entities.csproj",
+        "projectName": "Entities",
+        "projectPath": "C:\\Users\\cuerpos\\Desktop\\SegundoParcial\\Martin.Emmanuel.Div.2C.Segundo.Parcial\\Entities\\Entities.csproj",
+        "packagesPath": "C:\\Users\\cuerpos\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\cuerpos\\Desktop\\SegundoParcial\\Martin.Emmanuel.Div.2C.Segundo.Parcial\\Entities\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\cuerpos\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\cuerpos\\Desktop\\SegundoParcial\\Martin.Emmanuel.Div.2C.Segundo.Parcial\\UIHotel\\UIHotel.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\cuerpos\\Desktop\\SegundoParcial\\Martin.Emmanuel.Div.2C.Segundo.Parcial\\UIHotel\\UIHotel.csproj",
+        "projectName": "UIHotel",
+        "projectPath": "C:\\Users\\cuerpos\\Desktop\\SegundoParcial\\Martin.Emmanuel.Div.2C.Segundo.Parcial\\UIHotel\\UIHotel.csproj",
+        "packagesPath": "C:\\Users\\cuerpos\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\cuerpos\\Desktop\\SegundoParcial\\Martin.Emmanuel.Div.2C.Segundo.Parcial\\UIHotel\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\cuerpos\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0-windows"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0-windows7.0": {
+            "targetAlias": "net6.0-windows",
+            "projectReferences": {
+              "C:\\Users\\cuerpos\\Desktop\\SegundoParcial\\Martin.Emmanuel.Div.2C.Segundo.Parcial\\Entities\\Entities.csproj": {
+                "projectPath": "C:\\Users\\cuerpos\\Desktop\\SegundoParcial\\Martin.Emmanuel.Div.2C.Segundo.Parcial\\Entities\\Entities.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0-windows7.0": {
+          "targetAlias": "net6.0-windows",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WindowsForms": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
