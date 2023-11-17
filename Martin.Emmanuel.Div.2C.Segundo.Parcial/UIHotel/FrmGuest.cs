@@ -116,7 +116,7 @@ namespace UIHotel
                             await this._roomController.UpdateRoomAvailability(reservation.RoomNumber, true);
                             await this._reservationController.Delete(reservation);
                         }
-                        MessageBox.Show("Reserva eliminada correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Huesped eliminado correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.UpdateGuestDataGrid();
                     }
 

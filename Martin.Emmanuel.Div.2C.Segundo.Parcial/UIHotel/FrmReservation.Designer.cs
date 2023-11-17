@@ -39,6 +39,8 @@
             btnGenerateReservation = new Button();
             grbGuests = new GroupBox();
             cmbGuests = new ComboBox();
+            btnJsonData = new Button();
+            cmbJsonBillingData = new ComboBox();
             grbRoomData.SuspendLayout();
             grbReservationData.SuspendLayout();
             grbGuests.SuspendLayout();
@@ -123,7 +125,7 @@
             // btnGenerateReservation
             // 
             btnGenerateReservation.Font = new Font("Arial", 13F, FontStyle.Regular, GraphicsUnit.Point);
-            btnGenerateReservation.Location = new Point(481, 223);
+            btnGenerateReservation.Location = new Point(506, 226);
             btnGenerateReservation.Name = "btnGenerateReservation";
             btnGenerateReservation.Size = new Size(194, 47);
             btnGenerateReservation.TabIndex = 10;
@@ -151,11 +153,34 @@
             cmbGuests.Size = new Size(347, 30);
             cmbGuests.TabIndex = 0;
             // 
+            // btnJsonData
+            // 
+            btnJsonData.Font = new Font("Arial", 13F, FontStyle.Regular, GraphicsUnit.Point);
+            btnJsonData.Location = new Point(43, 369);
+            btnJsonData.Name = "btnJsonData";
+            btnJsonData.Size = new Size(215, 64);
+            btnJsonData.TabIndex = 13;
+            btnJsonData.Text = "VER INFORME DE CUENTA DESDE JSON";
+            btnJsonData.UseVisualStyleBackColor = true;
+            btnJsonData.Click += btnJsonData_Click;
+            // 
+            // cmbJsonBillingData
+            // 
+            cmbJsonBillingData.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbJsonBillingData.Font = new Font("Arial Black", 13F, FontStyle.Regular, GraphicsUnit.Point);
+            cmbJsonBillingData.FormattingEnabled = true;
+            cmbJsonBillingData.Location = new Point(280, 369);
+            cmbJsonBillingData.Name = "cmbJsonBillingData";
+            cmbJsonBillingData.Size = new Size(909, 32);
+            cmbJsonBillingData.TabIndex = 14;
+            // 
             // FrmReservation
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1223, 703);
+            Controls.Add(cmbJsonBillingData);
+            Controls.Add(btnJsonData);
             Controls.Add(grbGuests);
             Controls.Add(btnGenerateReservation);
             Controls.Add(grbReservationData);
@@ -194,5 +219,7 @@
         private Label lblCheckOut;
         private GroupBox grbGuests;
         private ComboBox cmbGuests;
+        private Button btnJsonData;
+        private ComboBox cmbJsonBillingData;
     }
 }

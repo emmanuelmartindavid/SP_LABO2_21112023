@@ -4,6 +4,7 @@ using Entities.Handlers.GuestExceptions;
 using Entities.Handlers.ReservationExceptions;
 using Entities.Handlers.RoomExceptions;
 using Entities.Models;
+using Entities.Serialization;
 using Entities.Validators;
 
 namespace UIHotel
@@ -17,6 +18,7 @@ namespace UIHotel
         private readonly RoomController _roomController;
         private readonly ReservationController _reservationController;
         private readonly DataEntryValidator _dataEntryValidator;
+        private List<Billing> _billings;
 
         /// <summary>
         /// 
@@ -28,6 +30,7 @@ namespace UIHotel
             this._roomController = new();
             this._reservationController = new();
             this._dataEntryValidator = new();
+            this._billings = new();
 
         }
         /// <summary>
@@ -68,12 +71,16 @@ namespace UIHotel
                 await this._dataEntryValidator.ValidateReservationExistence(reservation);
                 await this._reservationController.Add(reservation);
                 await this._roomController.UpdateRoomAvailability(room.Number, false);
+                room.Available = false;
+                var bill = new Billing(guest, room, reservation);
+                this._billings.Add(bill);
+                JSONSerialization.SerializeBillings(this._billings);
                 await this.UpdateDataComboBox();
                 MessageBox.Show("Reserva generada correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al generar la reserva: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.ShowError($"Error al generar la reserva:{ex.Message}");
             }
         }
 
@@ -106,9 +113,9 @@ namespace UIHotel
                 this.dtpCheckOut.MinDate = new DateTime(2023, 11, 18, 0, 0, 0, 0);
                 this.dtpCheckOut.MaxDate = new DateTime(2024, 12, 31, 0, 0, 0, 0);
             }
-            catch (Exception ex )
+            catch (Exception ex)
             {
-                MessageBox.Show($"Error al actualizar los datos{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.ShowError($"Error al actualizar los datos{ex.Message}");
             }
 
         }
@@ -116,7 +123,22 @@ namespace UIHotel
         private void ShowError(string message)
         {
             MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
 
+        private void btnJsonData_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _billings = JSONSerialization.DeserializeBillings();
+                this.cmbJsonBillingData.DataSource = _billings;
+                this.cmbJsonBillingData.DisplayMember = "DisplayProperty";
+            }
+            catch (Exception ex)
+            {
+                this.ShowError($"Error al actualizar los datos{ex.Message}");
+            }
+
+            //METODO PARA ACTUALIZAR EL COMBOBOX CON LOS DATOS DEL JSON TO DO.
         }
     }
 }

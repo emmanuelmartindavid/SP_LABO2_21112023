@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entiti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UIHotel", "UIHotel\UIHotel.csproj", "{AD6E1984-F573-4C0A-B319-928B9622FD1D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{265FF7DE-F5BD-4D0A-8047-900E38F19A72}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{AD6E1984-F573-4C0A-B319-928B9622FD1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD6E1984-F573-4C0A-B319-928B9622FD1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD6E1984-F573-4C0A-B319-928B9622FD1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{265FF7DE-F5BD-4D0A-8047-900E38F19A72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{265FF7DE-F5BD-4D0A-8047-900E38F19A72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{265FF7DE-F5BD-4D0A-8047-900E38F19A72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{265FF7DE-F5BD-4D0A-8047-900E38F19A72}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

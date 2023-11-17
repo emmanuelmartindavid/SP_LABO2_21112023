@@ -1,6 +1,7 @@
 using Entities;
 using Entities.Controllers;
 using Entities.Models;
+using Entities.Serialization;
 using Entities.Utilities;
 
 namespace UIHotel
@@ -20,6 +21,38 @@ namespace UIHotel
 
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
+           /* List<Billing> bills = new();
+
+     
+            bills = JSONSerialization.DeserializeBillings();
+
+            *//* var guest = new Guest(12345678, "Roque", "Perez", 1234567234);
+             var reservation = new Reservation(12345678, new DateTime(2003, 4, 12), new DateTime(2003, 4, 15), 102);
+
+             var bill = new Billing(guest, new Room(102, false, ERoomType.Simple), reservation);
+
+             var guest2 = new Guest(12345678, "Juan", "PEdro", 1234567234);
+             var reservation2 = new Reservation(12345678, new DateTime(2003, 4, 12), new DateTime(2003, 4, 15), 102);
+
+             var bill2 = new Billing(guest, new Room(102, false, ERoomType.Simple), reservation);
+
+             bills.Add(bill);
+             bills.Add(bill2);*//*
+
+            var guest2 = new Guest(12345678, "Jose", "PEdro", 1234567234);
+            var reservation2 = new Reservation(12345678, new DateTime(2003, 4, 12), new DateTime(2003, 4, 15), 102);
+
+            var bill2 = new Billing(guest2, new Room(102, false, ERoomType.Simple), reservation2);
+            bills.Add(bill2);
+
+            JSONSerialization.SerializeBillings(bills);
+*/
+
+            // JSONSerialization.SerializeBillings( reservation.ToInvoiceString(guest, new Room(102, false,ERoomType.Simple)));
+
+
+
+
             _guestController = new();
             _reservationController = new();
 
@@ -87,7 +120,7 @@ namespace UIHotel
 
         private void btnRoomHanlder_Click(object sender, EventArgs e)
         {
-             FrmRooms frmRoom = new(EFrmType.Edit);
+            FrmRooms frmRoom = new(EFrmType.Edit);
             frmRoom.Show();
             this.Hide();
         }

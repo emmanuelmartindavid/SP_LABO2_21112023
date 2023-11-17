@@ -1,22 +1,60 @@
-﻿using Entities.Utilities;
+﻿using Entities.Models;
+using System.Text.Json;
 
 namespace Entities.Serialization
 {
     public class JSONSerialization : JSONManagment
     {
-        public static void SerializeBillings(string billings)
+        public static void SerializeBillings(Billing billing)
         {
-            string json = Serialize(billings);
+            try
+            {
+                string json = Serialize(billing);
 
-            string path = "C:\\Users\\Cuerpos\\billings.json";
-            File.WriteAllText(path, json);
+                string path = "C:\\Users\\Cuerpos\\billings.json";
+                File.WriteAllText(path, json);
+            }
+            catch (Exception ex)
+            {
+
+                throw new NotSerializeJsonException("Error", ex.Message);
+            }
+        }
+
+        public static void SerializeBillings(List<Billing> billing)
+        {
+            try
+            {
+                string json = Serialize(billing);
+
+                string path = "C:\\Users\\Cuerpos\\billings.json";
+                File.WriteAllText(path, json);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new NotSerializeJsonException("Error", ex.Message);
+            }
+
+
 
         }
 
         public static List<Billing> DeserializeBillings()
         {
-            string json = File.ReadAllText(@"C:\Users\Usuario\source\repos\Hotel-Management-App\Hotel-Management-App\billings.json");
-            return Deserialize<List<Billing>>(json);
+            try
+            {
+                string json = File.ReadAllText("C:\\Users\\Cuerpos\\billings.json");
+                return Deserialize<List<Billing>>(json);
+            }
+            catch (Exception ex)
+            {
+
+                throw new NotDeserializeJsonException("Error", ex.Message);
+            }
+
+
         }
 
 
