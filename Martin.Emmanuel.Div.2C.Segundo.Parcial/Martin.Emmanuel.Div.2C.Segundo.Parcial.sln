@@ -5,9 +5,7 @@ VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{D05524D1-0194-4369-A491-B0A8D01E372A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIHotel", "UIHotel\UIHotel.csproj", "{AD6E1984-F573-4C0A-B319-928B9622FD1D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PruebaUI", "PruebaUI\PruebaUI.csproj", "{67822FF5-A21D-4F17-B543-7B7D328D174E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UIHotel", "UIHotel\UIHotel.csproj", "{AD6E1984-F573-4C0A-B319-928B9622FD1D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +21,6 @@ Global
 		{AD6E1984-F573-4C0A-B319-928B9622FD1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD6E1984-F573-4C0A-B319-928B9622FD1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD6E1984-F573-4C0A-B319-928B9622FD1D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{67822FF5-A21D-4F17-B543-7B7D328D174E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{67822FF5-A21D-4F17-B543-7B7D328D174E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{67822FF5-A21D-4F17-B543-7B7D328D174E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{67822FF5-A21D-4F17-B543-7B7D328D174E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

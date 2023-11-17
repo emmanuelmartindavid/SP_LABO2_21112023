@@ -70,18 +70,6 @@ namespace UIHotel
                 this.UpdateRoomDataGrid();
                 MessageBox.Show("Huesped registrado correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            catch (WrongRoomNumberException ex)
-            {
-                this.ShowError(ex.Message);
-            }
-            catch (RoomExistsException ex)
-            {
-                this.ShowError(ex.Message);
-            }
-            catch (RoomNotAddedException ex)
-            {
-                this.ShowError(ex.Message);
-            }
             catch (Exception ex)
             {
                 this.ShowError($"Error al agregar habitacion: {ex.Message}");
@@ -155,18 +143,6 @@ namespace UIHotel
                     this.UpdateRoomDataGrid();
                     MessageBox.Show("Habitacion actualizada correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-            }
-            catch (WrongRoomNumberException ex)
-            {
-                this.ShowError(ex.Message);
-            }
-            catch (RoomExistsException ex)
-            {
-                this.ShowError(ex.Message);
-            }
-            catch (RoomNotUpdatedException ex)
-            {
-                this.ShowError(ex.Message);
             }
             catch (Exception ex)
             {

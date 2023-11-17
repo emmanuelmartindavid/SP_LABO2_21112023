@@ -65,14 +65,6 @@ namespace UIHotel
                         this.UpdateReservationsGrid();
                     }
                 }
-                catch (RoomNotUpdatedException ex)
-                {
-                    this.ShowError(ex.Message);
-                }
-                catch (ReservationNotDeletedException)
-                {
-                    this.ShowError("Error al eliminar la reserva");
-                }
                 catch (Exception ex)
                 {
                     this.ShowError($"Error al eliminar la reserva: {ex.Message}");
@@ -121,26 +113,6 @@ namespace UIHotel
                     this.UpdateReservationsGrid();
                     MessageBox.Show("Reserva actualizada correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-            }
-            catch (WrongRoomNumberException ex)
-            {
-                this.ShowError(ex.Message);
-            }
-            catch (RoomExistsException ex)
-            {
-                this.ShowError(ex.Message);
-            }
-            catch (WrongReservationDateException ex)
-            {
-                this.ShowError(ex.Message);
-            }
-            catch (RoomNotUpdatedException ex)
-            {
-                this.ShowError(ex.Message);
-            }
-            catch (ReservationNotUpdatedException ex)
-            {
-                this.ShowError(ex.Message);
             }
             catch (Exception ex)
             {
@@ -205,7 +177,7 @@ namespace UIHotel
                     this.DeleteData();
                 }
             }
-            catch (ReservationNotObtainedException ex)
+            catch (Exception ex)
             {
                 this.ShowError($"Error al actualizar las reservas: {ex.Message}");
             }

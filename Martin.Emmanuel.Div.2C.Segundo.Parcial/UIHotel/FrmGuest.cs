@@ -78,33 +78,6 @@ namespace UIHotel
                 this.UpdateGuestDataGrid();
                 MessageBox.Show("Huesped registrado correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            catch (WrongGuestDniException ex)
-            {
-                this.ShowError(ex.Message);
-            }
-            catch (WrongGuestNameException ex)
-            {
-                this.ShowError(ex.Message);
-            }
-            catch (WrongPhoneNumberGuestException ex)
-            {
-                this.ShowError(ex.Message);
-
-            }
-            catch (GuestNotObtainedException ex)
-            {
-                this.ShowError(ex.Message);
-
-            }
-            catch (GuestExistsException ex)
-            {
-                this.ShowError(ex.Message);
-
-            }
-            catch (GuestNotAddedException ex)
-            {
-                this.ShowError(ex.Message);
-            }
             catch (Exception ex)
             {
                 this.ShowError($"Error al actualizar huesped: {ex.Message}");
@@ -148,22 +121,6 @@ namespace UIHotel
                     }
 
                 }
-                catch (GuestNotDeletedException ex)
-                {
-                    this.ShowError(ex.Message);
-                }
-                catch (RoomNotUpdatedException ex)
-                {
-                    this.ShowError(ex.Message);
-                }
-                catch (ReservationNotObtainedException ex)
-                {
-                    this.ShowError(ex.Message);
-                }
-                catch (ReservationNotDeletedException ex)
-                {
-                    this.ShowError(ex.Message);
-                }
                 catch (Exception ex)
                 {
                     this.ShowError($"Error al eliminar huesped: {ex.Message}");
@@ -205,33 +162,6 @@ namespace UIHotel
                     this.UpdateGuestDataGrid();
                     MessageBox.Show("Huesped actualizado correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-            }
-            catch (WrongGuestDniException ex)
-            {
-                this.ShowError(ex.Message);
-            }
-            catch (WrongGuestNameException ex)
-            {
-                this.ShowError(ex.Message);
-            }
-            catch (WrongPhoneNumberGuestException ex)
-            {
-                this.ShowError(ex.Message);
-
-            }
-            catch (GuestNotObtainedException ex)
-            {
-                this.ShowError(ex.Message);
-
-            }
-            catch (GuestExistsException ex)
-            {
-                this.ShowError(ex.Message);
-
-            }
-            catch (GuestNotUpdatedException ex)
-            {
-                this.ShowError(ex.Message);
             }
             catch (Exception ex)
             {
@@ -290,7 +220,7 @@ namespace UIHotel
                     this.DeleteData();
                 }
             }
-            catch (GuestNotObtainedException ex)
+            catch (Exception ex)
             {
                 this.ShowError(ex.Message);
 

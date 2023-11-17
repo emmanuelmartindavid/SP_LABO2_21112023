@@ -71,21 +71,9 @@ namespace UIHotel
                 await this.UpdateDataComboBox();
                 MessageBox.Show("Reserva generada correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            catch (ReservationExistsException ex)
+            catch (Exception ex)
             {
-                this.ShowError(ex.Message);
-            }
-            catch (ReservationNotAddedException ex)
-            {
-                this.ShowError(ex.Message);
-            }
-            catch (RoomNotUpdatedException ex)
-            {
-                this.ShowError(ex.Message);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Error al generar la reserva", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error al generar la reserva: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -118,17 +106,9 @@ namespace UIHotel
                 this.dtpCheckOut.MinDate = new DateTime(2023, 11, 18, 0, 0, 0, 0);
                 this.dtpCheckOut.MaxDate = new DateTime(2024, 12, 31, 0, 0, 0, 0);
             }
-            catch (RoomNotObtainedException ex)
+            catch (Exception ex )
             {
-                this.ShowError(ex.Message);
-            }
-            catch (GuestNotObtainedException ex)
-            {
-                this.ShowError(ex.Message);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Error al actualizar los datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error al actualizar los datos{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
