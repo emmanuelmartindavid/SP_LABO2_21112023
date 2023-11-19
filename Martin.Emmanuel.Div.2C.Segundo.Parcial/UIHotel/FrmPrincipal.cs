@@ -11,54 +11,26 @@ namespace UIHotel
 
         private GuestController _guestController;
         private ReservationController _reservationController;
-
-
         public FrmPrincipal()
         {
             InitializeComponent();
 
         }
-
+        /// <summary>
+        /// Evento que se ejecuta al cargar el formulario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
-           /* List<Billing> bills = new();
-
-     
-            bills = JSONSerialization.DeserializeBillings();
-
-            *//* var guest = new Guest(12345678, "Roque", "Perez", 1234567234);
-             var reservation = new Reservation(12345678, new DateTime(2003, 4, 12), new DateTime(2003, 4, 15), 102);
-
-             var bill = new Billing(guest, new Room(102, false, ERoomType.Simple), reservation);
-
-             var guest2 = new Guest(12345678, "Juan", "PEdro", 1234567234);
-             var reservation2 = new Reservation(12345678, new DateTime(2003, 4, 12), new DateTime(2003, 4, 15), 102);
-
-             var bill2 = new Billing(guest, new Room(102, false, ERoomType.Simple), reservation);
-
-             bills.Add(bill);
-             bills.Add(bill2);*//*
-
-            var guest2 = new Guest(12345678, "Jose", "PEdro", 1234567234);
-            var reservation2 = new Reservation(12345678, new DateTime(2003, 4, 12), new DateTime(2003, 4, 15), 102);
-
-            var bill2 = new Billing(guest2, new Room(102, false, ERoomType.Simple), reservation2);
-            bills.Add(bill2);
-
-            JSONSerialization.SerializeBillings(bills);
-*/
-
-            // JSONSerialization.SerializeBillings( reservation.ToInvoiceString(guest, new Room(102, false,ERoomType.Simple)));
-
-
-
-
             _guestController = new();
             _reservationController = new();
-
-
         }
-
+        /// <summary>
+        /// Evento que se ejecuta al cerrar el formulario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnFrmReservation_Click(object sender, EventArgs e)
         {
 
@@ -66,9 +38,15 @@ namespace UIHotel
             frmReservation.Show();
             this.Hide();
         }
+        /// <summary>
+        /// Evento que se ejecuta al hacer click en el boton de "Huespedes Registrados"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void btnRegisteredGuests_Click(object sender, EventArgs e)
         {
             var guests = await _guestController.GetAllGuests();
+            guests.OrderGuestByLastName();
             dgvMainData.DataSource = guests;
 
             dgvMainData.Columns[0].HeaderText = "DNI";
@@ -78,7 +56,11 @@ namespace UIHotel
             dgvMainData.Columns[4].Visible = false;
 
         }
-
+        /// <summary>
+        /// Evento que se ejecuta al hacer click en el boton de "Historial de Reservas"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void btnReservationsHistory_Click(object sender, EventArgs e)
         {
 
@@ -89,35 +71,55 @@ namespace UIHotel
             dgvMainData.Columns[2].HeaderText = "CheckOut";
             dgvMainData.Columns[3].HeaderText = "Nro Habitacion";
         }
-
+        /// <summary>
+        /// Evento que se ejecuta al hacer click en el boton de "Reservas Activas"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnReservationHandler_Click(object sender, EventArgs e)
         {
             FrmReservationHandler frmReservationHandler = new();
             frmReservationHandler.Show();
             this.Hide();
         }
-
+        /// <summary>
+        /// Evento que se ejecuta al hacer click en el boton de "Registrar Huesped"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRegisterGuest_Click(object sender, EventArgs e)
         {
             FrmGuest frmGuestRegister = new(EFrmType.Register);
             frmGuestRegister.Show();
             this.Hide();
         }
-
+        /// <summary>
+        /// Evento que se ejecuta al hacer click en el boton de "Editar Huesped"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnHandlerGuest_Click(object sender, EventArgs e)
         {
             FrmGuest frmGuestRegister = new(EFrmType.Edit);
             frmGuestRegister.Show();
             this.Hide();
         }
-
+        /// <summary>
+        /// Evento que se ejecuta al hacer click en el boton de "Registrar Habitacion"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRegisterRoom_Click(object sender, EventArgs e)
         {
             FrmRooms frmRoom = new(EFrmType.Register);
             frmRoom.Show();
             this.Hide();
         }
-
+        /// <summary>
+        /// Evento que se ejecuta al hacer click en el boton de "Editar Habitacion"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRoomHanlder_Click(object sender, EventArgs e)
         {
             FrmRooms frmRoom = new(EFrmType.Edit);

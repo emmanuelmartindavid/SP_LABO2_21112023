@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entities.SQLLogic
 {
@@ -18,7 +12,7 @@ namespace Entities.SQLLogic
         /// <returns></returns>
         public async Task<SqlCommand> CreateCommand(string query)
         {
-            await Open();
+            await this.Open();
             var command = new SqlCommand(query, this._connection);
             return command;
         }

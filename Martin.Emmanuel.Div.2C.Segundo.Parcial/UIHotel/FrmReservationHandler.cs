@@ -8,18 +8,13 @@ using Entities.Handlers.ReservationExceptions;
 
 namespace UIHotel
 {
-    /// <summary>
-    /// Formulario para manejar las reservaciones.
-    /// </summary>
+
     public partial class FrmReservationHandler : Form
     {
         private readonly ReservationController _reservationController;
         private readonly RoomController _roomController;
         private readonly DataEntryValidator _dataEntryValidator;
 
-        /// <summary>
-        /// Inicializa una nueva instancia de la clase FrmReservationHandler.
-        /// </summary>
         public FrmReservationHandler()
         {
             InitializeComponent();
@@ -29,23 +24,18 @@ namespace UIHotel
         }
 
         /// <summary>
-        /// Manejador del evento Load para FrmReservationHandler.
-        /// Actualiza el DataGridView con las reservas actuales.
+        /// Evento Click para btnAddReservation.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void FrmReservationHandler_Load(object sender, EventArgs e)
+        private void FrmReservationHandler_Load(object sender, EventArgs e)
         {
             this.UpdateReservationsGrid();
-            //  await this._roomController.UpdateRoomAvailability(103, true);
-            //  await this._roomController.UpdateRoomAvailability(104, true);
-
         }
 
 
         /// <summary>
-        /// Manejador del evento Click para btnDelete.
-        /// Elimina la reserva seleccionada y actualiza el DataGridView.
+        /// Evento Click para btnAddReservation.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -58,7 +48,6 @@ namespace UIHotel
                     var reservation = (Reservation)this.dgvReservationHandler.CurrentRow.DataBoundItem;
                     if (reservation is not null)
                     {
-                        UtilityClass.AddDeleteReservationsToList(reservation);
                         await this._roomController.UpdateRoomAvailability(reservation.RoomNumber, true);
                         await this._reservationController.Delete(reservation);
                         MessageBox.Show("Reserva eliminada correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -77,8 +66,7 @@ namespace UIHotel
         }
 
         /// <summary>
-        /// Manejador del evento Click para btnUpdateReservation.
-        /// Actualiza la reserva seleccionada y actualiza el DataGridView.
+        /// Evento Click para btnAddReservation.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -121,8 +109,7 @@ namespace UIHotel
         }
 
         /// <summary>
-        /// Manejador del evento FormClosing para FrmReservationHandler.
-        /// Muestra el formulario principal y oculta este formulario.
+        /// Evento Click para btnAddReservation.
         /// </summary>
         private void FrmReservationHandler_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -132,7 +119,7 @@ namespace UIHotel
 
         }
         /// <summary>
-        /// Actualiza los campos de texto con los detalles de la reservacion seleccionada.
+        /// Actualiza los campos de texto con los datos de la reserva seleccionada en el DataGridView.
         /// </summary>
         private void UpdateTxtView()
         {

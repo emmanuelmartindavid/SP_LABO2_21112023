@@ -15,7 +15,6 @@ namespace Entities.SQLLogic
         static ConnectionDataBase()
         {
             _connectionString = "Server=.;Database=Hotel-Segundo-Parcial-Labo;Trusted_Connection=True;";
-
         }
 
         /// <summary>

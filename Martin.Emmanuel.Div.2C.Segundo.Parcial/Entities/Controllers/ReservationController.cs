@@ -7,36 +7,23 @@ namespace Entities.Controllers
     public class ReservationController
     {
         private ReservationHandler _reservationHandler;
-
-        private IManagementDataBase<Reservation> _managementDataBase;
-
         public ReservationController()
         {
             this._reservationHandler = new();
         }
-
-        public ReservationController(IManagementDataBase<Reservation> managementDataBase)
-        {
-            this._managementDataBase = managementDataBase;
-        }
-
-         public async Task<List<Reservation>> GetAllReservationsconI()
-        {
-            return await this._managementDataBase.GetAll();
-        }
         /// <summary>
-        /// Devuelve una lista de todas las reservaciones
+        /// Obtiene todas las reservaciones de la base de datos
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Devuelve una lista de todas las reservaciones</returns>
         public async Task<List<Reservation>> GetAllReservations()
         {
             return await this._reservationHandler.GetAll();
         }
         /// <summary>
-        /// Devuelve una reservacion por su dni
+        /// Obtiene una reservacion por dni de huesped
         /// </summary>
         /// <param name="dni"></param>
-        /// <returns></returns>
+        /// <returns>Devuelve una reservacion</returns>
         public async Task<Reservation> GetReservationByDni(int dni)
         {
             return await this._reservationHandler.GetById(dni);

@@ -13,13 +13,15 @@ namespace Entities.Utilities
         {
             return objs.Select(o => (T)o).ToList();
         }*/
-
+/*
        public static List<Reservation> DeletedReservations = new List<Reservation>();
 
         public static void AddDeleteReservationsToList(Reservation reservation)
         {
             DeletedReservations.Add(reservation);
-        }
+        }*/
+
+        public static List<Billing> billings = new();
 
 
       

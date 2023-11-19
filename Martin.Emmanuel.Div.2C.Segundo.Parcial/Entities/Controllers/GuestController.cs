@@ -1,11 +1,9 @@
 ﻿using Entities.Handlers;
 using Entities.Models;
+using Entities.SQLLogic;
 
 namespace Entities.Controllers
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class GuestController
     {
         private readonly GuestHandler _guestHandler;
@@ -15,27 +13,26 @@ namespace Entities.Controllers
             _guestHandler = new();
         }
         /// <summary>
-        /// Devuelve una lista de todos los Huespedes
+        /// Obtiene Huespedes de la base de datos
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Devuelve una lista de todos los Huespedes</returns>
         public async Task<List<Guest>> GetAllGuests()
         {
-         
+
             return await _guestHandler.GetAll();
         }
-
         /// <summary>
-        /// Devuelve un huesped por su dni
+        /// Obtiene un huesped por su dni
         /// </summary>
         /// <param name="dni"></param>
-        /// <returns></returns>
+        /// <returns>Devuelve un huesped por su dni</returns>
         public async Task<Guest> GetGuestByDni(int dni)
         {
             return await _guestHandler.GetById(dni);
         }
 
         /// <summary>
-        /// Agrera un huesped a la base de datos
+        /// Agrega un huesped a la base de datos
         /// </summary>
         /// <param name="guest"></param>
         /// <returns></returns>
@@ -67,7 +64,7 @@ namespace Entities.Controllers
         /// Verifica si un huesped existe en la base de datos
         /// </summary>
         /// <param name="dni"></param>
-        /// <returns></returns>
+        /// <returns>Devuelve true si existe huesped, false caso contrario</returns>
         public async Task<bool> GuestExists(int dni)
         {
             Guest guest = await _guestHandler.GetById(dni);

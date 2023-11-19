@@ -12,47 +12,67 @@ namespace Entities.Models
         private Guest _guest;
         private Room _room;
         private Reservation _reservation;
-        private decimal _totalCost;
-        //properties
 
+        /// <summary>
+        /// Propiedad de Huesped
+        /// </summary>
         public Guest Guest
         {
             get { return _guest; }
             set { _guest = value; }
         }
 
+        /// <summary>
+        /// Propiedad de Habitacion
+        /// </summary>
         public Room Room
         {
             get { return _room; }
             set { _room = value; }
         }
 
+        /// <summary>
+        /// Propiedad de Reserva
+        /// </summary>
         public Reservation Reservation
         {
             get { return _reservation; }
             set { _reservation = value; }
         }
 
+        /// <summary>
+        /// Propiedad de Costo Total
+        /// </summary>
         public decimal TotalCost
         {
             get { return CalculateTotalCost(); }
-            set { _totalCost = value; }
         }
 
+        /// <summary>
+        /// Propiedad Muestra datos de la Cuenta
+        /// </summary>
         public string DisplayProperty
         {
             get
             {
-                return $"{_guest.Name}, {_guest.LastName} - Habitacion: {_room.Number} - CheckIn: {_reservation.ChekIn.ToShortDateString()} - CheckOut: {_reservation.CheckOut.ToShortDateString()} - Costo: U$D{TotalCost}";
+                return $"{_guest.Name}, {_guest.LastName} - Habitacion: {_room.Number} - CheckIn: {_reservation.ChekIn.ToShortDateString()} - CheckOut: {_reservation.CheckOut.ToShortDateString()} - Costo: U$D {TotalCost}";
             }
         }
 
-
-
+        /// <summary>
+        /// Constructor de la clase Billing
+        /// </summary>
         public Billing()
         {
 
         }
+        
+        /// <summary>
+        /// Constructor de la clase Billing
+        /// </summary>
+        /// <param name="guest"></param>
+        /// <param name="room"></param>
+        /// <param name="reservation"></param>
         public Billing(Guest guest, Room room, Reservation reservation)
         {
             _guest = guest;
@@ -60,6 +80,11 @@ namespace Entities.Models
             _reservation = reservation;
 
         }
+
+        /// <summary>
+        /// Calcula el costo total de la reserva
+        /// </summary>
+        /// <returns></returns>
         private decimal CalculateTotalCost()
         {
 
@@ -69,6 +94,11 @@ namespace Entities.Models
             return numberOfNights * nightlyRate;
         }
 
+        /// <summary>
+        /// Genera el costo por noche de la habitacion
+        /// </summary>
+        /// <param name="room"></param>
+        /// <returns>Obtiene el costo por noche de la habitacion</returns>
         private decimal GetNightlyRate(Room room)
         {
             if (room.Type == ERoomType.Simple)
@@ -77,28 +107,5 @@ namespace Entities.Models
             }
             return 90;
         }
-
-        /* public override string ToString()
-         {
-             decimal totalCost = CalculateTotalCost();
-             *//*StringBuilder sb = new();
-
-             sb.AppendLine($"Factura para {this._guest.Name}, {this._guest.LastName}:");
-             sb.AppendLine($"Habitación: {this._room.Number}");
-             sb.AppendLine($"Fecha de ingreso: {this._reservation.ChekIn.ToShortDateString()}");
-             sb.AppendLine($"Fecha de salida: {this._reservation.CheckOut.ToShortDateString()}");
-             sb.AppendLine($"Total a pagar: ${totalCost}");*//*
-
-             var invoiceData = new
-             {
-                 Huesped = $"{_guest.Name}, {_guest.LastName}",
-                 Habitacion = _room.Number,
-                 CheckIn = _reservation.ChekIn.ToShortDateString(),
-                 CheckOut = _reservation.CheckOut.ToShortDateString(),
-                 CostoTotal = totalCost
-             };
-
-             return invoiceData.ToString();
-         }*/
     }
 }

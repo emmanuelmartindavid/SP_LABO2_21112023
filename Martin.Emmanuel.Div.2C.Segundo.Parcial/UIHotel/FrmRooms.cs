@@ -5,9 +5,6 @@ using Entities.Models;
 using Entities.Validators;
 namespace UIHotel
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public partial class FrmRooms : Form
     {
         private readonly RoomController _roomController;
@@ -27,6 +24,7 @@ namespace UIHotel
                 this.btnDeleteRoom.Visible = true;
                 this.btnModifyRoom.Visible = true;
                 this.lblAvaible.Visible = false;
+                this.cmbAvaiableRoom.Visible = false;
             }
             else
             {
@@ -38,7 +36,7 @@ namespace UIHotel
             }
         }
         /// <summary>
-        /// 
+        /// Evento que se ejecuta al hacer doble click sobre una fila del DataGridView.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -50,7 +48,7 @@ namespace UIHotel
             this.cmbAvaiableRoom.DisplayMember = "DisplayProperty";
         }
         /// <summary>
-        /// 
+        /// Evento que se ejecuta al hacer doble click sobre una fila del DataGridView.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -77,7 +75,7 @@ namespace UIHotel
         }
 
         /// <summary>
-        /// 
+        /// Muestra un mensaje de error.
         /// </summary>
         /// <param name="message"></param>
 
@@ -86,7 +84,7 @@ namespace UIHotel
             MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         /// <summary>
-        /// 
+        /// Evento que se ejecuta al hacer doble click sobre una fila del DataGridView.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -115,7 +113,7 @@ namespace UIHotel
             }
         }
         /// <summary>
-        /// 
+        /// Evento que se ejecuta al hacer doble click sobre una fila del DataGridView.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -224,11 +222,25 @@ namespace UIHotel
                 this.lblRoomDgv.Text = "No hay huespedes";
             }
         }
-
+        /// <summary>
+        /// Evento que se ejecuta al cerrar el formulario.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FrmRooms_FormClosing(object sender, FormClosingEventArgs e)
         {
             FrmPrincipal frmPrincipal = new();
             frmPrincipal.Show();
+        }
+        /// <summary>
+        /// Evento que se ejecuta al hacer doble click sobre una fila del DataGridView.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvRoomHandler_DoubleClick(object sender, EventArgs e)
+        {
+            this.UpdateTxtView();
+
         }
     }
 }

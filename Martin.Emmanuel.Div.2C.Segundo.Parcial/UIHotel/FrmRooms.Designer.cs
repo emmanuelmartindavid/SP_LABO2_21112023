@@ -74,6 +74,7 @@
             dgvRoomHandler.RowTemplate.Height = 25;
             dgvRoomHandler.Size = new Size(451, 275);
             dgvRoomHandler.TabIndex = 11;
+            dgvRoomHandler.DoubleClick += dgvRoomHandler_DoubleClick;
             // 
             // btnDeleteRoom
             // 

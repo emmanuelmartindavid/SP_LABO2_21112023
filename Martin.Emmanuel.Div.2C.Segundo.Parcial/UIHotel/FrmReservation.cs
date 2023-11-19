@@ -1,28 +1,20 @@
 ﻿using Entities.Controllers;
-using Entities.Exceptions;
-using Entities.Handlers.GuestExceptions;
-using Entities.Handlers.ReservationExceptions;
-using Entities.Handlers.RoomExceptions;
 using Entities.Models;
 using Entities.Serialization;
+using Entities.Utilities;
 using Entities.Validators;
 
 namespace UIHotel
 {
-    /// <summary>
-    /// 
-    /// </summary>
+
     public partial class FrmReservation : Form
     {
         private readonly GuestController _guestController;
         private readonly RoomController _roomController;
         private readonly ReservationController _reservationController;
         private readonly DataEntryValidator _dataEntryValidator;
-        private List<Billing> _billings;
 
-        /// <summary>
-        /// 
-        /// </summary>
+
         public FrmReservation()
         {
             this.InitializeComponent();
@@ -30,8 +22,6 @@ namespace UIHotel
             this._roomController = new();
             this._reservationController = new();
             this._dataEntryValidator = new();
-            this._billings = new();
-
         }
         /// <summary>
         /// Manejador del evento Load de FrmReservation.
@@ -73,9 +63,10 @@ namespace UIHotel
                 await this._roomController.UpdateRoomAvailability(room.Number, false);
                 room.Available = false;
                 var bill = new Billing(guest, room, reservation);
-                this._billings.Add(bill);
-                JSONSerialization.SerializeBillings(this._billings);
+                UtilityClass.billings.Add(bill);
+                JSONSerialization.SerializeBillings(UtilityClass.billings);
                 await this.UpdateDataComboBox();
+                this.UpdateBillingCombobox();
                 MessageBox.Show("Reserva generada correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -119,26 +110,40 @@ namespace UIHotel
             }
 
         }
-
+        /// <summary>
+        /// Muestra un mensaje de error.
+        /// </summary>
+        /// <param name="message"></param>
         private void ShowError(string message)
         {
             MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-
+        /// <summary>
+        /// Evento de clic en el botón de actualizar datos del JSON.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnJsonData_Click(object sender, EventArgs e)
+        {
+            this.UpdateBillingCombobox();
+
+            //METODO PARA ACTUALIZAR EL COMBOBOX CON LOS DATOS DEL JSON TO DO.
+        }
+        /// <summary>
+        /// Actualiza el comboBox con los datos del JSON.
+        /// </summary>
+        private void UpdateBillingCombobox()
         {
             try
             {
-                _billings = JSONSerialization.DeserializeBillings();
-                this.cmbJsonBillingData.DataSource = _billings;
+                UtilityClass.billings = JSONSerialization.DeserializeBillings();
+                this.cmbJsonBillingData.DataSource = UtilityClass.billings;
                 this.cmbJsonBillingData.DisplayMember = "DisplayProperty";
             }
             catch (Exception ex)
             {
                 this.ShowError($"Error al actualizar los datos{ex.Message}");
             }
-
-            //METODO PARA ACTUALIZAR EL COMBOBOX CON LOS DATOS DEL JSON TO DO.
         }
     }
 }

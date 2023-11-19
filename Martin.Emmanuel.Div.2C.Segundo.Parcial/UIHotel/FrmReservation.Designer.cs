@@ -156,7 +156,7 @@
             // btnJsonData
             // 
             btnJsonData.Font = new Font("Arial", 13F, FontStyle.Regular, GraphicsUnit.Point);
-            btnJsonData.Location = new Point(43, 369);
+            btnJsonData.Location = new Point(12, 369);
             btnJsonData.Name = "btnJsonData";
             btnJsonData.Size = new Size(215, 64);
             btnJsonData.TabIndex = 13;
@@ -169,9 +169,9 @@
             cmbJsonBillingData.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbJsonBillingData.Font = new Font("Arial Black", 13F, FontStyle.Regular, GraphicsUnit.Point);
             cmbJsonBillingData.FormattingEnabled = true;
-            cmbJsonBillingData.Location = new Point(280, 369);
+            cmbJsonBillingData.Location = new Point(233, 369);
             cmbJsonBillingData.Name = "cmbJsonBillingData";
-            cmbJsonBillingData.Size = new Size(909, 32);
+            cmbJsonBillingData.Size = new Size(978, 32);
             cmbJsonBillingData.TabIndex = 14;
             // 
             // FrmReservation

@@ -4,9 +4,6 @@ using Entities.Models;
 
 namespace Entities.Validators
 {
-    /// <summary>
-    /// Clase para validar la entrada de datos.
-    /// </summary>
     public class DataEntryValidator
     {
         private static ReservationController? _reservationController;
@@ -78,7 +75,7 @@ namespace Entities.Validators
         }
 
         /// <summary>
-        /// 
+        /// Valida la existencia del huésped.
         /// </summary>
         /// <param name="newDni"></param>
         /// <param name="originalDni"></param>
@@ -133,7 +130,7 @@ namespace Entities.Validators
             }
         }
         /// <summary>
-        /// 
+        /// Valida la existencia de la reserva.
         /// </summary>
         /// <param name="dni"></param>
         /// <returns></returns>
@@ -168,7 +165,7 @@ namespace Entities.Validators
             throw new RoomExistsException("La habitacion ingresada no existe en sistema."); ;
         }
         /// <summary>
-        /// 
+        /// Valida la existencia de la habitación.
         /// </summary>
         /// <param name="roomNumber"></param>
         /// <returns></returns>
@@ -199,8 +196,5 @@ namespace Entities.Validators
             }
             throw new WrongRoomNumberException("Ingrese solo numeros.");
         }
-
-
-
     }
 }

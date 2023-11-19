@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 namespace Entities.Handlers
 {
 
-    internal class GuestHandler : CommandDataBase, IManagementDataBase<Guest>
+    public class GuestHandler : CommandDataBase, IManagementDataBase<Guest>
     {
         /// <summary>
         /// Agrega un huesped a la base de datos
@@ -61,7 +61,7 @@ namespace Entities.Handlers
         /// Obtiene un huesped de la base de datos por su dni
         /// </summary>
         /// <param name="dni"></param>
-        /// <returns></returns>
+        /// <returns>Devuelve al huesped de la base de datos</returns>
         public async Task<Guest> GetById(int dni)
         {
             try
@@ -92,7 +92,7 @@ namespace Entities.Handlers
         /// <summary>
         /// Obtiene todos los huespedes de la base de datos
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Devuelve lista de huesped de la base de datos</returns>
         public async Task<List<Guest>> GetAll()
         {
             try

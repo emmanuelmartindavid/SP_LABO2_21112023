@@ -63,7 +63,7 @@ namespace Entities.Handlers
         /// <summary>
         /// Obtiene todas las reservaciones de la base de datos
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Devuelve las reservaciones de la base de datos</returns>
         public async Task<List<Reservation>> GetAll()
         {
             try
@@ -90,10 +90,10 @@ namespace Entities.Handlers
         }
 
         /// <summary>
-        /// Obtiene una reservacion de la base de datos por su dni
+        /// Obtiene una reservacion de la base de datos por dni de huesped
         /// </summary>
         /// <param name="dniGuest"></param>
-        /// <returns></returns>
+        /// <returns>Devuelve la reservacion de la base de datos segun dni de huespded</returns>
         public async Task<Reservation> GetById(int dniGuest)
         {
             try

@@ -10,9 +10,6 @@ using Entities.Handlers.RoomExceptions;
 
 namespace UIHotel
 {
-    /// <summary>
-    /// Form para registrar huespedes.
-    /// </summary>
     public partial class FrmGuest : Form
     {
         private readonly GuestController _guestController;
@@ -45,7 +42,7 @@ namespace UIHotel
             }
         }
         /// <summary>
-        /// 
+        /// Evento que se ejecuta al cargar el formulario.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -54,7 +51,7 @@ namespace UIHotel
             this.UpdateGuestDataGrid();
         }
         /// <summary>
-        /// 
+        /// Evento que se ejecuta al hacer click en el boton de registrar huesped.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -80,11 +77,11 @@ namespace UIHotel
             }
             catch (Exception ex)
             {
-                this.ShowError($"Error al actualizar huesped: {ex.Message}");
+                this.ShowError($"Error al agregar huesped: {ex.Message}");
             }
         }
         /// <summary>
-        /// 
+        /// Evento que se ejecuta al cerrar el formulario.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -94,7 +91,7 @@ namespace UIHotel
             frmPrincipal.Show();
         }
         /// <summary>
-        /// 
+        /// Evento que se ejecuta al hacer click en el boton de eliminar huesped.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -133,7 +130,7 @@ namespace UIHotel
 
         }
         /// <summary>
-        /// 
+        /// Evento que se ejecuta al hacer click en el boton de modificar huesped.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -182,8 +179,6 @@ namespace UIHotel
                 this.txtPhoneNumber.Text = guest.PhoneNumber.ToString();
             }
         }
-
-
         /// <summary>
         /// Actualiza los encabezados de las columnas del DataGridView.
         /// </summary>
@@ -194,6 +189,7 @@ namespace UIHotel
             this.dgvGuestsHandler.Columns[2].HeaderText = "Apellido";
             this.dgvGuestsHandler.Columns[3].HeaderText = "Nro Telefono";
             this.dgvGuestsHandler.Columns[4].Visible = false;
+
         }
 
         /// <summary>
@@ -205,6 +201,7 @@ namespace UIHotel
             {
                 var guest = await this._guestController.GetAllGuests();
                 this.dgvGuestsHandler.DataSource = guest;
+                guest.OrderGuestByLastName();
                 this.UpdateDatGrid();
                 if (guest.Count > 0)
                 {
@@ -246,7 +243,7 @@ namespace UIHotel
             }
         }
         /// <summary>
-        /// 
+        /// Evento que se ejecuta al hacer doble click sobre un huesped del DataGridView.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -255,7 +252,10 @@ namespace UIHotel
             this.UpdateTxtView();
         }
 
-
+        /// <summary>
+        /// Muestra un mensaje de error.
+        /// </summary>
+        /// <param name="message"></param>
         private void ShowError(string message)
         {
             MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

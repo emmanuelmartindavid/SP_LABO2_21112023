@@ -9,15 +9,25 @@ namespace Entities.Models
 {
     public class Room
     {
-
         private int _number;
         private bool _available;
         private ERoomType _type;
 
+        /// <summary>
+        /// Propiedad Number.
+        /// </summary>
         public int Number { get => _number; set => _number = value; }
+        /// <summary>
+        /// Propiedad Available.
+        /// </summary>
         public bool Available { get => _available; set => _available = value; }
+        /// <summary>
+        /// Propiedad Type.
+        /// </summary>
         public ERoomType Type { get => _type; set => _type = value; }
-
+        /// <summary>
+        /// Propiedad DisplayProperty.
+        /// </summary>
         public string DisplayProperty
         {
             get
@@ -29,10 +39,20 @@ namespace Entities.Models
                 return $"{Number} - {Type}: US$90";
             }
         }
+
+        /// <summary>
+        /// Constructor de la clase Room.
+        /// </summary>
         public Room()
         {
 
         }
+        /// <summary>
+        /// Constructor de la clase Room.
+        /// </summary>
+        /// <param name="number"></param>
+        /// <param name="available"></param>
+        /// <param name="type"></param>
         public Room(int number, bool available, ERoomType type)
         {
             this._number = number;
@@ -40,6 +60,10 @@ namespace Entities.Models
             this._type = type;
         }
 
+        /// <summary>
+        /// Convierte un DataRow en un objeto Room.
+        /// </summary>
+        /// <param name="row"></param>
         public static explicit operator Room(DataRow row)
         {
             var number = Convert.ToInt32(row["Numero"].ToString());
@@ -50,22 +74,12 @@ namespace Entities.Models
             Room room = new(number, available, roomType);
 
             return room;
-            //MANEJO EXCEPCIONES
         }
+
         public override string ToString()
         {
             return $"- {Number} -{Available} - {Type} - ";
         }
 
-        public override bool Equals(object obj)
-        {
-            return obj is Room room &&
-                   Number == room.Number;
-        }
-
-        public override int GetHashCode()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

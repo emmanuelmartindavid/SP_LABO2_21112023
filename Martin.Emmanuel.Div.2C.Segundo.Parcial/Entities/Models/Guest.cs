@@ -11,16 +11,33 @@ namespace Entities.Models
         private int _dni;
         private long _phoneNumber;
 
+        /// <summary>
+        /// Propiedad DNI del Guest.
+        /// </summary>
         public int Dni { get => _dni; set => _dni = value; }
+        /// <summary>
+        /// Propiedad Nombre del Guest.
+        /// </summary>
         public string Name { get => _name; set => _name = value; }
+        /// <summary>
+        /// Propiedad Apellido del Guest.
+        /// </summary>
         public string LastName { get => _lastName; set => _lastName = value; }
+        /// <summary>
+        /// Propiedad Número de teléfono del Guest.
+        /// </summary>
         public long PhoneNumber { get => _phoneNumber; set => _phoneNumber = value; }
-
+        /// <summary>
+        /// Propiedad DisplayProperty del Guest.
+        /// </summary>
         public string DisplayProperty
         {
             get => $"{Name} {LastName} - DNI: {Dni}";
         }
 
+        /// <summary>
+        /// Constructor por defecto de la clase Guest.
+        /// </summary>
         public Guest() { }
 
         /// <summary>
@@ -39,36 +56,6 @@ namespace Entities.Models
         }
 
         /// <summary>
-        /// Devuelve una cadena que representa al Guest.
-        /// </summary>
-        /// <returns>Una cadena que representa al Guest.</returns>
-        public override string ToString()
-        {
-            return $"{Name} {LastName} - DNI: {Dni}";
-        }
-
-        /// <summary>
-        /// Determina si el objeto especificado es igual a este objeto.
-        /// </summary>
-        /// <param name="obj">El objeto para comparar con este objeto.</param>
-        /// <returns>Verdadero si el objeto especificado es igual a este objeto; de lo contrario, falso.</returns>
-        public override bool Equals(object obj)
-        {
-            return obj is Guest patient &&
-                   Dni == patient.Dni;
-        }
-
-        /// <summary>
-        /// Sirve como la función hash predeterminada.
-        /// </summary>
-        /// <returns>Un código hash que se puede usar para buscar este objeto en una colección.</returns>
-        public override int GetHashCode()
-        {
-            return Dni.GetHashCode();
-        }
-
-
-        /// <summary>
         /// Convierte un DataRow en un Guest.
         /// </summary>
         /// <param name="line"></param>
@@ -82,6 +69,14 @@ namespace Entities.Models
             Guest guest = new(dni, name, lastName, phoneNumber);
 
             return guest;
+        }
+        /// <summary>
+        /// Devuelve una cadena que representa al Guest.
+        /// </summary>
+        /// <returns>Una cadena que representa al Guest.</returns>
+        public override string ToString()
+        {
+            return $"{Name} {LastName} - DNI: {Dni}";
         }
 
     }

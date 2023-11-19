@@ -13,25 +13,25 @@ namespace Entities.Controllers
         }
 
         ///<summary>
-        ///Crea lista de todas las habitaciones
+        /// Crea lista de todas las habitaciones
         ///</summary>
-        /// <returns></returns>
+        /// <returns>Devuelve lista de habitaciones</returns>
         public async Task<List<Room>> GetAllRooms()
         {
             return await this._roomHandler.GetAll();
         }
         /// <summary>
-        /// 
+        /// Obtiene una habitacion por su numero
         /// </summary>
         /// <param name="number"></param>
-        /// <returns></returns>
+        /// <returns>Devuelve habitacion buscada</returns>
         public async Task<Room> GetRoomByNumber(int number)
         {
             return await this._roomHandler.GetById(number);
         }
 
         ///<summary>
-        ///Agrega una habitacion a la base de datos
+        /// Agrega una habitacion a la base de datos
         ///</summary>
         ///<param name="appointments"></param>
         public async Task AddRoom(Room room)
@@ -71,7 +71,7 @@ namespace Entities.Controllers
         /// <summary>
         /// Obtiene todas las habitaciones disponibles
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Devuelve las habitaciones disponibles</returns>
         public async Task<List<Room>> GetAvailableRooms()
         {
             return await this._roomHandler.GetAvailable();

@@ -1,21 +1,38 @@
-﻿
-using System.Data;
+﻿using System.Data;
 
 namespace Entities.Models
 {
     public class Reservation
     {
-
         private int _dniGuest;
         private DateTime _chekIn;
         private DateTime _checkOut;
         private int _roomNumber;
 
+        /// <summary>
+        /// Propiedad DniGuest.
+        /// </summary>
         public int DniGuest { get => _dniGuest; set => _dniGuest = value; }
+        /// <summary>
+        /// Propiedad ChekIn.
+        /// </summary>
         public DateTime ChekIn { get => _chekIn; set => _chekIn = value; }
+        /// <summary>
+        /// Propiedad CheckOut.
+        /// </summary>
         public DateTime CheckOut { get => _checkOut; set => _checkOut = value; }
+        /// <summary>
+        /// Propiedad RoomNumber.
+        /// </summary>
         public int RoomNumber { get => _roomNumber; set => _roomNumber = value; }
 
+        /// <summary>
+        /// Constructor de la clase Reservation.
+        /// </summary>
+        /// <param name="dniGuest"></param>
+        /// <param name="chekIn"></param>
+        /// <param name="checkOut"></param>
+        /// <param name="roomNumber"></param>
         public Reservation(int dniGuest, DateTime chekIn, DateTime checkOut, int roomNumber)
         {
             this._dniGuest = dniGuest;
@@ -24,6 +41,9 @@ namespace Entities.Models
             this._roomNumber = roomNumber;
         }
 
+        /// <summary>
+        /// Constructor vacio de la clase Reservation.
+        /// </summary>
         public Reservation()
         {
         }
@@ -42,20 +62,16 @@ namespace Entities.Models
             Reservation reservation = new(dniGuest, chekIn, checkOut, roomNumber);
 
             return reservation;
-
-            //MANEJO EXCEPCIONES
         }
 
+        /// <summary>
+        /// Sobreescritura del metodo ToString().
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return $"{DniGuest} - {ChekIn} - {CheckOut} - {RoomNumber}";
         }
 
-
-
-
-
-
     }
-
 }

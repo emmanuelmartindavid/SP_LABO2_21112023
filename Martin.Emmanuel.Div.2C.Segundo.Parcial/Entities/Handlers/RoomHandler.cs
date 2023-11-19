@@ -58,9 +58,9 @@ namespace Entities.Handlers
         }
 
         /// <summary>
-        /// Devuelve una lista de todas las habitaciones
+        /// Obtiene todas las habitaciones de la base de datos
         /// </summary>
-        ///<returns></returns>
+        ///<returns>Devuelve una lista de todas las habitaciones de la base de datos</returns>
         public async Task<List<Room>> GetAll()
         {
             try
@@ -90,7 +90,7 @@ namespace Entities.Handlers
         ///  Obtiene una habitacion por su numero
         /// </summary>
         /// <param name="number"></param>
-        /// <returns></returns>
+        /// <returns> Devuelve la habitacion seleccionada</returns>
         public async Task<Room> GetById(int number)
         {
             try
@@ -163,7 +163,7 @@ namespace Entities.Handlers
 
         }
         /// <summary>
-        /// 
+        /// Actualiza la disponibilidad de una habitacion en la base de datos con su Id
         /// </summary>
         /// <param name="id"></param>
         /// <param name="status"></param>
@@ -188,9 +188,9 @@ namespace Entities.Handlers
         }
 
         /// <summary>
-        ///  Obtener todas las habitaciones disponibles
+        ///  Obtiene todas las habitaciones disponibles
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Devuelve lista de habitaciones disponibles de la base de datos</returns>
         public async Task<List<Room>> GetAvailable()
         {
             try
