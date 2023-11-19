@@ -7,7 +7,9 @@ namespace UIHotel
 {
     public partial class FrmRooms : Form
     {
+        private readonly GuestController _guestController;
         private readonly RoomController _roomController;
+        private readonly ReservationController _reservationController;
         private readonly DataEntryValidator _dataEntryValidator;
         private readonly EFrmType _eFrmRoomType;
 
@@ -16,6 +18,33 @@ namespace UIHotel
         {
             this.InitializeComponent();
             this._roomController = new();
+            this._dataEntryValidator = new();
+            this._eFrmRoomType = register;
+            if (register == EFrmType.Edit)
+            {
+                this.btnRegisterRoom.Visible = false;
+                this.btnDeleteRoom.Visible = true;
+                this.btnModifyRoom.Visible = true;
+                this.lblAvaible.Visible = false;
+                this.cmbAvaiableRoom.Visible = false;
+            }
+            else
+            {
+                this.lblAvaible.Visible = false;
+                this.cmbAvaiableRoom.Visible = false;
+                this.btnRegisterRoom.Visible = true;
+                this.btnDeleteRoom.Visible = false;
+                this.btnModifyRoom.Visible = false;
+            }
+        }
+
+
+        public FrmRooms(EFrmType register, GuestController guestController, RoomController roomController, ReservationController reservationController)
+        {
+            this.InitializeComponent();
+            this._guestController = guestController;
+            this._roomController = roomController;
+            this._reservationController = reservationController;
             this._dataEntryValidator = new();
             this._eFrmRoomType = register;
             if (register == EFrmType.Edit)
@@ -181,10 +210,11 @@ namespace UIHotel
         {
             try
             {
-                var room = await _roomController.GetAvailableRooms();
-                this.dgvRoomHandler.DataSource = room;
+                var rooms = await this._roomController.GetAllRooms();
+                var availableRooms = rooms.Where(room => room.Available).ToList();
+                this.dgvRoomHandler.DataSource = availableRooms;
                 this.UpdateDatGrid();
-                if (room.Count > 0)
+                if (availableRooms.Count > 0)
                 {
                     this.lblRoomDgv.Text = "Habitaciones. Doble click sobre la habitacion que quiera seleccionar.";
                     this.UpdateTxtView();
@@ -212,7 +242,6 @@ namespace UIHotel
             this.txtRoomNumber.Text = string.Empty;
             this.cmbRoomType.SelectedItem = null;
             this.cmbAvaiableRoom.SelectedItem = null;
-
             if (_eFrmRoomType == EFrmType.Register)
             {
                 this.lblRoomDgv.Text = "Huespedes";
@@ -229,7 +258,7 @@ namespace UIHotel
         /// <param name="e"></param>
         private void FrmRooms_FormClosing(object sender, FormClosingEventArgs e)
         {
-            FrmPrincipal frmPrincipal = new();
+            FrmPrincipal frmPrincipal = new(_guestController, _roomController, _reservationController);
             frmPrincipal.Show();
         }
         /// <summary>
@@ -240,7 +269,6 @@ namespace UIHotel
         private void dgvRoomHandler_DoubleClick(object sender, EventArgs e)
         {
             this.UpdateTxtView();
-
         }
     }
 }

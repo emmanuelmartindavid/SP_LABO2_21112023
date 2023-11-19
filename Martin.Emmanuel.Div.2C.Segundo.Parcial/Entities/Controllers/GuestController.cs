@@ -6,11 +6,16 @@ namespace Entities.Controllers
 {
     public class GuestController
     {
-        private readonly GuestHandler _guestHandler;
+        private readonly IDataBaseGenericRepository<Guest> _guestRepository;
 
         public GuestController()
         {
-            _guestHandler = new();
+            this._guestRepository = new GuestRepository(new ContextDb());
+        }
+
+        public GuestController(IDataBaseGenericRepository<Guest> guestRepository)
+        {
+            this._guestRepository = guestRepository;
         }
         /// <summary>
         /// Obtiene Huespedes de la base de datos
@@ -19,7 +24,7 @@ namespace Entities.Controllers
         public async Task<List<Guest>> GetAllGuests()
         {
 
-            return await _guestHandler.GetAll();
+            return await this._guestRepository.GetAll();
         }
         /// <summary>
         /// Obtiene un huesped por su dni
@@ -28,7 +33,7 @@ namespace Entities.Controllers
         /// <returns>Devuelve un huesped por su dni</returns>
         public async Task<Guest> GetGuestByDni(int dni)
         {
-            return await _guestHandler.GetById(dni);
+            return await this._guestRepository.GetById(dni);
         }
 
         /// <summary>
@@ -38,7 +43,7 @@ namespace Entities.Controllers
         /// <returns></returns>
         public async Task AddGuest(Guest guest)
         {
-            await _guestHandler.Add(guest);
+            await this._guestRepository.Add(guest);
         }
 
         /// <summary>
@@ -48,7 +53,7 @@ namespace Entities.Controllers
         /// <returns></returns>
         public async Task UpdateGuest(Guest guest)
         {
-            await _guestHandler.Update(guest);
+            await this._guestRepository.Update(guest);
         }
 
         /// <summary>
@@ -58,7 +63,7 @@ namespace Entities.Controllers
         /// <returns></returns>
         public async Task DeleteGuest(Guest guest)
         {
-            await _guestHandler.Delete(guest.Dni);
+            await this._guestRepository.Delete(guest.Dni);
         }
         /// <summary>
         /// Verifica si un huesped existe en la base de datos
@@ -67,7 +72,7 @@ namespace Entities.Controllers
         /// <returns>Devuelve true si existe huesped, false caso contrario</returns>
         public async Task<bool> GuestExists(int dni)
         {
-            Guest guest = await _guestHandler.GetById(dni);
+            Guest guest = await this._guestRepository.GetById(dni);
 
             return guest != null;
         }

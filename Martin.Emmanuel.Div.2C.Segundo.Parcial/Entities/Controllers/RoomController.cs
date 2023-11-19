@@ -1,15 +1,21 @@
 ﻿using Entities.Handlers;
 using Entities.Models;
+using Entities.SQLLogic;
 
 namespace Entities.Controllers
 {
     public class RoomController
     {
-        private RoomHandler _roomHandler;
+        private readonly IDataBaseGenericRepository<Room> _roomRepository;
 
         public RoomController()
         {
-            this._roomHandler = new();
+            this._roomRepository = new RoomRepository(new ContextDb());
+        }
+
+        public RoomController(IDataBaseGenericRepository<Room> roomRepository)
+        {
+            this._roomRepository = roomRepository;
         }
 
         ///<summary>
@@ -18,7 +24,7 @@ namespace Entities.Controllers
         /// <returns>Devuelve lista de habitaciones</returns>
         public async Task<List<Room>> GetAllRooms()
         {
-            return await this._roomHandler.GetAll();
+            return await this._roomRepository.GetAll();
         }
         /// <summary>
         /// Obtiene una habitacion por su numero
@@ -27,7 +33,7 @@ namespace Entities.Controllers
         /// <returns>Devuelve habitacion buscada</returns>
         public async Task<Room> GetRoomByNumber(int number)
         {
-            return await this._roomHandler.GetById(number);
+            return await this._roomRepository.GetById(number);
         }
 
         ///<summary>
@@ -36,7 +42,7 @@ namespace Entities.Controllers
         ///<param name="appointments"></param>
         public async Task AddRoom(Room room)
         {
-            await this._roomHandler.Add(room);
+            await this._roomRepository.Add(room);
         }
 
         /// <summary>
@@ -45,18 +51,7 @@ namespace Entities.Controllers
         /// <param name="appointments"></param>
         public async Task UpdateRoom(Room room)
         {
-            await this._roomHandler.Update(room);
-        }
-
-        /// <summary>
-        /// Actualiza la disponibilidad de una habitacion en la base de datos
-        /// </summary>
-        /// <param name="number"></param>
-        /// <param name="available"></param>
-        /// <returns></returns>
-        public async Task UpdateRoomAvailability(int number, bool available)
-        {
-            await this._roomHandler.UpdateStatus(number, available);
+            await this._roomRepository.Update(room);
         }
 
         /// <summary>
@@ -65,16 +60,9 @@ namespace Entities.Controllers
         /// <param name="appointments"></param>
         public async Task DeleteRoom(int number)
         {
-            await this._roomHandler.Delete(number);
+            await this._roomRepository.Delete(number);
         }
 
-        /// <summary>
-        /// Obtiene todas las habitaciones disponibles
-        /// </summary>
-        /// <returns>Devuelve las habitaciones disponibles</returns>
-        public async Task<List<Room>> GetAvailableRooms()
-        {
-            return await this._roomHandler.GetAvailable();
-        }
+ 
     }
 }

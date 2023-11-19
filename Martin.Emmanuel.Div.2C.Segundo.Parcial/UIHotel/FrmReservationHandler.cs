@@ -1,16 +1,12 @@
 ﻿using Entities.Controllers;
 using Entities.Models;
-using Entities.Utilities;
 using Entities.Validators;
-using Entities.Exceptions;
-using Entities.Handlers.RoomExceptions;
-using Entities.Handlers.ReservationExceptions;
-
 namespace UIHotel
 {
 
     public partial class FrmReservationHandler : Form
     {
+        private readonly GuestController _guestController;
         private readonly ReservationController _reservationController;
         private readonly RoomController _roomController;
         private readonly DataEntryValidator _dataEntryValidator;
@@ -18,8 +14,13 @@ namespace UIHotel
         public FrmReservationHandler()
         {
             InitializeComponent();
-            this._reservationController = new();
-            this._roomController = new();
+        }
+        public FrmReservationHandler(GuestController guestController, RoomController roomController,ReservationController reservationController)
+        {
+            this.InitializeComponent();
+            this._guestController = guestController;
+            this._roomController = roomController;
+            this._reservationController = reservationController;
             this._dataEntryValidator = new();
         }
 
@@ -48,7 +49,9 @@ namespace UIHotel
                     var reservation = (Reservation)this.dgvReservationHandler.CurrentRow.DataBoundItem;
                     if (reservation is not null)
                     {
-                        await this._roomController.UpdateRoomAvailability(reservation.RoomNumber, true);
+                        var room = await this._roomController.GetRoomByNumber(reservation.RoomNumber);
+                        room.Available = true;
+                        await this._roomController.UpdateRoom(room);
                         await this._reservationController.Delete(reservation);
                         MessageBox.Show("Reserva eliminada correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.UpdateReservationsGrid();
@@ -87,8 +90,12 @@ namespace UIHotel
                     _dataEntryValidator.ValidateReservationData(this.dtpCheckIn.Text, this.dtpCheckOut.Text);
                     if (roomNumber != reservation.RoomNumber)
                     {
-                        await this._roomController.UpdateRoomAvailability(reservation.RoomNumber, true);
-                        await this._roomController.UpdateRoomAvailability(roomNumber, false);
+                        var room = await this._roomController.GetRoomByNumber(reservation.RoomNumber);
+                        room.Available = true;
+                        await this._roomController.UpdateRoom(room);
+                        var newRoom = await this._roomController.GetRoomByNumber(roomNumber);
+                        newRoom.Available = false;
+                        await this._roomController.UpdateRoom(newRoom);
                     }
                     var newReservation = new Reservation
                     {
@@ -113,7 +120,7 @@ namespace UIHotel
         /// </summary>
         private void FrmReservationHandler_FormClosing(object sender, FormClosingEventArgs e)
         {
-            FrmPrincipal frmPrincipal = new();
+            FrmPrincipal frmPrincipal = new(_guestController, _roomController, _reservationController);
             frmPrincipal.Show();
             this.Hide();
 
@@ -131,8 +138,6 @@ namespace UIHotel
                 this.txtRoomNumber.Text = reservation.RoomNumber.ToString();
             }
         }
-
-
         /// <summary>
         /// Actualiza los encabezados de las columnas del DataGridView.
         /// </summary>
@@ -192,7 +197,6 @@ namespace UIHotel
         {
             MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-
     }
 }
 

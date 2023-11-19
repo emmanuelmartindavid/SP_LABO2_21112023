@@ -13,19 +13,26 @@ namespace UIHotel
     public partial class FrmGuest : Form
     {
         private readonly GuestController _guestController;
+        private readonly RoomController _roomController;
+
         private readonly ReservationController _reservationController;
         private readonly DataEntryValidator _dataEntryValidator;
-        private readonly RoomController _roomController;
         private readonly EFrmType _eFrmGuestType;
-        public FrmGuest(EFrmType eFrmGuestType)
+
+
+        public FrmGuest()
         {
             InitializeComponent();
-            this._guestController = new();
-            this._dataEntryValidator = new();
-            this._reservationController = new();
-            this._roomController = new();
-            this._eFrmGuestType = eFrmGuestType;
+        }
 
+        public FrmGuest(EFrmType eFrmGuestType, GuestController guestController, RoomController roomController, ReservationController reservationController)
+        {
+            this.InitializeComponent();
+            this._guestController = guestController;
+            this._roomController = roomController;
+            this._reservationController = reservationController;
+            this._eFrmGuestType = eFrmGuestType;
+            this._dataEntryValidator = new();
             if (eFrmGuestType == EFrmType.Edit)
             {
                 this.btnRegisterGuest.Visible = false;
@@ -77,7 +84,7 @@ namespace UIHotel
             }
             catch (Exception ex)
             {
-                this.ShowError($"Error al agregar huesped: {ex.Message}");
+                ShowError($"Error al agregar huesped: {ex.Message}");
             }
         }
         /// <summary>
@@ -87,7 +94,7 @@ namespace UIHotel
         /// <param name="e"></param>
         private void FrmGuestRegister_FormClosing(object sender, FormClosingEventArgs e)
         {
-            FrmPrincipal frmPrincipal = new();
+            FrmPrincipal frmPrincipal = new(_guestController, _roomController, _reservationController);
             frmPrincipal.Show();
         }
         /// <summary>
@@ -110,7 +117,7 @@ namespace UIHotel
                         if (await this._dataEntryValidator.ValidateReservationExistence(guest.Dni))
                         {
                             var reservation = await this._reservationController.GetReservationByDni(guest.Dni);
-                            await this._roomController.UpdateRoomAvailability(reservation.RoomNumber, true);
+                            //  await this._roomController.UpdateRoomAvailability(reservation.RoomNumber, true);
                             await this._reservationController.Delete(reservation);
                         }
                         MessageBox.Show("Huesped eliminado correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -120,7 +127,7 @@ namespace UIHotel
                 }
                 catch (Exception ex)
                 {
-                    this.ShowError($"Error al eliminar huesped: {ex.Message}");
+                    ShowError($"Error al eliminar huesped: {ex.Message}");
                 }
             }
             else
@@ -162,7 +169,7 @@ namespace UIHotel
             }
             catch (Exception ex)
             {
-                this.ShowError($"Error al actualizar huesped: {ex.Message}");
+                ShowError($"Error al actualizar huesped: {ex.Message}");
             }
         }
         /// <summary>
@@ -189,7 +196,6 @@ namespace UIHotel
             this.dgvGuestsHandler.Columns[2].HeaderText = "Apellido";
             this.dgvGuestsHandler.Columns[3].HeaderText = "Nro Telefono";
             this.dgvGuestsHandler.Columns[4].Visible = false;
-
         }
 
         /// <summary>
@@ -219,7 +225,7 @@ namespace UIHotel
             }
             catch (Exception ex)
             {
-                this.ShowError(ex.Message);
+                ShowError(ex.Message);
 
             }
         }
@@ -256,7 +262,7 @@ namespace UIHotel
         /// Muestra un mensaje de error.
         /// </summary>
         /// <param name="message"></param>
-        private void ShowError(string message)
+        private static void ShowError(string message)
         {
             MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }

@@ -38,6 +38,8 @@
             btnHandlerGuest = new Button();
             btnRegisterRoom = new Button();
             btnRoomHanlder = new Button();
+            cmbJsonBillingData = new ComboBox();
+            btnJsonData = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvMainData).BeginInit();
             SuspendLayout();
             // 
@@ -110,10 +112,10 @@
             // 
             dgvMainData.BackgroundColor = SystemColors.ButtonFace;
             dgvMainData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvMainData.Location = new Point(210, 208);
+            dgvMainData.Location = new Point(915, 198);
             dgvMainData.Name = "dgvMainData";
             dgvMainData.RowTemplate.Height = 25;
-            dgvMainData.Size = new Size(791, 501);
+            dgvMainData.Size = new Size(446, 521);
             dgvMainData.TabIndex = 7;
             // 
             // btnHandlerGuest
@@ -149,11 +151,34 @@
             btnRoomHanlder.UseVisualStyleBackColor = true;
             btnRoomHanlder.Click += btnRoomHanlder_Click;
             // 
+            // cmbJsonBillingData
+            // 
+            cmbJsonBillingData.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbJsonBillingData.Font = new Font("Arial Black", 13F, FontStyle.Regular, GraphicsUnit.Point);
+            cmbJsonBillingData.FormattingEnabled = true;
+            cmbJsonBillingData.Location = new Point(12, 359);
+            cmbJsonBillingData.Name = "cmbJsonBillingData";
+            cmbJsonBillingData.Size = new Size(891, 32);
+            cmbJsonBillingData.TabIndex = 16;
+            // 
+            // btnJsonData
+            // 
+            btnJsonData.Font = new Font("Arial", 13F, FontStyle.Regular, GraphicsUnit.Point);
+            btnJsonData.Location = new Point(362, 245);
+            btnJsonData.Name = "btnJsonData";
+            btnJsonData.Size = new Size(215, 64);
+            btnJsonData.TabIndex = 15;
+            btnJsonData.Text = "VER INFORME DE CUENTA DESDE JSON";
+            btnJsonData.UseVisualStyleBackColor = true;
+            btnJsonData.Click += btnJsonData_Click;
+            // 
             // FrmPrincipal
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
             ClientSize = new Size(1367, 720);
+            Controls.Add(cmbJsonBillingData);
+            Controls.Add(btnJsonData);
             Controls.Add(btnRoomHanlder);
             Controls.Add(btnRegisterRoom);
             Controls.Add(btnHandlerGuest);
@@ -187,5 +212,7 @@
         private Button btnHandlerGuest;
         private Button btnRegisterRoom;
         private Button btnRoomHanlder;
+        private ComboBox cmbJsonBillingData;
+        private Button btnJsonData;
     }
 }

@@ -14,13 +14,17 @@ namespace UIHotel
         private readonly ReservationController _reservationController;
         private readonly DataEntryValidator _dataEntryValidator;
 
-
         public FrmReservation()
         {
             this.InitializeComponent();
-            this._guestController = new();
-            this._roomController = new();
-            this._reservationController = new();
+        }
+
+        public FrmReservation(GuestController guestController, RoomController roomController, ReservationController reservationController)
+        {
+            this.InitializeComponent();
+            this._guestController = guestController;
+            this._roomController = roomController;
+            this._reservationController = reservationController;
             this._dataEntryValidator = new();
         }
         /// <summary>
@@ -60,7 +64,11 @@ namespace UIHotel
                 };
                 await this._dataEntryValidator.ValidateReservationExistence(reservation);
                 await this._reservationController.Add(reservation);
-                await this._roomController.UpdateRoomAvailability(room.Number, false);
+
+                var newRoom = await this._roomController.GetRoomByNumber(room.Number);
+                newRoom.Available = false;
+                await this._roomController.UpdateRoom(newRoom);
+
                 room.Available = false;
                 var bill = new Billing(guest, room, reservation);
                 UtilityClass.billings.Add(bill);
@@ -82,7 +90,7 @@ namespace UIHotel
         /// <param name="e"></param>
         private void FrmReservation_FormClosing(object sender, FormClosingEventArgs e)
         {
-            FrmPrincipal frmPrincipal = new();
+            FrmPrincipal frmPrincipal = new(_guestController, _roomController, _reservationController);
             frmPrincipal.Show();
         }
         /// <summary>
@@ -93,8 +101,9 @@ namespace UIHotel
         {
             try
             {
-                var rooms = await this._roomController.GetAvailableRooms();
-                this.cmbRoomNumber.DataSource = rooms;
+                var rooms = await this._roomController.GetAllRooms();
+                var availableRooms = rooms.Where(room => room.Available).ToList();
+                this.cmbRoomNumber.DataSource = availableRooms;
                 this.cmbRoomNumber.DisplayMember = "DisplayProperty";
                 var guests = await _guestController.GetAllGuests();
                 this.cmbGuests.DataSource = guests;

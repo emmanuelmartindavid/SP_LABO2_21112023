@@ -1,20 +1,25 @@
-using Entities;
 using Entities.Controllers;
 using Entities.Models;
 using Entities.Serialization;
 using Entities.Utilities;
-
 namespace UIHotel
 {
     public partial class FrmPrincipal : Form
     {
+        private readonly GuestController _guestController;
+        private readonly RoomController _roomController;
+        private readonly ReservationController _reservationController;
 
-        private GuestController _guestController;
-        private ReservationController _reservationController;
         public FrmPrincipal()
         {
             InitializeComponent();
-
+        }
+        public FrmPrincipal(GuestController guestController, RoomController roomController, ReservationController reservationController)
+        {
+            InitializeComponent();
+            this._guestController = guestController;
+            this._roomController = roomController;
+            this._reservationController = reservationController;
         }
         /// <summary>
         /// Evento que se ejecuta al cargar el formulario
@@ -23,8 +28,14 @@ namespace UIHotel
         /// <param name="e"></param>
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
-            _guestController = new();
-            _reservationController = new();
+            try
+            {
+                UtilityClass.billings = JSONSerialization.DeserializeBillings();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"No se pudo cargar el archivo JSON: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);         
+            }
         }
         /// <summary>
         /// Evento que se ejecuta al cerrar el formulario
@@ -33,8 +44,7 @@ namespace UIHotel
         /// <param name="e"></param>
         private void btnFrmReservation_Click(object sender, EventArgs e)
         {
-
-            FrmReservation frmReservation = new();
+            FrmReservation frmReservation = new(_guestController, _roomController, _reservationController);
             frmReservation.Show();
             this.Hide();
         }
@@ -78,7 +88,7 @@ namespace UIHotel
         /// <param name="e"></param>
         private void btnReservationHandler_Click(object sender, EventArgs e)
         {
-            FrmReservationHandler frmReservationHandler = new();
+            FrmReservationHandler frmReservationHandler = new(_guestController, _roomController, _reservationController);
             frmReservationHandler.Show();
             this.Hide();
         }
@@ -89,7 +99,7 @@ namespace UIHotel
         /// <param name="e"></param>
         private void btnRegisterGuest_Click(object sender, EventArgs e)
         {
-            FrmGuest frmGuestRegister = new(EFrmType.Register);
+            FrmGuest frmGuestRegister = new(EFrmType.Register, _guestController, _roomController, _reservationController);
             frmGuestRegister.Show();
             this.Hide();
         }
@@ -100,7 +110,7 @@ namespace UIHotel
         /// <param name="e"></param>
         private void btnHandlerGuest_Click(object sender, EventArgs e)
         {
-            FrmGuest frmGuestRegister = new(EFrmType.Edit);
+            FrmGuest frmGuestRegister = new(EFrmType.Edit, _guestController, _roomController, _reservationController);
             frmGuestRegister.Show();
             this.Hide();
         }
@@ -111,7 +121,7 @@ namespace UIHotel
         /// <param name="e"></param>
         private void btnRegisterRoom_Click(object sender, EventArgs e)
         {
-            FrmRooms frmRoom = new(EFrmType.Register);
+            FrmRooms frmRoom = new(EFrmType.Register, _guestController, _roomController, _reservationController);
             frmRoom.Show();
             this.Hide();
         }
@@ -122,9 +132,26 @@ namespace UIHotel
         /// <param name="e"></param>
         private void btnRoomHanlder_Click(object sender, EventArgs e)
         {
-            FrmRooms frmRoom = new(EFrmType.Edit);
+            FrmRooms frmRoom = new(EFrmType.Edit, _guestController, _roomController, _reservationController);
             frmRoom.Show();
             this.Hide();
+        }
+        /// <summary>
+        ///  Evento que se ejecuta al hacer click en el boton de "Data Json"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnJsonData_Click(object sender, EventArgs e)
+        {
+            if (UtilityClass.billings.Count == 0)
+            {
+                this.cmbJsonBillingData.DataSource = new List<string> { "No hay nada para mostrar" };
+            }
+            else
+            {
+                this.cmbJsonBillingData.DataSource = UtilityClass.billings;
+                this.cmbJsonBillingData.DisplayMember = "DisplayProperty";
+            }
         }
     }
 }

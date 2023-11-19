@@ -6,10 +6,16 @@ namespace Entities.Controllers
 {
     public class ReservationController
     {
-        private ReservationHandler _reservationHandler;
+        private readonly IDataBaseGenericRepository<Reservation> _reservationRepository;
+
         public ReservationController()
         {
-            this._reservationHandler = new();
+            this._reservationRepository = new ReservationRepository(new ContextDb());
+        }
+
+        public ReservationController(IDataBaseGenericRepository<Reservation> reservationRepository)
+        {
+            this._reservationRepository = reservationRepository;
         }
         /// <summary>
         /// Obtiene todas las reservaciones de la base de datos
@@ -17,7 +23,7 @@ namespace Entities.Controllers
         /// <returns>Devuelve una lista de todas las reservaciones</returns>
         public async Task<List<Reservation>> GetAllReservations()
         {
-            return await this._reservationHandler.GetAll();
+            return await this._reservationRepository.GetAll();
         }
         /// <summary>
         /// Obtiene una reservacion por dni de huesped
@@ -26,7 +32,7 @@ namespace Entities.Controllers
         /// <returns>Devuelve una reservacion</returns>
         public async Task<Reservation> GetReservationByDni(int dni)
         {
-            return await this._reservationHandler.GetById(dni);
+            return await this._reservationRepository.GetById(dni);
         }
 
 
@@ -36,7 +42,7 @@ namespace Entities.Controllers
         /// <param name="reservation"></param>
         public async Task Add(Reservation reservation)
         {
-            await this._reservationHandler.Add(reservation);
+            await this._reservationRepository.Add(reservation);
         }
 
         /// <summary>
@@ -45,7 +51,7 @@ namespace Entities.Controllers
         /// <param name="reservation"></param>
         public async Task UpdateReservation(Reservation reservation)
         {
-            await this._reservationHandler.Update(reservation);
+            await this._reservationRepository.Update(reservation);
         }
 
         /// <summary>
@@ -54,7 +60,7 @@ namespace Entities.Controllers
         /// <param name="reservation"></param>
         public async Task Delete(Reservation reservation)
         {
-            await this._reservationHandler.Delete(reservation.DniGuest);
+            await this._reservationRepository.Delete(reservation.DniGuest);
         }
     }
 }

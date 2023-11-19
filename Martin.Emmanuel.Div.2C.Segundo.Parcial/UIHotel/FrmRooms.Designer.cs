@@ -69,7 +69,7 @@
             // 
             dgvRoomHandler.BackgroundColor = SystemColors.ButtonFace;
             dgvRoomHandler.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvRoomHandler.Location = new Point(432, 61);
+            dgvRoomHandler.Location = new Point(594, 61);
             dgvRoomHandler.Name = "dgvRoomHandler";
             dgvRoomHandler.RowTemplate.Height = 25;
             dgvRoomHandler.Size = new Size(451, 275);
@@ -170,7 +170,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(895, 452);
+            ClientSize = new Size(1175, 452);
             Controls.Add(lblRoomDgv);
             Controls.Add(btnModifyRoom);
             Controls.Add(dgvRoomHandler);
