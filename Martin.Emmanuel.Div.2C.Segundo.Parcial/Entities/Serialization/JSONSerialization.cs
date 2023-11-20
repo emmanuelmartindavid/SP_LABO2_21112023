@@ -15,7 +15,8 @@ namespace Entities.Serialization
             try
             {
                 string json = Serialize(billing);
-                string path = "C:\\Users\\Cuerpos\\billings.json";
+                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "billings.json");
+
                 File.WriteAllText(path, json);
             }
             catch (Exception ex)
@@ -33,8 +34,7 @@ namespace Entities.Serialization
             try
             {
                 string json = Serialize(billing);
-
-                string path = "C:\\Users\\Cuerpos\\billings.json";
+                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "billings.json");
                 File.WriteAllText(path, json);
 
             }
@@ -43,9 +43,6 @@ namespace Entities.Serialization
 
                 throw new NotSerializeJsonException("Error", ex.Message);
             }
-
-
-
         }
         /// <summary>
         /// Metodo para deserializar una lista de cuentas
@@ -56,7 +53,8 @@ namespace Entities.Serialization
         {
             try
             {
-                string json = File.ReadAllText("C:\\Users\\Cuerpos\\billings.json");
+                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "billings.json");
+                string json = File.ReadAllText(path);
                 return Deserialize<List<Billing>>(json);
             }
             catch (Exception ex)
@@ -64,12 +62,6 @@ namespace Entities.Serialization
 
                 throw new NotDeserializeJsonException("Error", ex.Message);
             }
-
-
         }
-
-
     }
-
-
 }

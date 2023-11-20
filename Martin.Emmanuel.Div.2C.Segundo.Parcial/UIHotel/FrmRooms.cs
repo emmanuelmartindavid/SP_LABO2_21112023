@@ -232,11 +232,11 @@ namespace UIHotel
             this.cmbRoomType.SelectedItem = null;
             if (_eFrmRoomType == EFrmType.Register)
             {
-                this.lblRoomDgv.Text = "Huespedes";
+                this.lblRoomDgv.Text = "Habitaciones";
             }
             else
             {
-                this.lblRoomDgv.Text = "No hay huespedes";
+                this.lblRoomDgv.Text = "No hay habitaciones";
             }
         }
 

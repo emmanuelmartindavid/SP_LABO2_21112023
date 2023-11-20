@@ -112,9 +112,9 @@ namespace UIHotel
                 var guests = await _guestController.GetAllGuests();
                 this.cmbGuests.DataSource = guests;
                 this.cmbGuests.DisplayMember = "DisplayProperty";
-                this.dtpCheckIn.MinDate = new DateTime(2023, 11, 17, 0, 0, 0, 0);
+                this.dtpCheckIn.MinDate = new DateTime(2023, 11, 23, 0, 0, 0, 0);
                 this.dtpCheckIn.MaxDate = new DateTime(2024, 12, 31, 0, 0, 0, 0);
-                this.dtpCheckOut.MinDate = new DateTime(2023, 11, 18, 0, 0, 0, 0);
+                this.dtpCheckOut.MinDate = new DateTime(2023, 11, 24, 0, 0, 0, 0);
                 this.dtpCheckOut.MaxDate = new DateTime(2024, 12, 31, 0, 0, 0, 0);
             }
             catch (Exception ex)

@@ -9,10 +9,6 @@ namespace Tests
     public class UnitTest1
     {
         [TestMethod]
-        /*    [DataRow(1, "I")]
-            [DataRow(2, "II")]
-            [DataRow(3, "III")]
-            [DataRow(4, "IV")]*/
         public async Task ShouldGetGuestIfDniExistsInDataBase()
         {
             var guestController = new GuestController();

@@ -140,6 +140,7 @@
             dgvReservationHandler.RowTemplate.Height = 25;
             dgvReservationHandler.Size = new Size(427, 273);
             dgvReservationHandler.TabIndex = 6;
+            dgvReservationHandler.DoubleClick += dgvReservationHandler_DoubleClick;
             // 
             // lblReservationsDgv
             // 

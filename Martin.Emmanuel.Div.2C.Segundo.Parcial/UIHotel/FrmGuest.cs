@@ -38,6 +38,8 @@ namespace UIHotel
                 this.btnRegisterGuest.Visible = false;
                 this.btnDeleteGuest.Visible = true;
                 this.btnModifyGuest.Visible = true;
+                lblDni.Visible = false;
+                txtDni.Visible = false;
             }
             else
             {
@@ -150,11 +152,9 @@ namespace UIHotel
                 var guest = (Guest)this.dgvGuestsHandler.CurrentRow.DataBoundItem;
                 if (guest is not null)
                 {
-                    this._dataEntryValidator.ValidateDniGuest(this.txtDni.Text);
                     var guestDni = int.Parse(this.txtDni.Text);
                     this._dataEntryValidator.ValidateNameGuest(this.txtName.Text, this.txtLastName.Text);
                     this._dataEntryValidator.ValidatePhoneNumberGuest(this.txtPhoneNumber.Text);
-                    await this._dataEntryValidator.ValidateGuestExistence(guestDni, guest.Dni);
                     var newGuest = new Guest
                     {
                         Dni = guest.Dni,
