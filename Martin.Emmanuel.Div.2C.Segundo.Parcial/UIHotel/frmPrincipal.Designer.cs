@@ -40,6 +40,8 @@
             btnRoomHanlder = new Button();
             cmbJsonBillingData = new ComboBox();
             btnJsonData = new Button();
+            cmbTrackUserMovement = new ComboBox();
+            btnTrackUserMovement = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvMainData).BeginInit();
             SuspendLayout();
             // 
@@ -156,7 +158,7 @@
             cmbJsonBillingData.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbJsonBillingData.Font = new Font("Arial Black", 13F, FontStyle.Regular, GraphicsUnit.Point);
             cmbJsonBillingData.FormattingEnabled = true;
-            cmbJsonBillingData.Location = new Point(12, 359);
+            cmbJsonBillingData.Location = new Point(12, 286);
             cmbJsonBillingData.Name = "cmbJsonBillingData";
             cmbJsonBillingData.Size = new Size(891, 32);
             cmbJsonBillingData.TabIndex = 16;
@@ -164,7 +166,7 @@
             // btnJsonData
             // 
             btnJsonData.Font = new Font("Arial", 13F, FontStyle.Regular, GraphicsUnit.Point);
-            btnJsonData.Location = new Point(362, 245);
+            btnJsonData.Location = new Point(330, 198);
             btnJsonData.Name = "btnJsonData";
             btnJsonData.Size = new Size(215, 64);
             btnJsonData.TabIndex = 15;
@@ -172,11 +174,34 @@
             btnJsonData.UseVisualStyleBackColor = true;
             btnJsonData.Click += btnJsonData_Click;
             // 
+            // cmbTrackUserMovement
+            // 
+            cmbTrackUserMovement.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbTrackUserMovement.Font = new Font("Arial Black", 13F, FontStyle.Regular, GraphicsUnit.Point);
+            cmbTrackUserMovement.FormattingEnabled = true;
+            cmbTrackUserMovement.Location = new Point(12, 548);
+            cmbTrackUserMovement.Name = "cmbTrackUserMovement";
+            cmbTrackUserMovement.Size = new Size(891, 32);
+            cmbTrackUserMovement.TabIndex = 18;
+            // 
+            // btnTrackUserMovement
+            // 
+            btnTrackUserMovement.Font = new Font("Arial", 13F, FontStyle.Regular, GraphicsUnit.Point);
+            btnTrackUserMovement.Location = new Point(330, 460);
+            btnTrackUserMovement.Name = "btnTrackUserMovement";
+            btnTrackUserMovement.Size = new Size(215, 64);
+            btnTrackUserMovement.TabIndex = 17;
+            btnTrackUserMovement.Text = "VER TRACKING DE USUARIO ";
+            btnTrackUserMovement.UseVisualStyleBackColor = true;
+            btnTrackUserMovement.Click += btnTrackUserMovement_Click;
+            // 
             // FrmPrincipal
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
             ClientSize = new Size(1367, 720);
+            Controls.Add(cmbTrackUserMovement);
+            Controls.Add(btnTrackUserMovement);
             Controls.Add(cmbJsonBillingData);
             Controls.Add(btnJsonData);
             Controls.Add(btnRoomHanlder);
@@ -214,5 +239,7 @@
         private Button btnRoomHanlder;
         private ComboBox cmbJsonBillingData;
         private Button btnJsonData;
+        private ComboBox cmbTrackUserMovement;
+        private Button btnTrackUserMovement;
     }
 }

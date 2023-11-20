@@ -71,8 +71,8 @@ namespace UIHotel
 
                 room.Available = false;
                 var bill = new Billing(guest, room, reservation);
-                UtilityClass.billings.Add(bill);
-                JSONSerialization.SerializeBillings(UtilityClass.billings);
+                UtilityClass.Billings.Add(bill);
+                JSONSerialization.SerializeBillings(UtilityClass.Billings);
                 await this.UpdateDataComboBox();
                 this.UpdateBillingCombobox();
                 MessageBox.Show("Reserva generada correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -145,8 +145,8 @@ namespace UIHotel
         {
             try
             {
-                UtilityClass.billings = JSONSerialization.DeserializeBillings();
-                this.cmbJsonBillingData.DataSource = UtilityClass.billings;
+                UtilityClass.Billings = JSONSerialization.DeserializeBillings();
+                this.cmbJsonBillingData.DataSource = UtilityClass.Billings;
                 this.cmbJsonBillingData.DisplayMember = "DisplayProperty";
             }
             catch (Exception ex)

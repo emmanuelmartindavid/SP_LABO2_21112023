@@ -15,7 +15,7 @@ namespace UIHotel
         {
             InitializeComponent();
         }
-        public FrmReservationHandler(GuestController guestController, RoomController roomController,ReservationController reservationController)
+        public FrmReservationHandler(GuestController guestController, RoomController roomController, ReservationController reservationController)
         {
             this.InitializeComponent();
             this._guestController = guestController;
@@ -29,11 +29,10 @@ namespace UIHotel
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void FrmReservationHandler_Load(object sender, EventArgs e)
+        private async void FrmReservationHandler_Load(object sender, EventArgs e)
         {
-            this.UpdateReservationsGrid();
+            await this.UpdateReservationsGrid();
         }
-
 
         /// <summary>
         /// Evento Click para btnAddReservation.
@@ -54,7 +53,7 @@ namespace UIHotel
                         await this._roomController.UpdateRoom(room);
                         await this._reservationController.Delete(reservation);
                         MessageBox.Show("Reserva eliminada correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.UpdateReservationsGrid();
+                        await this.UpdateReservationsGrid();
                     }
                 }
                 catch (Exception ex)
@@ -105,7 +104,7 @@ namespace UIHotel
                         RoomNumber = roomNumber
                     };
                     await this._reservationController.UpdateReservation(newReservation);
-                    this.UpdateReservationsGrid();
+                    await this.UpdateReservationsGrid();
                     MessageBox.Show("Reserva actualizada correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -152,7 +151,7 @@ namespace UIHotel
         /// <summary>
         /// Actualiza el DataGridView con las reservas actuales.
         /// </summary>
-        private async void UpdateReservationsGrid()
+        private async Task UpdateReservationsGrid()
         {
             try
             {

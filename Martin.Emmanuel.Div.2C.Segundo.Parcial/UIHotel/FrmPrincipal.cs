@@ -2,9 +2,10 @@ using Entities.Controllers;
 using Entities.Models;
 using Entities.Serialization;
 using Entities.Utilities;
+using System.Windows.Forms;
 namespace UIHotel
 {
-    public partial class FrmPrincipal : Form
+    public partial class FrmPrincipal : BaseFormTrack
     {
         private readonly GuestController _guestController;
         private readonly RoomController _roomController;
@@ -20,6 +21,7 @@ namespace UIHotel
             this._guestController = guestController;
             this._roomController = roomController;
             this._reservationController = reservationController;
+            this.OnUserTracker += OnUserAction;
         }
         /// <summary>
         /// Evento que se ejecuta al cargar el formulario
@@ -30,11 +32,11 @@ namespace UIHotel
         {
             try
             {
-                UtilityClass.billings = JSONSerialization.DeserializeBillings();
+                UtilityClass.Billings = JSONSerialization.DeserializeBillings();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show($"No se pudo cargar el archivo JSON: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);         
+                cmbJsonBillingData.DataSource = new List<string> { "No hay nada para mostrar" };
             }
         }
         /// <summary>
@@ -47,6 +49,7 @@ namespace UIHotel
             FrmReservation frmReservation = new(_guestController, _roomController, _reservationController);
             frmReservation.Show();
             this.Hide();
+
         }
         /// <summary>
         /// Evento que se ejecuta al hacer click en el boton de "Huespedes Registrados"
@@ -55,15 +58,17 @@ namespace UIHotel
         /// <param name="e"></param>
         private async void btnRegisteredGuests_Click(object sender, EventArgs e)
         {
+            dgvMainData.DataSource = null;
             var guests = await _guestController.GetAllGuests();
             guests.OrderGuestByLastName();
             dgvMainData.DataSource = guests;
-
             dgvMainData.Columns[0].HeaderText = "DNI";
             dgvMainData.Columns[1].HeaderText = "Nombre";
             dgvMainData.Columns[2].HeaderText = "Apellido";
             dgvMainData.Columns[3].HeaderText = "Nro Telefono";
             dgvMainData.Columns[4].Visible = false;
+
+            this.TriggerUserTracker($"Usuario ve Huespedes. {DateTime.Now}");
 
         }
         /// <summary>
@@ -73,13 +78,15 @@ namespace UIHotel
         /// <param name="e"></param>
         private async void btnReservationsHistory_Click(object sender, EventArgs e)
         {
-
+            dgvMainData.DataSource = null;
             var reservations = await _reservationController.GetAllReservations();
             dgvMainData.DataSource = reservations;
             dgvMainData.Columns[0].HeaderText = "DNI";
             dgvMainData.Columns[1].HeaderText = "CheckIn";
             dgvMainData.Columns[2].HeaderText = "CheckOut";
             dgvMainData.Columns[3].HeaderText = "Nro Habitacion";
+
+            this.TriggerUserTracker($"Usuario ve Reservaciones. {DateTime.Now}");
         }
         /// <summary>
         /// Evento que se ejecuta al hacer click en el boton de "Reservas Activas"
@@ -143,15 +150,27 @@ namespace UIHotel
         /// <param name="e"></param>
         private void btnJsonData_Click(object sender, EventArgs e)
         {
-            if (UtilityClass.billings.Count == 0)
+            if (UtilityClass.Billings.Count == 0)
             {
                 this.cmbJsonBillingData.DataSource = new List<string> { "No hay nada para mostrar" };
             }
             else
             {
-                this.cmbJsonBillingData.DataSource = UtilityClass.billings;
+                this.cmbJsonBillingData.DataSource = UtilityClass.Billings;
                 this.cmbJsonBillingData.DisplayMember = "DisplayProperty";
             }
+        }
+
+
+        private void OnUserAction(string action)
+        {
+            UtilityClass.ActionLog.Add(action);
+        }
+
+        private void btnTrackUserMovement_Click(object sender, EventArgs e)
+        {
+            cmbTrackUserMovement.DataSource = null;
+            cmbTrackUserMovement.DataSource = UtilityClass.ActionLog;
         }
     }
 }

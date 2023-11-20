@@ -1,29 +1,41 @@
 ﻿using Entities.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Entities.Utilities
 {
     public static class UtilityClass
     {
-        /*public static List<T> GetList<T>(List<object> objs)
+        private static List<Billing> _billings;
+        private static List<string> _actionLog;
+        /// <summary>
+        /// 
+        /// </summary>
+        public static List<Billing> Billings
         {
-            return objs.Select(o => (T)o).ToList();
-        }*/
-/*
-       public static List<Reservation> DeletedReservations = new List<Reservation>();
-
-        public static void AddDeleteReservationsToList(Reservation reservation)
+            get
+            {
+                _billings ??= new();
+                return _billings;
+            }
+            set
+            {
+                _billings = value;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public static List<string> ActionLog
         {
-            DeletedReservations.Add(reservation);
-        }*/
-
-        public static List<Billing> billings = new();
-
-
-      
+            get
+            {
+                _actionLog ??= new();
+                return _actionLog;
+            }
+            set
+            {
+                _actionLog = value;
+            }        
+        }
     }
 }

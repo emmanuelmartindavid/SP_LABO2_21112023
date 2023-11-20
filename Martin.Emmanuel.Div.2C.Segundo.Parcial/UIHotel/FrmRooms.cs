@@ -69,9 +69,9 @@ namespace UIHotel
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void FrmRooms_Load(object sender, EventArgs e)
+        private async void FrmRooms_Load(object sender, EventArgs e)
         {
-            this.UpdateRoomDataGrid();
+            await this.UpdateRoomDataGrid();
             this.cmbAvaiableRoom.DataSource = new List<bool> { true, false };
             this.cmbRoomType.DataSource = Enum.GetValues(typeof(ERoomType));
             this.cmbAvaiableRoom.DisplayMember = "DisplayProperty";
@@ -94,7 +94,7 @@ namespace UIHotel
                     Available = (bool)this.cmbAvaiableRoom.SelectedItem,
                 };
                 await this._roomController.AddRoom(room);
-                this.UpdateRoomDataGrid();
+                await this.UpdateRoomDataGrid();
                 MessageBox.Show("Huesped registrado correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -128,7 +128,7 @@ namespace UIHotel
                     {
                         await this._roomController.DeleteRoom(room.Number);
                         MessageBox.Show("Habitacion eliminada correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.UpdateRoomDataGrid();
+                        await this.UpdateRoomDataGrid();
                     }
                 }
                 catch (RoomNotDeletedException ex)
@@ -167,7 +167,7 @@ namespace UIHotel
                         Available = true,
                     };
                     await this._roomController.UpdateRoom(newRoom);
-                    this.UpdateRoomDataGrid();
+                    await this.UpdateRoomDataGrid();
                     MessageBox.Show("Habitacion actualizada correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -206,7 +206,7 @@ namespace UIHotel
         /// <summary>
         /// Actualiza el DataGridView con los huespedes actuales.
         /// </summary>
-        private async void UpdateRoomDataGrid()
+        private async Task UpdateRoomDataGrid()
         {
             try
             {

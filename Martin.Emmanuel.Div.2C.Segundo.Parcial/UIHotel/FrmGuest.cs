@@ -14,11 +14,9 @@ namespace UIHotel
     {
         private readonly GuestController _guestController;
         private readonly RoomController _roomController;
-
         private readonly ReservationController _reservationController;
         private readonly DataEntryValidator _dataEntryValidator;
         private readonly EFrmType _eFrmGuestType;
-
 
         public FrmGuest()
         {
@@ -45,7 +43,6 @@ namespace UIHotel
                 this.btnRegisterGuest.Visible = true;
                 this.btnDeleteGuest.Visible = false;
                 this.btnModifyGuest.Visible = false;
-
             }
         }
         /// <summary>
@@ -53,9 +50,9 @@ namespace UIHotel
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void FrmGuestRegister_Load(object sender, EventArgs e)
+        private async void FrmGuestRegister_Load(object sender, EventArgs e)
         {
-            this.UpdateGuestDataGrid();
+            await this.UpdateGuestDataGrid();
         }
         /// <summary>
         /// Evento que se ejecuta al hacer click en el boton de registrar huesped.
@@ -79,7 +76,7 @@ namespace UIHotel
                     PhoneNumber = long.Parse(txtPhoneNumber.Text),
                 };
                 await this._guestController.AddGuest(guest);
-                this.UpdateGuestDataGrid();
+                await this.UpdateGuestDataGrid();
                 MessageBox.Show("Huesped registrado correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -121,7 +118,7 @@ namespace UIHotel
                             await this._reservationController.Delete(reservation);
                         }
                         MessageBox.Show("Huesped eliminado correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.UpdateGuestDataGrid();
+                        await this.UpdateGuestDataGrid();
                     }
 
                 }
@@ -163,7 +160,7 @@ namespace UIHotel
                         PhoneNumber = long.Parse(this.txtPhoneNumber.Text),
                     };
                     await this._guestController.UpdateGuest(newGuest);
-                    this.UpdateGuestDataGrid();
+                    await this.UpdateGuestDataGrid();
                     MessageBox.Show("Huesped actualizado correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -201,7 +198,7 @@ namespace UIHotel
         /// <summary>
         /// Actualiza el DataGridView con los huespedes actuales.
         /// </summary>
-        private async void UpdateGuestDataGrid()
+        private async Task UpdateGuestDataGrid()
         {
             try
             {
