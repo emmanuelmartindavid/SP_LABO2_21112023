@@ -58,18 +58,17 @@ namespace UIHotel
         /// <param name="e"></param>
         private async void btnRegisteredGuests_Click(object sender, EventArgs e)
         {
-            dgvMainData.DataSource = null;
+            this.dgvMainData.DataSource = null;
             var guests = await _guestController.GetAllGuests();
             guests.OrderGuestByLastName();
-            dgvMainData.DataSource = guests;
-            dgvMainData.Columns[0].HeaderText = "DNI";
-            dgvMainData.Columns[1].HeaderText = "Nombre";
-            dgvMainData.Columns[2].HeaderText = "Apellido";
-            dgvMainData.Columns[3].HeaderText = "Nro Telefono";
-            dgvMainData.Columns[4].Visible = false;
+            this.dgvMainData.DataSource = guests;
+            this.dgvMainData.Columns[0].HeaderText = "DNI";
+            this.dgvMainData.Columns[1].HeaderText = "Nombre";
+            this.dgvMainData.Columns[2].HeaderText = "Apellido";
+            this.dgvMainData.Columns[3].HeaderText = "Nro Telefono";
+            this.dgvMainData.Columns[4].Visible = false;
 
-            this.TriggerUserTracker($"Usuario ve Huespedes. {DateTime.Now}");
-
+            this.TriggerUserTracker($"Usuario ve Huespedes registrados en sistema. {DateTime.Now}");
         }
         /// <summary>
         /// Evento que se ejecuta al hacer click en el boton de "Historial de Reservas"
@@ -78,15 +77,15 @@ namespace UIHotel
         /// <param name="e"></param>
         private async void btnReservationsHistory_Click(object sender, EventArgs e)
         {
-            dgvMainData.DataSource = null;
+            this.dgvMainData.DataSource = null;
             var reservations = await _reservationController.GetAllReservations();
-            dgvMainData.DataSource = reservations;
-            dgvMainData.Columns[0].HeaderText = "DNI";
-            dgvMainData.Columns[1].HeaderText = "CheckIn";
-            dgvMainData.Columns[2].HeaderText = "CheckOut";
-            dgvMainData.Columns[3].HeaderText = "Nro Habitacion";
+            this.dgvMainData.DataSource = reservations;
+            this.dgvMainData.Columns[0].HeaderText = "DNI";
+            this.dgvMainData.Columns[1].HeaderText = "CheckIn";
+            this.dgvMainData.Columns[2].HeaderText = "CheckOut";
+            this.dgvMainData.Columns[3].HeaderText = "Nro Habitacion";
 
-            this.TriggerUserTracker($"Usuario ve Reservaciones. {DateTime.Now}");
+            this.TriggerUserTracker($"Usuario ve Reservaciones registradas en sistema. {DateTime.Now}");
         }
         /// <summary>
         /// Evento que se ejecuta al hacer click en el boton de "Reservas Activas"
@@ -161,12 +160,19 @@ namespace UIHotel
             }
         }
 
-
+         /// <summary>
+        /// Agrega accion de usuario a la lista de acciones.
+        /// </summary>
+        /// <param name="action"></param>
         private void OnUserAction(string action)
         {
             UtilityClass.ActionLog.Add(action);
         }
-
+        /// <summary>
+        /// Evento que se ejecuta al hacer click en el boton de "Track User Movement" Actualiza movimiento de usuario en programa.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnTrackUserMovement_Click(object sender, EventArgs e)
         {
             cmbTrackUserMovement.DataSource = null;

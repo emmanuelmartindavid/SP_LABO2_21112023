@@ -1,10 +1,12 @@
 ﻿using Entities.Controllers;
 using Entities.Models;
+using Entities.Utilities;
 using Entities.Validators;
+
 namespace UIHotel
 {
 
-    public partial class FrmReservationHandler : Form
+    public partial class FrmReservationHandler : BaseFormTrack
     {
         private readonly GuestController _guestController;
         private readonly ReservationController _reservationController;
@@ -22,6 +24,7 @@ namespace UIHotel
             this._roomController = roomController;
             this._reservationController = reservationController;
             this._dataEntryValidator = new();
+            this.OnUserTracker += OnUserAction;
         }
 
         /// <summary>
@@ -54,6 +57,7 @@ namespace UIHotel
                         await this._reservationController.Delete(reservation);
                         MessageBox.Show("Reserva eliminada correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         await this.UpdateReservationsGrid();
+                        this.TriggerUserTracker($"Usuario elimina Reserva: {DateTime.Now} - DNI: {reservation.DniGuest}");
                     }
                 }
                 catch (Exception ex)
@@ -106,6 +110,7 @@ namespace UIHotel
                     await this._reservationController.UpdateReservation(newReservation);
                     await this.UpdateReservationsGrid();
                     MessageBox.Show("Reserva actualizada correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.TriggerUserTracker($"Usuario modifica Reserva: {DateTime.Now} - DNI: {reservation.DniGuest}");
                 }
             }
             catch (Exception ex)
@@ -155,6 +160,7 @@ namespace UIHotel
         {
             try
             {
+                this.dgvReservationHandler.DataSource = null;
                 var reservations = await _reservationController.GetAllReservations();
                 this.dgvReservationHandler.DataSource = reservations;
                 this.UpdateDatGrid();
@@ -195,6 +201,14 @@ namespace UIHotel
         private void ShowError(string message)
         {
             MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        /// <summary>
+        /// Agrega accion de usuario a la lista de acciones.
+        /// </summary>
+        /// <param name="action"></param>
+        private void OnUserAction(string action)
+        {
+            UtilityClass.ActionLog.Add(action);
         }
     }
 }

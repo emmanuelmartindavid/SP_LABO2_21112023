@@ -7,7 +7,7 @@ using Entities.Validators;
 namespace UIHotel
 {
 
-    public partial class FrmReservation : Form
+    public partial class FrmReservation : BaseFormTrack
     {
         private readonly GuestController _guestController;
         private readonly RoomController _roomController;
@@ -26,6 +26,7 @@ namespace UIHotel
             this._roomController = roomController;
             this._reservationController = reservationController;
             this._dataEntryValidator = new();
+            this.OnUserTracker += OnUserAction;
         }
         /// <summary>
         /// Manejador del evento Load de FrmReservation.
@@ -76,6 +77,7 @@ namespace UIHotel
                 await this.UpdateDataComboBox();
                 this.UpdateBillingCombobox();
                 MessageBox.Show("Reserva generada correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.TriggerUserTracker($"Usuario genera una reservacion en sistema. {DateTime.Now} a nombre de {guest.Name}, {guest.LastName}");
             }
             catch (Exception ex)
             {
@@ -101,6 +103,8 @@ namespace UIHotel
         {
             try
             {
+                this.cmbRoomNumber.DataSource = null;
+                this.cmbGuests.DataSource = null;
                 var rooms = await this._roomController.GetAllRooms();
                 var availableRooms = rooms.Where(room => room.Available).ToList();
                 this.cmbRoomNumber.DataSource = availableRooms;
@@ -135,8 +139,6 @@ namespace UIHotel
         private void btnJsonData_Click(object sender, EventArgs e)
         {
             this.UpdateBillingCombobox();
-
-            //METODO PARA ACTUALIZAR EL COMBOBOX CON LOS DATOS DEL JSON TO DO.
         }
         /// <summary>
         /// Actualiza el comboBox con los datos del JSON.
@@ -145,6 +147,7 @@ namespace UIHotel
         {
             try
             {
+                this.cmbJsonBillingData.DataSource = null;
                 UtilityClass.Billings = JSONSerialization.DeserializeBillings();
                 this.cmbJsonBillingData.DataSource = UtilityClass.Billings;
                 this.cmbJsonBillingData.DisplayMember = "DisplayProperty";
@@ -153,6 +156,14 @@ namespace UIHotel
             {
                 this.ShowError($"Error al actualizar los datos{ex.Message}");
             }
+        }
+        /// <summary>
+        /// Agrega accion de usuario a la lista de acciones.
+        /// </summary>
+        /// <param name="action"></param>
+        private void OnUserAction(string action)
+        {
+            UtilityClass.ActionLog.Add(action);
         }
     }
 }

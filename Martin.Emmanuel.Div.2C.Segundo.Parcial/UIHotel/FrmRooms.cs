@@ -1,18 +1,17 @@
 ﻿using Entities.Controllers;
-using Entities.Exceptions;
 using Entities.Handlers.RoomExceptions;
 using Entities.Models;
+using Entities.Utilities;
 using Entities.Validators;
 namespace UIHotel
 {
-    public partial class FrmRooms : Form
+    public partial class FrmRooms : BaseFormTrack
     {
         private readonly GuestController _guestController;
         private readonly RoomController _roomController;
         private readonly ReservationController _reservationController;
         private readonly DataEntryValidator _dataEntryValidator;
         private readonly EFrmType _eFrmRoomType;
-
 
         public FrmRooms(EFrmType register)
         {
@@ -25,13 +24,11 @@ namespace UIHotel
                 this.btnRegisterRoom.Visible = false;
                 this.btnDeleteRoom.Visible = true;
                 this.btnModifyRoom.Visible = true;
-                this.lblAvaible.Visible = false;
-                this.cmbAvaiableRoom.Visible = false;
+
             }
             else
             {
-                this.lblAvaible.Visible = false;
-                this.cmbAvaiableRoom.Visible = false;
+
                 this.btnRegisterRoom.Visible = true;
                 this.btnDeleteRoom.Visible = false;
                 this.btnModifyRoom.Visible = false;
@@ -47,18 +44,16 @@ namespace UIHotel
             this._reservationController = reservationController;
             this._dataEntryValidator = new();
             this._eFrmRoomType = register;
+            this.OnUserTracker += OnUserAction;
+
             if (register == EFrmType.Edit)
             {
                 this.btnRegisterRoom.Visible = false;
                 this.btnDeleteRoom.Visible = true;
                 this.btnModifyRoom.Visible = true;
-                this.lblAvaible.Visible = false;
-                this.cmbAvaiableRoom.Visible = false;
             }
             else
             {
-                this.lblAvaible.Visible = false;
-                this.cmbAvaiableRoom.Visible = false;
                 this.btnRegisterRoom.Visible = true;
                 this.btnDeleteRoom.Visible = false;
                 this.btnModifyRoom.Visible = false;
@@ -72,9 +67,7 @@ namespace UIHotel
         private async void FrmRooms_Load(object sender, EventArgs e)
         {
             await this.UpdateRoomDataGrid();
-            this.cmbAvaiableRoom.DataSource = new List<bool> { true, false };
             this.cmbRoomType.DataSource = Enum.GetValues(typeof(ERoomType));
-            this.cmbAvaiableRoom.DisplayMember = "DisplayProperty";
         }
         /// <summary>
         /// Evento que se ejecuta al hacer doble click sobre una fila del DataGridView.
@@ -91,11 +84,11 @@ namespace UIHotel
                 {
                     Number = roomNumber,
                     Type = (ERoomType)this.cmbRoomType.SelectedItem,
-                    Available = (bool)this.cmbAvaiableRoom.SelectedItem,
                 };
                 await this._roomController.AddRoom(room);
                 await this.UpdateRoomDataGrid();
                 MessageBox.Show("Huesped registrado correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.TriggerUserTracker($"Usuario registra nueva habitacion a sistema: {DateTime.Now} - Nro: {room.Number}");
             }
             catch (Exception ex)
             {
@@ -129,6 +122,7 @@ namespace UIHotel
                         await this._roomController.DeleteRoom(room.Number);
                         MessageBox.Show("Habitacion eliminada correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         await this.UpdateRoomDataGrid();
+                        this.TriggerUserTracker($"Usuario elimina habitacion de sistema: {DateTime.Now} - Nro: {room.Number}");
                     }
                 }
                 catch (RoomNotDeletedException ex)
@@ -150,11 +144,6 @@ namespace UIHotel
         {
             try
             {
-                /*if (this.dgvReservationHandler.CurrentRow == null)
-                {
-                    this.ShowError("No hay reservas para actualizar");
-                    return;
-                }*/
                 var room = (Room)this.dgvRoomHandler.CurrentRow.DataBoundItem;
                 if (room is not null)
                 {
@@ -169,6 +158,7 @@ namespace UIHotel
                     await this._roomController.UpdateRoom(newRoom);
                     await this.UpdateRoomDataGrid();
                     MessageBox.Show("Habitacion actualizada correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.TriggerUserTracker($"Usuario modifica habitacion en sistema: {DateTime.Now} - Nro: {room.Number}");
                 }
             }
             catch (Exception ex)
@@ -187,10 +177,8 @@ namespace UIHotel
             {
                 this.txtRoomNumber.Text = room.Number.ToString();
                 this.cmbRoomType.SelectedItem = room.Type;
-                this.cmbAvaiableRoom.SelectedItem = room.Available;
             }
         }
-
 
         /// <summary>
         /// Actualiza los encabezados de las columnas del DataGridView.
@@ -210,6 +198,7 @@ namespace UIHotel
         {
             try
             {
+                this.dgvRoomHandler.DataSource = null;
                 var rooms = await this._roomController.GetAllRooms();
                 var availableRooms = rooms.Where(room => room.Available).ToList();
                 this.dgvRoomHandler.DataSource = availableRooms;
@@ -241,7 +230,6 @@ namespace UIHotel
         {
             this.txtRoomNumber.Text = string.Empty;
             this.cmbRoomType.SelectedItem = null;
-            this.cmbAvaiableRoom.SelectedItem = null;
             if (_eFrmRoomType == EFrmType.Register)
             {
                 this.lblRoomDgv.Text = "Huespedes";
@@ -251,6 +239,7 @@ namespace UIHotel
                 this.lblRoomDgv.Text = "No hay huespedes";
             }
         }
+
         /// <summary>
         /// Evento que se ejecuta al cerrar el formulario.
         /// </summary>
@@ -261,6 +250,7 @@ namespace UIHotel
             FrmPrincipal frmPrincipal = new(_guestController, _roomController, _reservationController);
             frmPrincipal.Show();
         }
+
         /// <summary>
         /// Evento que se ejecuta al hacer doble click sobre una fila del DataGridView.
         /// </summary>
@@ -269,6 +259,15 @@ namespace UIHotel
         private void dgvRoomHandler_DoubleClick(object sender, EventArgs e)
         {
             this.UpdateTxtView();
+        }
+
+        /// <summary>
+        /// Agrega accion de usuario a la lista de acciones.
+        /// </summary>
+        /// <param name="action"></param>
+        private void OnUserAction(string action)
+        {
+            UtilityClass.ActionLog.Add(action);
         }
     }
 }

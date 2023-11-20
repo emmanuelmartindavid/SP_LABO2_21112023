@@ -34,10 +34,8 @@
             btnDeleteRoom = new Button();
             btnRegisterRoom = new Button();
             grbRoomData = new GroupBox();
-            cmbAvaiableRoom = new ComboBox();
             cmbRoomType = new ComboBox();
             txtRoomNumber = new TextBox();
-            lblAvaible = new Label();
             lblType = new Label();
             lblRoomNumber = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvRoomHandler).BeginInit();
@@ -57,7 +55,7 @@
             // btnModifyRoom
             // 
             btnModifyRoom.Font = new Font("Arial", 13F, FontStyle.Regular, GraphicsUnit.Point);
-            btnModifyRoom.Location = new Point(302, 340);
+            btnModifyRoom.Location = new Point(301, 308);
             btnModifyRoom.Name = "btnModifyRoom";
             btnModifyRoom.Size = new Size(108, 42);
             btnModifyRoom.TabIndex = 12;
@@ -79,7 +77,7 @@
             // btnDeleteRoom
             // 
             btnDeleteRoom.Font = new Font("Arial", 13F, FontStyle.Regular, GraphicsUnit.Point);
-            btnDeleteRoom.Location = new Point(152, 340);
+            btnDeleteRoom.Location = new Point(152, 308);
             btnDeleteRoom.Name = "btnDeleteRoom";
             btnDeleteRoom.Size = new Size(108, 42);
             btnDeleteRoom.TabIndex = 10;
@@ -90,7 +88,7 @@
             // btnRegisterRoom
             // 
             btnRegisterRoom.Font = new Font("Arial", 13F, FontStyle.Regular, GraphicsUnit.Point);
-            btnRegisterRoom.Location = new Point(12, 340);
+            btnRegisterRoom.Location = new Point(12, 308);
             btnRegisterRoom.Name = "btnRegisterRoom";
             btnRegisterRoom.Size = new Size(108, 42);
             btnRegisterRoom.TabIndex = 9;
@@ -100,28 +98,17 @@
             // 
             // grbRoomData
             // 
-            grbRoomData.Controls.Add(cmbAvaiableRoom);
             grbRoomData.Controls.Add(cmbRoomType);
             grbRoomData.Controls.Add(txtRoomNumber);
-            grbRoomData.Controls.Add(lblAvaible);
             grbRoomData.Controls.Add(lblType);
             grbRoomData.Controls.Add(lblRoomNumber);
             grbRoomData.Font = new Font("Arial", 13F, FontStyle.Regular, GraphicsUnit.Point);
             grbRoomData.Location = new Point(33, 61);
             grbRoomData.Name = "grbRoomData";
-            grbRoomData.Size = new Size(325, 232);
+            grbRoomData.Size = new Size(325, 174);
             grbRoomData.TabIndex = 8;
             grbRoomData.TabStop = false;
             grbRoomData.Text = "Datos Habitacion";
-            // 
-            // cmbAvaiableRoom
-            // 
-            cmbAvaiableRoom.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbAvaiableRoom.FormattingEnabled = true;
-            cmbAvaiableRoom.Location = new Point(155, 171);
-            cmbAvaiableRoom.Name = "cmbAvaiableRoom";
-            cmbAvaiableRoom.Size = new Size(121, 27);
-            cmbAvaiableRoom.TabIndex = 6;
             // 
             // cmbRoomType
             // 
@@ -138,15 +125,6 @@
             txtRoomNumber.Name = "txtRoomNumber";
             txtRoomNumber.Size = new Size(121, 27);
             txtRoomNumber.TabIndex = 4;
-            // 
-            // lblAvaible
-            // 
-            lblAvaible.AutoSize = true;
-            lblAvaible.Location = new Point(13, 177);
-            lblAvaible.Name = "lblAvaible";
-            lblAvaible.Size = new Size(122, 21);
-            lblAvaible.TabIndex = 2;
-            lblAvaible.Text = "Disponibilidad";
             // 
             // lblType
             // 
@@ -200,10 +178,8 @@
         private Button btnRegisterRoom;
         private GroupBox grbRoomData;
         private TextBox txtRoomNumber;
-        private Label lblAvaible;
         private Label lblType;
         private Label lblRoomNumber;
-        private ComboBox cmbAvaiableRoom;
         private ComboBox cmbRoomType;
     }
 }

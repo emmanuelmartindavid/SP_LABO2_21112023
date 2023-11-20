@@ -5,12 +5,13 @@ using Entities.Models;
 using Entities.Handlers.GuestExceptions;
 using Entities.Handlers.ReservationExceptions;
 using Entities.Handlers.RoomExceptions;
+using Entities.Utilities;
 
 
 
 namespace UIHotel
 {
-    public partial class FrmGuest : Form
+    public partial class FrmGuest : BaseFormTrack
     {
         private readonly GuestController _guestController;
         private readonly RoomController _roomController;
@@ -31,12 +32,12 @@ namespace UIHotel
             this._reservationController = reservationController;
             this._eFrmGuestType = eFrmGuestType;
             this._dataEntryValidator = new();
+            this.OnUserTracker += OnUserAction;
             if (eFrmGuestType == EFrmType.Edit)
             {
                 this.btnRegisterGuest.Visible = false;
                 this.btnDeleteGuest.Visible = true;
                 this.btnModifyGuest.Visible = true;
-
             }
             else
             {
@@ -78,6 +79,7 @@ namespace UIHotel
                 await this._guestController.AddGuest(guest);
                 await this.UpdateGuestDataGrid();
                 MessageBox.Show("Huesped registrado correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.TriggerUserTracker($"Usuario registra un Huesped({guest.Name}, {guest.LastName}) en sistema. {DateTime.Now}");
             }
             catch (Exception ex)
             {
@@ -114,13 +116,15 @@ namespace UIHotel
                         if (await this._dataEntryValidator.ValidateReservationExistence(guest.Dni))
                         {
                             var reservation = await this._reservationController.GetReservationByDni(guest.Dni);
-                            //  await this._roomController.UpdateRoomAvailability(reservation.RoomNumber, true);
+                            var room = await this._roomController.GetRoomByNumber(reservation.RoomNumber);
+                            room.Available = true;
+                            await this._roomController.UpdateRoom(room);
                             await this._reservationController.Delete(reservation);
                         }
                         MessageBox.Show("Huesped eliminado correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.TriggerUserTracker($"Usuario elimina un Huesped({guest.Name}, {guest.LastName}) del sistema. {DateTime.Now}");
                         await this.UpdateGuestDataGrid();
                     }
-
                 }
                 catch (Exception ex)
                 {
@@ -151,7 +155,6 @@ namespace UIHotel
                     this._dataEntryValidator.ValidateNameGuest(this.txtName.Text, this.txtLastName.Text);
                     this._dataEntryValidator.ValidatePhoneNumberGuest(this.txtPhoneNumber.Text);
                     await this._dataEntryValidator.ValidateGuestExistence(guestDni, guest.Dni);
-
                     var newGuest = new Guest
                     {
                         Dni = guest.Dni,
@@ -162,6 +165,7 @@ namespace UIHotel
                     await this._guestController.UpdateGuest(newGuest);
                     await this.UpdateGuestDataGrid();
                     MessageBox.Show("Huesped actualizado correctamente", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.TriggerUserTracker($"Usuario modifica un Huesped({guest.Name}, {guest.LastName}) del sistema. {DateTime.Now}");
                 }
             }
             catch (Exception ex)
@@ -202,6 +206,7 @@ namespace UIHotel
         {
             try
             {
+                this.dgvGuestsHandler.DataSource = null;
                 var guest = await this._guestController.GetAllGuests();
                 this.dgvGuestsHandler.DataSource = guest;
                 guest.OrderGuestByLastName();
@@ -262,6 +267,14 @@ namespace UIHotel
         private static void ShowError(string message)
         {
             MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        /// <summary>
+        /// Agrega accion de usuario a la lista de acciones.
+        /// </summary>
+        /// <param name="action"></param>
+        private void OnUserAction(string action)
+        {
+            UtilityClass.ActionLog.Add(action);
         }
     }
 }

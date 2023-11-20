@@ -129,3 +129,4 @@ C:\Users\cuerpos\Desktop\Prueba Repository\UIHotel\bin\Debug\net6.0-windows\Enti
 C:\Users\cuerpos\Desktop\Prueba Repository\UIHotel\obj\Debug\net6.0-windows\UIHotel.csproj.CopyComplete
 C:\Users\cuerpos\Desktop\Prueba Repository\UIHotel\obj\Debug\net6.0-windows\UIHotel.genruntimeconfig.cache
 C:\Users\cuerpos\Desktop\Prueba Repository\UIHotel\obj\Debug\net6.0-windows\ref\UIHotel.dll
+C:\Users\cuerpos\Desktop\SegundoParcial\Martin.Emmanuel.Div.2C.Segundo.Parcial\UIHotel\obj\Debug\net6.0-windows\UIHotel.BaseFormTrack.resources

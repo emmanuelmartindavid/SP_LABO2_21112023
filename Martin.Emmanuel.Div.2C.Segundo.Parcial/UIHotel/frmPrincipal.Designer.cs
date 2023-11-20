@@ -114,10 +114,10 @@
             // 
             dgvMainData.BackgroundColor = SystemColors.ButtonFace;
             dgvMainData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvMainData.Location = new Point(915, 198);
+            dgvMainData.Location = new Point(1027, 174);
             dgvMainData.Name = "dgvMainData";
             dgvMainData.RowTemplate.Height = 25;
-            dgvMainData.Size = new Size(446, 521);
+            dgvMainData.Size = new Size(781, 555);
             dgvMainData.TabIndex = 7;
             // 
             // btnHandlerGuest
@@ -160,13 +160,13 @@
             cmbJsonBillingData.FormattingEnabled = true;
             cmbJsonBillingData.Location = new Point(12, 286);
             cmbJsonBillingData.Name = "cmbJsonBillingData";
-            cmbJsonBillingData.Size = new Size(891, 32);
+            cmbJsonBillingData.Size = new Size(1009, 32);
             cmbJsonBillingData.TabIndex = 16;
             // 
             // btnJsonData
             // 
             btnJsonData.Font = new Font("Arial", 13F, FontStyle.Regular, GraphicsUnit.Point);
-            btnJsonData.Location = new Point(330, 198);
+            btnJsonData.Location = new Point(416, 198);
             btnJsonData.Name = "btnJsonData";
             btnJsonData.Size = new Size(215, 64);
             btnJsonData.TabIndex = 15;
@@ -181,13 +181,13 @@
             cmbTrackUserMovement.FormattingEnabled = true;
             cmbTrackUserMovement.Location = new Point(12, 548);
             cmbTrackUserMovement.Name = "cmbTrackUserMovement";
-            cmbTrackUserMovement.Size = new Size(891, 32);
+            cmbTrackUserMovement.Size = new Size(1009, 32);
             cmbTrackUserMovement.TabIndex = 18;
             // 
             // btnTrackUserMovement
             // 
             btnTrackUserMovement.Font = new Font("Arial", 13F, FontStyle.Regular, GraphicsUnit.Point);
-            btnTrackUserMovement.Location = new Point(330, 460);
+            btnTrackUserMovement.Location = new Point(416, 465);
             btnTrackUserMovement.Name = "btnTrackUserMovement";
             btnTrackUserMovement.Size = new Size(215, 64);
             btnTrackUserMovement.TabIndex = 17;
@@ -199,7 +199,7 @@
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
-            ClientSize = new Size(1367, 720);
+            ClientSize = new Size(1810, 735);
             Controls.Add(cmbTrackUserMovement);
             Controls.Add(btnTrackUserMovement);
             Controls.Add(cmbJsonBillingData);
