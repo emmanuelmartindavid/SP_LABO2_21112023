@@ -4,6 +4,9 @@ using Entities.SQLLogic;
 
 namespace Entities.Controllers
 {
+    /// <summary>
+    /// Clase controladora de habitaciones con la base de datos.
+    /// </summary>
     public class RoomController
     {
         private readonly IDataBaseGenericRepository<Room> _roomRepository;

@@ -4,6 +4,9 @@ using Entities.SQLLogic;
 
 namespace Entities.Controllers
 {
+    /// <summary>
+    /// Clase que controla las reservaciones con la base de datos.
+    /// </summary>
     public class ReservationController
     {
         private readonly IDataBaseGenericRepository<Reservation> _reservationRepository;

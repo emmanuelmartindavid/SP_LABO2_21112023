@@ -65,7 +65,6 @@ namespace Entities.Handlers
 
         }
 
-
         /// <summary>
         /// Obtiene todas las reservaciones de la base de datos
         /// </summary>

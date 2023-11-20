@@ -20,7 +20,6 @@ namespace Entities.Serialization
         {
             JsonSerializerOptions opciones = new();
             opciones.WriteIndented = true;
-
             return System.Text.Json.JsonSerializer.Serialize(obj, opciones);
         }
         /// <summary>
@@ -34,7 +33,6 @@ namespace Entities.Serialization
             try
             {
                 return JsonConvert.DeserializeObject<T>(json);
-
             }
             catch (Exception ex)
             {

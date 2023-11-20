@@ -6,7 +6,7 @@ namespace Entities.Serialization
     public class JSONSerialization : JSONManagment
     {
         /// <summary>
-        /// Metodo para serializar una cuenta
+        /// Metodo para serializar una cuenta JSOn
         /// </summary>
         /// <param name="billing"></param>
         /// <exception cref="NotSerializeJsonException"></exception>
@@ -15,13 +15,11 @@ namespace Entities.Serialization
             try
             {
                 string json = Serialize(billing);
-
                 string path = "C:\\Users\\Cuerpos\\billings.json";
                 File.WriteAllText(path, json);
             }
             catch (Exception ex)
             {
-
                 throw new NotSerializeJsonException("Error", ex.Message);
             }
         }
