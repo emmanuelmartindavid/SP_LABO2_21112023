@@ -1,12 +1,11 @@
 ﻿using Entities.Models;
 
-
 namespace Entities.Utilities
 {
     public static class UtilityClass
     {
-        private static List<Billing> _billings;
-        private static List<string> _actionLog;
+        private static List<Billing> ?_billings;
+        private static List<string> ?_actionLog;
         /// <summary>
         /// 
         /// </summary>

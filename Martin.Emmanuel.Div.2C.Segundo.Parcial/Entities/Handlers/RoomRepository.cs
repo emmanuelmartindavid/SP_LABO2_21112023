@@ -6,6 +6,9 @@ using System.Data.SqlClient;
 
 namespace Entities.Handlers
 {
+    /// <summary>
+    /// Clase que se encarga de la logica de la base de datos de las habitaciones
+    /// </summary>
     public class RoomRepository : IDataBaseGenericRepository<Room>
     {
         private readonly ContextDb _contextDb;

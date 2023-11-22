@@ -1,0 +1,117 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\cuerpos\\Desktop\\SegundoParcial\\Martin.Emmanuel.Div.2C.Segundo.Parcial\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D05524D1-0194-4369-A491-B0A8D01E372A}|Entities\\Entities.csproj|c:\\users\\cuerpos\\desktop\\segundoparcial\\martin.emmanuel.div.2c.segundo.parcial\\entities\\handlers\\roomrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D05524D1-0194-4369-A491-B0A8D01E372A}|Entities\\Entities.csproj|solutionrelative:entities\\handlers\\roomrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{265FF7DE-F5BD-4D0A-8047-900E38F19A72}|Tests\\Tests.csproj|c:\\users\\cuerpos\\desktop\\segundoparcial\\martin.emmanuel.div.2c.segundo.parcial\\tests\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{265FF7DE-F5BD-4D0A-8047-900E38F19A72}|Tests\\Tests.csproj|solutionrelative:tests\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D05524D1-0194-4369-A491-B0A8D01E372A}|Entities\\Entities.csproj|c:\\users\\cuerpos\\desktop\\segundoparcial\\martin.emmanuel.div.2c.segundo.parcial\\entities\\models\\billing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D05524D1-0194-4369-A491-B0A8D01E372A}|Entities\\Entities.csproj|solutionrelative:entities\\models\\billing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D05524D1-0194-4369-A491-B0A8D01E372A}|Entities\\Entities.csproj|c:\\users\\cuerpos\\desktop\\segundoparcial\\martin.emmanuel.div.2c.segundo.parcial\\entities\\utilities\\utilityclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D05524D1-0194-4369-A491-B0A8D01E372A}|Entities\\Entities.csproj|solutionrelative:entities\\utilities\\utilityclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD6E1984-F573-4C0A-B319-928B9622FD1D}|UIHotel\\UIHotel.csproj|c:\\users\\cuerpos\\desktop\\segundoparcial\\martin.emmanuel.div.2c.segundo.parcial\\uihotel\\frmreservationhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AD6E1984-F573-4C0A-B319-928B9622FD1D}|UIHotel\\UIHotel.csproj|solutionrelative:uihotel\\frmreservationhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD6E1984-F573-4C0A-B319-928B9622FD1D}|UIHotel\\UIHotel.csproj|c:\\users\\cuerpos\\desktop\\segundoparcial\\martin.emmanuel.div.2c.segundo.parcial\\uihotel\\frmreservation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AD6E1984-F573-4C0A-B319-928B9622FD1D}|UIHotel\\UIHotel.csproj|solutionrelative:uihotel\\frmreservation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RoomRepository.cs",
+              "DocumentMoniker": "C:\\Users\\cuerpos\\Desktop\\SegundoParcial\\Martin.Emmanuel.Div.2C.Segundo.Parcial\\Entities\\Handlers\\RoomRepository.cs",
+              "RelativeDocumentMoniker": "Entities\\Handlers\\RoomRepository.cs",
+              "ToolTip": "C:\\Users\\cuerpos\\Desktop\\SegundoParcial\\Martin.Emmanuel.Div.2C.Segundo.Parcial\\Entities\\Handlers\\RoomRepository.cs",
+              "RelativeToolTip": "Entities\\Handlers\\RoomRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAHcAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-11-21T15:28:11.343Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UnitTest1.cs",
+              "DocumentMoniker": "C:\\Users\\cuerpos\\Desktop\\SegundoParcial\\Martin.Emmanuel.Div.2C.Segundo.Parcial\\Tests\\UnitTest1.cs",
+              "RelativeDocumentMoniker": "Tests\\UnitTest1.cs",
+              "ToolTip": "C:\\Users\\cuerpos\\Desktop\\SegundoParcial\\Martin.Emmanuel.Div.2C.Segundo.Parcial\\Tests\\UnitTest1.cs",
+              "RelativeToolTip": "Tests\\UnitTest1.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAA8AAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-11-20T19:40:25.576Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UtilityClass.cs",
+              "DocumentMoniker": "C:\\Users\\cuerpos\\Desktop\\SegundoParcial\\Martin.Emmanuel.Div.2C.Segundo.Parcial\\Entities\\Utilities\\UtilityClass.cs",
+              "RelativeDocumentMoniker": "Entities\\Utilities\\UtilityClass.cs",
+              "ToolTip": "C:\\Users\\cuerpos\\Desktop\\SegundoParcial\\Martin.Emmanuel.Div.2C.Segundo.Parcial\\Entities\\Utilities\\UtilityClass.cs",
+              "RelativeToolTip": "Entities\\Utilities\\UtilityClass.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAxwBcAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-11-20T19:11:47.583Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Billing.cs",
+              "DocumentMoniker": "C:\\Users\\cuerpos\\Desktop\\SegundoParcial\\Martin.Emmanuel.Div.2C.Segundo.Parcial\\Entities\\Models\\Billing.cs",
+              "RelativeDocumentMoniker": "Entities\\Models\\Billing.cs",
+              "ToolTip": "C:\\Users\\cuerpos\\Desktop\\SegundoParcial\\Martin.Emmanuel.Div.2C.Segundo.Parcial\\Entities\\Models\\Billing.cs",
+              "RelativeToolTip": "Entities\\Models\\Billing.cs",
+              "ViewState": "AQIAAE4AAAAAAAAAAAAUwF4AAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-11-20T18:57:39.85Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "FrmReservation.cs",
+              "DocumentMoniker": "C:\\Users\\cuerpos\\Desktop\\SegundoParcial\\Martin.Emmanuel.Div.2C.Segundo.Parcial\\UIHotel\\FrmReservation.cs",
+              "RelativeDocumentMoniker": "UIHotel\\FrmReservation.cs",
+              "ToolTip": "C:\\Users\\cuerpos\\Desktop\\SegundoParcial\\Martin.Emmanuel.Div.2C.Segundo.Parcial\\UIHotel\\FrmReservation.cs",
+              "RelativeToolTip": "UIHotel\\FrmReservation.cs",
+              "ViewState": "AQIAADIAAAAAAAAAAAAIwBQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-11-20T18:38:24.308Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "FrmReservationHandler.cs",
+              "DocumentMoniker": "C:\\Users\\cuerpos\\Desktop\\SegundoParcial\\Martin.Emmanuel.Div.2C.Segundo.Parcial\\UIHotel\\FrmReservationHandler.cs",
+              "RelativeDocumentMoniker": "UIHotel\\FrmReservationHandler.cs",
+              "ToolTip": "C:\\Users\\cuerpos\\Desktop\\SegundoParcial\\Martin.Emmanuel.Div.2C.Segundo.Parcial\\UIHotel\\FrmReservationHandler.cs",
+              "RelativeToolTip": "UIHotel\\FrmReservationHandler.cs",
+              "ViewState": "AQIAACEAAAAAAAAAAAAowDYAAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-11-20T18:39:20.894Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

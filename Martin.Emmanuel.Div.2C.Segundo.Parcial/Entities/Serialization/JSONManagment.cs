@@ -18,8 +18,10 @@ namespace Entities.Serialization
         /// <returns>Devuelve el objeto serializado a JSON representado en STRING</returns>
         public static string Serialize<T>(T obj)
         {
-            JsonSerializerOptions opciones = new();
-            opciones.WriteIndented = true;
+            JsonSerializerOptions opciones = new()
+            {
+                WriteIndented = true
+            };
             return System.Text.Json.JsonSerializer.Serialize(obj, opciones);
         }
         /// <summary>
@@ -32,7 +34,7 @@ namespace Entities.Serialization
         {
             try
             {
-                return JsonConvert.DeserializeObject<T>(json);
+                return JsonConvert.DeserializeObject<T>(json)!;
             }
             catch (Exception ex)
             {

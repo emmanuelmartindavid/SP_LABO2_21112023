@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Entities.Models
+﻿namespace Entities.Models
 {
     public class Billing
     {
@@ -66,7 +60,7 @@ namespace Entities.Models
         {
 
         }
-        
+
         /// <summary>
         /// Constructor de la clase Billing
         /// </summary>

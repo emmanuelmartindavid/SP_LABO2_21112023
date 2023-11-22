@@ -54,6 +54,7 @@ namespace UIHotel
                 var checkOut = DateTime.Parse(dtpCheckOut.Text);
                 if (guest == null || room == null)
                 {
+                    this.ShowError($"Error al generar la reserva:");
                     return;
                 }
                 var reservation = new Reservation

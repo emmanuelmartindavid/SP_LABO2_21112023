@@ -1,11 +1,11 @@
 [
   {
     "Guest": {
-      "Dni": 12345678,
-      "Name": "Jorge Luis",
-      "LastName": "Borges",
-      "PhoneNumber": 1234567324,
-      "DisplayProperty": "Jorge Luis Borges - DNI: 12345678"
+      "Dni": 32086441,
+      "Name": "Anette",
+      "LastName": "Fearney",
+      "PhoneNumber": 1845210925,
+      "DisplayProperty": "Anette Fearney - DNI: 32086441"
     },
     "Room": {
       "Number": 101,
@@ -14,44 +14,21 @@
       "DisplayProperty": "101 - Simple: US$50 "
     },
     "Reservation": {
-      "DniGuest": 12345678,
-      "ChekIn": "2023-11-20T00:00:00",
-      "CheckOut": "2023-11-20T00:00:00",
+      "DniGuest": 32086441,
+      "ChekIn": "2023-11-23T00:00:00",
+      "CheckOut": "2023-11-24T00:00:00",
       "RoomNumber": 101
     },
-    "TotalCost": 0,
-    "DisplayProperty": "Jorge Luis, Borges - Habitacion: 101 - CheckIn: 20-Nov-23 - CheckOut: 20-Nov-23 - Costo: U$D 0"
+    "TotalCost": 50,
+    "DisplayProperty": "Anette, Fearney - Habitacion: 101 - CheckIn: 23-Nov-23 - CheckOut: 24-Nov-23 - Costo: U$D 50"
   },
   {
     "Guest": {
-      "Dni": 12345678,
-      "Name": "Jorge Luis",
-      "LastName": "Borges",
-      "PhoneNumber": 1234567324,
-      "DisplayProperty": "Jorge Luis Borges - DNI: 12345678"
-    },
-    "Room": {
-      "Number": 101,
-      "Available": false,
-      "Type": 0,
-      "DisplayProperty": "101 - Simple: US$50 "
-    },
-    "Reservation": {
-      "DniGuest": 12345678,
-      "ChekIn": "2023-11-20T00:00:00",
-      "CheckOut": "2023-11-20T00:00:00",
-      "RoomNumber": 101
-    },
-    "TotalCost": 0,
-    "DisplayProperty": "Jorge Luis, Borges - Habitacion: 101 - CheckIn: 20-Nov-23 - CheckOut: 20-Nov-23 - Costo: U$D 0"
-  },
-  {
-    "Guest": {
-      "Dni": 25647853,
-      "Name": "Hanna",
-      "LastName": "Arendt",
-      "PhoneNumber": 1134564356,
-      "DisplayProperty": "Hanna Arendt - DNI: 25647853"
+      "Dni": 34886137,
+      "Name": "Maura",
+      "LastName": "Sandry",
+      "PhoneNumber": 1879525954,
+      "DisplayProperty": "Maura Sandry - DNI: 34886137"
     },
     "Room": {
       "Number": 102,
@@ -60,127 +37,58 @@
       "DisplayProperty": "102 - Simple: US$50 "
     },
     "Reservation": {
-      "DniGuest": 25647853,
-      "ChekIn": "2023-11-20T00:00:00",
-      "CheckOut": "2023-11-20T00:00:00",
+      "DniGuest": 34886137,
+      "ChekIn": "2023-11-23T00:00:00",
+      "CheckOut": "2023-11-24T00:00:00",
       "RoomNumber": 102
     },
-    "TotalCost": 0,
-    "DisplayProperty": "Hanna, Arendt - Habitacion: 102 - CheckIn: 20-Nov-23 - CheckOut: 20-Nov-23 - Costo: U$D 0"
+    "TotalCost": 50,
+    "DisplayProperty": "Maura, Sandry - Habitacion: 102 - CheckIn: 23-Nov-23 - CheckOut: 24-Nov-23 - Costo: U$D 50"
   },
   {
     "Guest": {
-      "Dni": 12345678,
-      "Name": "Jorge Luis",
-      "LastName": "Borges",
-      "PhoneNumber": 1234567324,
-      "DisplayProperty": "Jorge Luis Borges - DNI: 12345678"
+      "Dni": 37287832,
+      "Name": "Cyndi",
+      "LastName": "Limeburner",
+      "PhoneNumber": 8334800581,
+      "DisplayProperty": "Cyndi Limeburner - DNI: 37287832"
     },
     "Room": {
-      "Number": 101,
+      "Number": 103,
       "Available": false,
       "Type": 0,
-      "DisplayProperty": "101 - Simple: US$50 "
+      "DisplayProperty": "103 - Simple: US$50 "
     },
     "Reservation": {
-      "DniGuest": 12345678,
+      "DniGuest": 37287832,
       "ChekIn": "2023-11-23T00:00:00",
       "CheckOut": "2023-11-24T00:00:00",
-      "RoomNumber": 101
+      "RoomNumber": 103
     },
     "TotalCost": 50,
-    "DisplayProperty": "Jorge Luis, Borges - Habitacion: 101 - CheckIn: 23-Nov-23 - CheckOut: 24-Nov-23 - Costo: U$D 50"
+    "DisplayProperty": "Cyndi, Limeburner - Habitacion: 103 - CheckIn: 23-Nov-23 - CheckOut: 24-Nov-23 - Costo: U$D 50"
   },
   {
     "Guest": {
-      "Dni": 12345678,
-      "Name": "Jorge Luis",
-      "LastName": "Borges",
-      "PhoneNumber": 1234567324,
-      "DisplayProperty": "Jorge Luis Borges - DNI: 12345678"
+      "Dni": 41862762,
+      "Name": "Brion",
+      "LastName": "Dionsetti",
+      "PhoneNumber": 6661941281,
+      "DisplayProperty": "Brion Dionsetti - DNI: 41862762"
     },
     "Room": {
-      "Number": 101,
+      "Number": 104,
       "Available": false,
       "Type": 0,
-      "DisplayProperty": "101 - Simple: US$50 "
+      "DisplayProperty": "104 - Simple: US$50 "
     },
     "Reservation": {
-      "DniGuest": 12345678,
+      "DniGuest": 41862762,
       "ChekIn": "2023-11-23T00:00:00",
       "CheckOut": "2023-11-24T00:00:00",
-      "RoomNumber": 101
+      "RoomNumber": 104
     },
     "TotalCost": 50,
-    "DisplayProperty": "Jorge Luis, Borges - Habitacion: 101 - CheckIn: 23-Nov-23 - CheckOut: 24-Nov-23 - Costo: U$D 50"
-  },
-  {
-    "Guest": {
-      "Dni": 18954123,
-      "Name": "Herman",
-      "LastName": "Hesse",
-      "PhoneNumber": 1234567899,
-      "DisplayProperty": "Herman Hesse - DNI: 18954123"
-    },
-    "Room": {
-      "Number": 101,
-      "Available": false,
-      "Type": 0,
-      "DisplayProperty": "101 - Simple: US$50 "
-    },
-    "Reservation": {
-      "DniGuest": 18954123,
-      "ChekIn": "2023-12-01T00:00:00",
-      "CheckOut": "2023-12-15T00:00:00",
-      "RoomNumber": 101
-    },
-    "TotalCost": 700,
-    "DisplayProperty": "Herman, Hesse - Habitacion: 101 - CheckIn: 01-Dec-23 - CheckOut: 15-Dec-23 - Costo: U$D 700"
-  },
-  {
-    "Guest": {
-      "Dni": 12345678,
-      "Name": "Jorge Luis",
-      "LastName": "Borges",
-      "PhoneNumber": 1234567324,
-      "DisplayProperty": "Jorge Luis Borges - DNI: 12345678"
-    },
-    "Room": {
-      "Number": 101,
-      "Available": false,
-      "Type": 0,
-      "DisplayProperty": "101 - Simple: US$50 "
-    },
-    "Reservation": {
-      "DniGuest": 12345678,
-      "ChekIn": "2023-12-02T00:00:00",
-      "CheckOut": "2023-12-15T00:00:00",
-      "RoomNumber": 101
-    },
-    "TotalCost": 650,
-    "DisplayProperty": "Jorge Luis, Borges - Habitacion: 101 - CheckIn: 02-Dec-23 - CheckOut: 15-Dec-23 - Costo: U$D 650"
-  },
-  {
-    "Guest": {
-      "Dni": 12345678,
-      "Name": "Jorge Luis",
-      "LastName": "Borges",
-      "PhoneNumber": 1234567324,
-      "DisplayProperty": "Jorge Luis Borges - DNI: 12345678"
-    },
-    "Room": {
-      "Number": 101,
-      "Available": false,
-      "Type": 0,
-      "DisplayProperty": "101 - Simple: US$50 "
-    },
-    "Reservation": {
-      "DniGuest": 12345678,
-      "ChekIn": "2023-11-23T00:00:00",
-      "CheckOut": "2023-11-24T00:00:00",
-      "RoomNumber": 101
-    },
-    "TotalCost": 50,
-    "DisplayProperty": "Jorge Luis, Borges - Habitacion: 101 - CheckIn: 23-Nov-23 - CheckOut: 24-Nov-23 - Costo: U$D 50"
+    "DisplayProperty": "Brion, Dionsetti - Habitacion: 104 - CheckIn: 23-Nov-23 - CheckOut: 24-Nov-23 - Costo: U$D 50"
   }
 ]

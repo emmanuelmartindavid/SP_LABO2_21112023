@@ -16,7 +16,6 @@ namespace Entities.Serialization
             {
                 string json = Serialize(billing);
                 string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "billings.json");
-
                 File.WriteAllText(path, json);
             }
             catch (Exception ex)

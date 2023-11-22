@@ -160,7 +160,7 @@ namespace UIHotel
             }
         }
 
-         /// <summary>
+        /// <summary>
         /// Agrega accion de usuario a la lista de acciones.
         /// </summary>
         /// <param name="action"></param>

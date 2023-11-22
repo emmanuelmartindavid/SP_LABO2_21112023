@@ -137,20 +137,13 @@ namespace UIHotel
             var reservation = (Reservation)this.dgvReservationHandler.CurrentRow.DataBoundItem;
             if (reservation is not null)
             {
-                 this.dtpCheckIn.MinDate = new DateTime(2023, 11, 23, 0, 0, 0, 0);
-                  this.dtpCheckIn.MaxDate = new DateTime(2024, 12, 31, 0, 0, 0, 0);
-                  this.dtpCheckOut.MinDate = new DateTime(2023, 11, 24, 0, 0, 0, 0);
-                  this.dtpCheckOut.MaxDate = new DateTime(2024, 12, 31, 0, 0, 0, 0);
+                this.dtpCheckIn.MinDate = new DateTime(2023, 11, 23, 0, 0, 0, 0);
+                this.dtpCheckIn.MaxDate = new DateTime(2024, 12, 31, 0, 0, 0, 0);
+                this.dtpCheckOut.MinDate = new DateTime(2023, 11, 24, 0, 0, 0, 0);
+                this.dtpCheckOut.MaxDate = new DateTime(2024, 12, 31, 0, 0, 0, 0);
                 this.dtpCheckIn.Value = reservation.ChekIn;
                 this.dtpCheckOut.Value = reservation.CheckOut;
                 this.txtRoomNumber.Text = reservation.RoomNumber.ToString();
-                /*  this.dtpCheckIn.Text = reservation.ChekIn.ToString();
-                  this.dtpCheckOut.Text = reservation.CheckOut.ToString();
-                  this.txtRoomNumber.Text = reservation.RoomNumber.ToString();
-                  this.dtpCheckIn.MinDate = new DateTime(2023, 11, 23, 0, 0, 0, 0);
-                  this.dtpCheckIn.MaxDate = new DateTime(2024, 12, 31, 0, 0, 0, 0);
-                  this.dtpCheckOut.MinDate = new DateTime(2023, 11, 24, 0, 0, 0, 0);
-                  this.dtpCheckOut.MaxDate = new DateTime(2024, 12, 31, 0, 0, 0, 0);*/
             }
         }
         /// <summary>

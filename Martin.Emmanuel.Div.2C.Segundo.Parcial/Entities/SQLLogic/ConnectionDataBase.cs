@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.SqlClient;
 
 namespace Entities.SQLLogic
 {
     public class ConnectionDataBase
     {
-        protected SqlConnection _connection;
-        protected static string _connectionString;
+        protected SqlConnection? _connection;
+        private readonly static string _connectionString;
 
         static ConnectionDataBase()
         {
@@ -32,7 +27,7 @@ namespace Entities.SQLLogic
         /// </summary>
         public void Close()
         {
-            _connection.Close();
+            _connection?.Close();
         }
     }
 }

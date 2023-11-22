@@ -1,6 +1,5 @@
 using Entities.Controllers;
 using Entities.Exceptions;
-using Entities.Models;
 using Entities.Validators;
 
 namespace Tests
