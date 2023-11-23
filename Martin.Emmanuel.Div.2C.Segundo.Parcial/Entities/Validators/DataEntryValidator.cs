@@ -67,7 +67,7 @@ namespace Entities.Validators
         /// <exception cref="GuestExistsException">Se lanza cuando el DNI del huésped ingresado ya existe en el sistema.</exception>
         public async Task ValidateGuestExistence(int dni)
         {
-            var guest = await _guestController.GuestExists(dni);
+            var guest = await _guestController!.GuestExists(dni);
             if (guest)
             {
                 throw new GuestExistsException("El DNI del huesped ingresado ya existe en sistema.");
@@ -87,7 +87,7 @@ namespace Entities.Validators
             {
                 return;
             }
-            var guest = await _guestController.GuestExists(newDni);
+            var guest = await _guestController!.GuestExists(newDni);
             if (guest)
             {
                 throw new GuestExistsException("El DNI del huesped ingresado ya existe en sistema.");
@@ -121,7 +121,7 @@ namespace Entities.Validators
         /// <exception cref="ReservationExistsException">Se lanza cuando ya existe una reserva para el huésped.</exception>
         public async Task ValidateReservationExistence(Reservation reservation)
         {
-            var reservations = await _reservationController.GetAllReservations();
+            var reservations = await _reservationController!.GetAllReservations();
             foreach (var item in reservations)
             {
                 if (item.DniGuest == reservation.DniGuest)
@@ -137,7 +137,7 @@ namespace Entities.Validators
         /// <returns></returns>
         public async Task<bool> ValidateReservationExistence(int dni)
         {
-            var reservations = await _reservationController.GetAllReservations();
+            var reservations = await _reservationController!.GetAllReservations();
             foreach (var item in reservations)
             {
                 if (item.DniGuest == dni)
@@ -155,7 +155,7 @@ namespace Entities.Validators
         /// <exception cref="RoomExistsException">Se lanza cuando la habitación ingresada no existe en el sistema.</exception>
         public async Task ValidateRoomExistence(int roomNumber)
         {
-            var rooms = await _roomController.GetAllRooms();
+            var rooms = await _roomController!.GetAllRooms();
             foreach (var item in rooms)
             {
                 if (item.Number == roomNumber)
@@ -173,7 +173,7 @@ namespace Entities.Validators
         /// <exception cref="RoomExistsException"></exception>
         public async Task ValidateRoomExistenceForNewRoom(int roomNumber)
         {
-            var rooms = await _roomController.GetAllRooms();
+            var rooms = await _roomController!.GetAllRooms();
             foreach (var item in rooms)
             {
                 if (item.Number == roomNumber)

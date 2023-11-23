@@ -49,7 +49,7 @@
             // 
             lblWelcome.AutoSize = true;
             lblWelcome.Font = new Font("Arial Black", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            lblWelcome.Location = new Point(187, 25);
+            lblWelcome.Location = new Point(481, 26);
             lblWelcome.Name = "lblWelcome";
             lblWelcome.Size = new Size(858, 38);
             lblWelcome.TabIndex = 0;
